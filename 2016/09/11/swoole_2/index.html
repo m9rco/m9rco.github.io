@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Shaowei Pu" />
+
+
+
+<meta name="description" content="介绍异步非阻塞io、进程的相关知识
+介绍Event Loop 异步io的使用、常见问题和解决方案和实例
+介绍Process 如何使用对象，Process通信使用实例
+装逼环节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swoole 学习第二章 Event Io 与 process">
+<meta property="og:url" content="http://blog.mango16.cc/2016/09/11/swoole_2/index.html">
+<meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
+<meta property="og:description" content="介绍异步非阻塞io、进程的相关知识
+介绍Event Loop 异步io的使用、常见问题和解决方案和实例
+介绍Process 如何使用对象，Process通信使用实例
+装逼环节">
+<meta property="og:image" content="https://psv.oss-cn-shanghai.aliyuncs.com/swoole.png">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/clipboard.png">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911120948.png">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911121836.png">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911122616.png">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911123803.png">
+<meta property="og:image" content="http://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911123803.png">
+<meta property="og:updated_time" content="2017-02-22T03:20:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swoole 学习第二章 Event Io 与 process">
+<meta name="twitter:description" content="介绍异步非阻塞io、进程的相关知识
+介绍Event Loop 异步io的使用、常见问题和解决方案和实例
+介绍Process 如何使用对象，Process通信使用实例
+装逼环节">
+<meta name="twitter:image" content="https://psv.oss-cn-shanghai.aliyuncs.com/swoole.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>swoole 学习第二章 Event Io 与 process | Because of your example, I wouldn&#39;t let it either.</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Shaowei Pu</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">无敌小笼包</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/542684913@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/PuShaoWei" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="javascript:alert('博主不想告诉你');" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" href="javascript:alert('博主不想告诉你');" title="豆瓣"></a>
+                            
+                                <a class="fa 简书" href="javascript:alert('博主不想告诉你');" title="简书"></a>
+                            
+                                <a class="fa SegmentFault" href="javascript:alert('博主不想告诉你');" title="SegmentFault"></a>
+                            
+                                <a class="fa QQ" href="javascript:alert('博主不想告诉你');" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/">Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yaf/">Yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellectual/">intellectual</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Shaowei Pu</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Shaowei Pu</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">无敌小笼包</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/542684913@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/PuShaoWei" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="javascript:alert('博主不想告诉你');" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" target="_blank" href="javascript:alert('博主不想告诉你');" title="豆瓣"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="javascript:alert('博主不想告诉你');" title="简书"></a>
+                            
+                                <a class="fa SegmentFault" target="_blank" href="javascript:alert('博主不想告诉你');" title="SegmentFault"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="javascript:alert('博主不想告诉你');" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-swoole_2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/11/swoole_2/" class="article-date">
+      <time datetime="2016-09-11T09:02:00.000Z" itemprop="datePublished">2016-09-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      swoole 学习第二章 Event Io 与 process
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/publish/">publish</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swoole/">Swoole</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>介绍异步非阻塞io、进程的相关知识</li>
+<li>介绍Event Loop 异步io的使用、常见问题和解决方案和实例</li>
+<li>介绍Process 如何使用对象，Process通信使用实例</li>
+<li>装逼环节</li>
+</ul>
+<a id="more"></a>
+<p><img src="https://psv.oss-cn-shanghai.aliyuncs.com/swoole.png" alt="swoole"></p>
+<blockquote>
+<ul>
+<li>介绍异步非阻塞io、进程的相关知识</li>
+<li>介绍Event Loop 异步io的使用、常见问题和解决方案和实例</li>
+<li>介绍Process 如何使用对象，Process通信使用实例</li>
+<li>装逼环节</li>
+</ul>
+</blockquote>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>刚刚才说了，子进程当复制一个父进程的时候会复制它的内存以及它的上下文环境，除了这些之外，子进程会复制父进程的io句柄(fd描述符)<br><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/clipboard.png" alt="swoole"></p>
+<ul>
+<li>[x] 子进程会复制父进程的IO句柄(我们打开的一个文件，以及创建的一个socked连接，这些都属于句柄，比如我在父进程内打开了一个文件fopen拥有一个fd描述符。那么子进程中同样拥有这个句柄，并且可以对同一个文件进行读写操作，这样的话多个进程对一个文件进行读写操作的话就会对文件造成混乱，这个时候我们就需要一个文件锁的东西，fd描述符);</li>
+</ul>
+<h3 id="进程之间的通信方式-–-管道"><a href="#进程之间的通信方式-–-管道" class="headerlink" title="进程之间的通信方式 – 管道"></a>进程之间的通信方式 – 管道</h3><p><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911120948.png" alt="swoole"></p>
+<p>我们在父进程创建一个管道的时候，这个管道会创建一组，就是两个描述符，一个描述符用来读一个描述符用来写，当父进程创建了一个管道的时候，那么它相对应的子进程也拥有相同的两个描述符。</p>
+<p>父进程通过对描述符当中写内容的时候子进程就可以通过读描述符来得到管道中的内容这样就实现了两个进程之间的通信，</p>
+<ul>
+<li>[x] 管道是一组（2个）特殊的描述符</li>
+<li>[x] 管道需要在fork函数调用前创建</li>
+<li>[x] 如果一端主动关闭管道，另一端的读写操作会直接返回0</li>
+</ul>
+<h3 id="进程之间的通信方式-–-消息队列"><a href="#进程之间的通信方式-–-消息队列" class="headerlink" title="进程之间的通信方式 – 消息队列"></a>进程之间的通信方式 – 消息队列</h3><p><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911121836.png" alt="swoole"><br>消息队列是独立于两个进程之外的这样一个方式，它跟之前说的共享内存挺像，它是独立于进程之外的一片特殊空间，</p>
+<ul>
+<li>[x] 指定一个key 值来创建一个消息队列</li>
+<li>[x] 在消息队列中传递的数据有大小限制 65535  (int) 的默值</li>
+<li>[x] 消息队列不像管道类似TCP传递而更像udp这样的流式传递，我发给你一个数据包，另一个进程去读，读的时候也是一个一个去读</li>
+<li>[x] 消息队列会一直保留直到被主动关闭</li>
+</ul>
+<h3 id="序章-IO多路复用"><a href="#序章-IO多路复用" class="headerlink" title="序章-IO多路复用"></a>序章-IO多路复用</h3><p><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911122616.png" alt="swoole"></p>
+<p>如图所示，有5个fd(描述符)注册在这个epoll函数里，它就会不停的去监听这5个描述符，比如某一个描述符有来自客户端的数据了，某一个描述符可以准备开始往客户端写数据了，或者某一个描述符被关闭了，诸如此类事件发生了，epoll 函数才会效应，并返回有这些事件发生的<code>socket</code>集合，让客户端再一个一个去处理，所以你会发现它并不是异步的，epoll 它的优点是可以处理大量的<code>socket</code>连接，</p>
+<ul>
+<li>[x] epoll函数会监听注册在自己名下的描述符</li>
+<li>[x] 当有socket感兴趣的事件发生时，epoll函数才会效应，并返回有事件发生的socket集合</li>
+<li>[x] epoll的本质是阻塞IO，它的优点在于能同时处理大量的socket连接</li>
+</ul>
+<h3 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h3><p><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911123803.png" alt="swoole"><br>实际上swoole 提供的<code>epoll</code>上层的封装，并且提供了一个线程，当使用swoole evente一些列函数去发起创建一个事件循环的时候，swoole会在底层启动一个<code>reactor</code>线程<br>，这个线程中会运行一个<code>epoll</code>实例并且它会去我们需要去注册描述符到这个epoll实例中并为它建立<code>read</code>与<code>write</code>的监听</p>
+<ul>
+<li>[x] Event Loop 实际上就是一个Reactor线程，其中运行了一个epoll 实例</li>
+<li>[x] 可通过接口添加socket 描述符到epoll监听中，并指定事件响应的回调函数</li>
+<li>[x] 因为它是新起的线程去运行的，Event Loop 不可用于FPM 环境中</li>
+</ul>
+<p>Event Loop实例</p>
+<p>命令行聊天室</p>
+<p>主要应用点：</p>
+<ul>
+<li>异步读取来自服务器的数据</li>
+<li>异步读取来自终端的输入</li>
+<li>手动退出聊天室<br>增加</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">bool swoole_event_add(int $sock, mixed $read_callback, mixed $write_callback = <span class="keyword">null</span>, int $event_flag = <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<p>修改，比如之前增加了一个描述符在里面并为它绑定了一个回调，那么后面我想修改它比如我这个时候不想让它继续监听写事件了或者想把它的监听关掉，那么都可以通过这个函数重新设定它，重新设定的时候注意一下如果我们穿进去的$fd之前是没有add的话会报错</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bool swoole_event_set($fd, mixed $read_callback, mixed $write_callback, int $flag);</div></pre></td></tr></table></figure>
+<p>当我们某个描述符不需要的时候可以通过<code>del</code>方法将它删除</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bool swoole_event_del(int $sock);</div></pre></td></tr></table></figure>
+<p>当我们整个事件都不想要的话我们可以通过exit退出整个事件轮询，把epoll这个实例关掉，这个只能在client 中调用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bool swoole_event_del(int $sock);</div></pre></td></tr></table></figure>
+<p>读事件是在我们加入的读回调中执行的，当我们需要异步的将某个socket中写的时候swoole 也提供了一个event_write函数,这个write就会把这个消息的发送变成异步的，当我们发送缓冲区满了的之后swoole就会将数据发送到发送队列里来监听它可写，底层会自动执行写的事件，我们不需要再代码中再去关注缓存的问题</p>
+<p>实例-命令行聊天室</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 一个简单的命令行聊天室</div><div class="line"> * User: pushaowei</div><div class="line"> * Date: 2016/9/11 0011</div><div class="line"> * Time: 12:53</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">server</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> $serv;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line">        header(<span class="string">"content-type:text/html;charset=utf8"</span>);</div><div class="line">        <span class="keyword">$this</span>-&gt;serv = <span class="keyword">new</span> swoole_server(<span class="string">"0.0.0.0"</span>,<span class="number">9501</span>);</div><div class="line">        <span class="keyword">$this</span>-&gt;serv -&gt;set ([<span class="string">'worker_num'</span> =&gt; <span class="number">1</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;serv -&gt;on(<span class="string">'Start'</span>,[<span class="keyword">$this</span>,<span class="string">'onStart'</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;serv -&gt;on(<span class="string">'Connect'</span>,[<span class="keyword">$this</span>,<span class="string">'onConnect'</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;serv -&gt;on(<span class="string">'Receive'</span>,[<span class="keyword">$this</span>,<span class="string">'onReceive'</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;serv -&gt;on(<span class="string">'Close'</span>,[<span class="keyword">$this</span>,<span class="string">'onClose'</span>]);</div><div class="line">        <span class="keyword">$this</span>-&gt;serv -&gt;start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * start</div><div class="line">     * <span class="doctag">@param</span> $serv</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onStart</span><span class="params">($serv)</span></span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"咱们连接已经建立成功啦\n"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 建立连接</div><div class="line">     * <span class="doctag">@param</span> $serv</div><div class="line">     * <span class="doctag">@param</span> $fd</div><div class="line">     * <span class="doctag">@param</span> $form_id</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onConnect</span><span class="params">($serv,$fd,$form_id)</span></span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"Client &#123;$fd&#125; connect\n"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 服务端关闭提示</div><div class="line">     * <span class="doctag">@param</span> $serv</div><div class="line">     * <span class="doctag">@param</span> $fd</div><div class="line">     * <span class="doctag">@param</span> $form_id</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onClose</span><span class="params">($serv,$fd,$form_id)</span></span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"Client &#123;$fd&#125; close connection \n"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 当我们收到客户端的消息时简单的广播出去</div><div class="line">     * <span class="doctag">@param</span> swoole_server $serv</div><div class="line">     * <span class="doctag">@param</span> $fd</div><div class="line">     * <span class="doctag">@param</span> $form_id</div><div class="line">     * <span class="doctag">@param</span> $data</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onReceive</span><span class="params">(swoole_server $serv,$fd,$form_id,$data)</span></span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"Get Message From Client &#123;$fd&#125; : &#123;$data&#125;\n"</span>;</div><div class="line">        <span class="keyword">foreach</span>($serv-&gt;connections <span class="keyword">as</span> $v)&#123;</div><div class="line">            <span class="keyword">if</span>($fd != $v)&#123;</div><div class="line">                $serv-&gt;send($v,$data);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$server = <span class="keyword">new</span> Server();</div></pre></td></tr></table></figure>
+<p>作者还没学习客户端怎么玩所以依然是使用瑞士军刀<code>nc</code>工具代替</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">[pushaowei@localhost www]$ nc <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">9501</span></div></pre></td></tr></table></figure>
+<p>然后作者觉得 ，老是用工具就不好玩了，于是又写了一份客户端的连接供大家玩</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 比较简陋的客户端.</div><div class="line"> * User: pushaowei</div><div class="line"> * Date: 2016/9/11 0011</div><div class="line"> * Time: 13:39</div><div class="line"> */</div><div class="line"><span class="comment">//通过stream方法生成了一个具体的描述符，通过tcp方式连接了服务器</span></div><div class="line">$socket = stream_socket_client(<span class="string">"tcp://127.0.0.1:9501"</span>,$errno,$errstr,<span class="number">30</span>);</div><div class="line"><span class="comment">/*</span></div><div class="line">STDIN    标准的输入设备</div><div class="line">STDOUT    标准的输出设备</div><div class="line">STDERR    标准的错误设备</div><div class="line">可以在PHP脚本里使用这三个常量，以接受用户的输入，或者显示处理和计算的结果。</div><div class="line">现在就有小明和二狗两个人在这个聊天室里聊天</div><div class="line">*/</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 读监听，当客户端小明发送到服务器的数据后这里会被读到，然后转发给二狗</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onRead</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">global</span> $socket;</div><div class="line">    $buffer = stream_socket_recvfrom($socket,<span class="number">1024</span>);</div><div class="line">    <span class="keyword">if</span>(!$buffer)&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"Server closed\n"</span>;</div><div class="line">        swoole_event_del($socket);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"\n刚刚有人说:&#123;$buffer&#125;\n"</span>;</div><div class="line">    fwrite(STDERR,<span class="string">"Enter Msg:"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 发送数据</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onWrite</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">global</span> $socket;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"on Write\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 发送操作</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onInput</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">global</span> $socket;</div><div class="line">    $msg = trim(fgets(STDIN));</div><div class="line">    <span class="comment">//如果键入 exit 的话就选择退出</span></div><div class="line">    <span class="keyword">if</span>($msg == <span class="string">'exit'</span>)&#123;</div><div class="line">        swoole_event_exit();</div><div class="line">        <span class="keyword">exit</span>();</div><div class="line">    &#125;</div><div class="line">    swoole_event_write($socket,$msg);</div><div class="line">    fwrite(STDOUT,<span class="string">"Enter Msg:"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//给$socket描述符设置了两个方法一个读一个写</span></div><div class="line">swoole_event_add($socket,<span class="string">'onRead'</span>,<span class="string">'onWrite'</span>);</div><div class="line"></div><div class="line"><span class="comment">//监听了标准输入，设置了input的函数，当它监听到来自键盘的输入后它来获取输入了啥内容，然后发送给客户端</span></div><div class="line">swoole_event_add(STDIN,<span class="string">'onInput'</span>);</div><div class="line"></div><div class="line"><span class="comment">//登录聊天室蹦出来的</span></div><div class="line">fwrite(STDOUT,<span class="string">"Enter Msg:"</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>异步读取来自服务器的数据</li>
+<li>异步读取来自终端的输入</li>
+<li>手动退出聊天室</li>
+</ul>
+<p><strong>Event Loop 的常见问题</strong></p>
+<p>Q:为什么开启Event loop 的程序会一直运行不停止<br>A:开始Event Loop 后程序会启动一个线程并一直阻塞在<code>epoll</code>的监听上，它是一个whlie的循环不断监听这个事件直到我们调用exit，因此不会退出，</p>
+<p>Q:如何关闭 Event Loop ？<br>A:调用swoole_event_exit函数即可关闭事件循环(swoole_server中此函数无用，这个只能用在client中)这个rectaor 不能关闭</p>
+<h3 id="Swoole-Process相关"><a href="#Swoole-Process相关" class="headerlink" title="Swoole_Process相关"></a>Swoole_Process相关</h3><p>这个process主要呢就是来替代PHP的pcntl扩展。</p>
+<ul>
+<li>swoole_process提供了基于unixsock的进程间通信，使用很简单只需调用write/read或者push/pop即可</li>
+<li>swoole_process支持重定向标准输入和输出，在子进程内echo不会打印屏幕，而是写入管道，读键盘输入可以重定向为管道读取数据</li>
+<li>swoole_process允许用于fpm/apache的Web请求中<br>配合swoole_event模块，创建的PHP子进程可以异步的事件驱动模式</li>
+<li>swoole_process提供了exec接口，创建的进程可以执行其他程序，与原PHP父进程之间可以方便的通信</li>
+</ul>
+<p>一个swoole_process对象除了它本身是一个进程之外，它还有三个比较重要的内容<br><img src="http://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160911123803.png" alt="swoole"></p>
+<p>所有的swoole_process通过参数指定它都会创建一个管道，子进程到父进程的通信管道，通过管道我们就可以实现进程之间的通信，每个swoole_process的进程空间是独立的</p>
+<ul>
+<li>基于C语言封装的进程管理模块， 方便php的多进程通信</li>
+<li>内置管道和消息队列的通信接口，可通过参数或API开启或关闭，很容易就进行进程间的通信</li>
+<li>提供自定义的信号管理</li>
+</ul>
+<p>创建子进程</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">int swoole_process::__construct(mixed $function, $redirect_stdin_stdout = <span class="keyword">false</span>, $create_pipe = <span class="keyword">true</span>);</div><div class="line"></div><div class="line"><span class="comment">//$function，子进程创建成功后要执行的函数,就是函数创建之后将要做什么</span></div><div class="line"></div><div class="line"><span class="comment">//$redirect_stdin_stdout，重定向子进程的标准输入和输出。 启用此选项后，在进程内echo将不是打印屏幕，而是写入到管道。读取键盘输入将变为从管道中读取数据。 默认为阻塞读取。</span></div><div class="line"></div><div class="line"><span class="comment">//$create_pipe，是否创建管道，启用$redirect_stdin_stdout后，此选项将忽略用户参数，强制为true 如果子进程内没有进程间通信，可以设置为false</span></div></pre></td></tr></table></figure>
+<p>启动进程</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">int swoole_process-&gt;start();</div><div class="line"></div><div class="line"><span class="comment">//创建成功返回子进程的PID，创建失败返回false。可使用swoole_errno和swoole_strerror得到错误码和错误信息。</span></div><div class="line">$process-&gt;pid 属性为子进程的PID</div><div class="line">$process-&gt;pipe 属性为管道的文件描述符</div></pre></td></tr></table></figure>
+<p>来个实例玩玩</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * swoole_process.</div><div class="line"> * User: pushaowei</div><div class="line"> * Date: 2016/9/11 0011</div><div class="line"> * Time: 14:59</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseProcess</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> $process;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * BaseProcess constructor.</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;process = <span class="keyword">new</span> swoole_process([<span class="keyword">$this</span>,<span class="string">'run'</span>],<span class="keyword">false</span>,<span class="keyword">true</span>);</div><div class="line">        <span class="comment">//$this -&gt; proccess -&gt; daemon(true,true);</span></div><div class="line">        <span class="keyword">$this</span>-&gt;process -&gt;start();</div><div class="line"></div><div class="line">        swoole_event_add(<span class="keyword">$this</span>-&gt;process-&gt;pipe,<span class="function"><span class="keyword">function</span><span class="params">($pipe)</span></span>&#123;</div><div class="line">            $data = <span class="keyword">$this</span>-&gt;process-&gt;read();</div><div class="line">            <span class="keyword">echo</span><span class="string">"RECV "</span>.$data.PHP_EOL;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> $worker</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">($worker)</span></span>&#123;</div><div class="line">        swoole_timer_tick(<span class="number">1000</span>, <span class="function"><span class="keyword">function</span> <span class="params">($timer_id)</span> </span>&#123;</div><div class="line">            <span class="keyword">static</span> $num = <span class="number">0</span>;</div><div class="line">            $num += + <span class="number">1</span>;</div><div class="line">            <span class="keyword">$this</span>-&gt;process-&gt;write(<span class="string">"Hello"</span>);</div><div class="line">            var_dump($num);</div><div class="line">            <span class="keyword">if</span> ($num == <span class="number">10</span>) &#123;</div><div class="line">                <span class="comment">//输出十次就退出</span></div><div class="line">                swoole_timer_clear($timer_id);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">new</span> BaseProcess();</div><div class="line"><span class="comment">//监听到进程退出了</span></div><div class="line">swoole_process::signal(SIGCHLD,<span class="function"><span class="keyword">function</span><span class="params">($sig)</span></span>&#123;</div><div class="line">    <span class="comment">//必须为false</span></div><div class="line">    <span class="keyword">while</span>($ret = swoole_process::wait(<span class="keyword">false</span>))&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"PID = &#123;$ret['pid']&#125;\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>proccess 实例消息队列式</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * swoole_process. 消息队列式</div><div class="line"> * User: pushaowei</div><div class="line"> * Date: 2016/9/11 0011</div><div class="line"> * Time: 14:59</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseProcess</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> $process;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * BaseProcess constructor.</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;process = <span class="keyword">new</span> swoole_process([<span class="keyword">$this</span>,<span class="string">'run'</span>],<span class="keyword">false</span>,<span class="keyword">true</span>);</div><div class="line">        <span class="comment">//创建一个消息队列并制定key值为123</span></div><div class="line">        <span class="keyword">if</span>(!<span class="keyword">$this</span>-&gt;process-&gt;useQueue(<span class="number">123</span>))&#123;</div><div class="line">            var_dump(swoole_strerror(swoole_error()));</div><div class="line">            <span class="keyword">exit</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">$this</span> -&gt; process-&gt;start();</div><div class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">            $data = <span class="keyword">$this</span> -&gt;process-&gt;pop();</div><div class="line">            <span class="keyword">echo</span> <span class="string">"RECV :"</span>.$data.PHP_EOL;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> $worker</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">($worker)</span></span>&#123;</div><div class="line">        swoole_timer_tick(<span class="number">1000</span>, <span class="function"><span class="keyword">function</span> <span class="params">($timer_id)</span> </span>&#123;</div><div class="line">            <span class="keyword">static</span> $num = <span class="number">0</span>;</div><div class="line">            $num += + <span class="number">1</span>;</div><div class="line">            <span class="keyword">$this</span>-&gt;process-&gt;write(<span class="string">"Hello"</span>);</div><div class="line">            var_dump($num);</div><div class="line">            <span class="keyword">if</span> ($num == <span class="number">10</span>) &#123;</div><div class="line">                <span class="comment">//输出十次就退出</span></div><div class="line">                swoole_timer_clear($timer_id);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">new</span> BaseProcess();</div><div class="line"><span class="comment">//监听到进程退出了</span></div><div class="line">swoole_process::signal(SIGCHLD,<span class="function"><span class="keyword">function</span><span class="params">($sig)</span></span>&#123;</div><div class="line">    <span class="comment">//必须为false</span></div><div class="line">    <span class="keyword">while</span>($ret = swoole_process::wait(<span class="keyword">false</span>))&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"PID = &#123;$ret['pid']&#125;\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="动态进程池"><a href="#动态进程池" class="headerlink" title="动态进程池"></a>动态进程池</h4><ul>
+<li>使用tick 函数定时投递任务</li>
+<li>动态进程池，根据任务执行的多条动态调整内存池的大小</li>
+</ul>
+<p>使用特性</p>
+<ul>
+<li>tick定时任务</li>
+<li>swoole_process 管道通信</li>
+<li>Event loop 事件循环</li>
+</ul>
+<blockquote>
+<p>看下源码应该就直观一点了</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * swoole_process. 消息队列式</div><div class="line"> * User: pushaowei</div><div class="line"> * Date: 2016/9/11 0011</div><div class="line"> * Time: 14:59</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseProcess</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> $process;</div><div class="line">    <span class="keyword">private</span> $process_list = []; <span class="comment">//对应的子进程的数组</span></div><div class="line">    <span class="keyword">private</span> $process_use = []; <span class="comment">//标记进程是否使用当中</span></div><div class="line">    <span class="keyword">private</span> $min_worker_num = <span class="number">3</span>; <span class="comment">//最小的worker</span></div><div class="line">    <span class="keyword">private</span> $max_worker_num = <span class="number">6</span>; <span class="comment">//最大的worker</span></div><div class="line">    <span class="keyword">private</span> $current_num; <span class="comment">//当前worker 标记</span></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * BaseProcess constructor.</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;process = <span class="keyword">new</span> swoole_process([<span class="keyword">$this</span>,<span class="string">'run'</span>],<span class="keyword">false</span>,<span class="number">2</span>);<span class="comment">//启动的一个父进程</span></div><div class="line">        <span class="keyword">$this</span>-&gt;process -&gt; start();</div><div class="line">        swoole_process::wait();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> $worker</div><div class="line">     * 任务进程池</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">($worker)</span></span>&#123;</div><div class="line">        <span class="comment">//这里可以执行sql</span></div><div class="line">        <span class="keyword">$this</span>-&gt;current_num = <span class="keyword">$this</span> -&gt;min_worker_num;</div><div class="line">        <span class="keyword">for</span>($i=<span class="number">0</span> ;$i&lt; <span class="keyword">$this</span>-&gt;current_num;$i++)&#123;</div><div class="line">            $process = <span class="keyword">new</span> swoole_process([<span class="keyword">$this</span>,<span class="string">'task_num'</span>],<span class="keyword">false</span>,<span class="number">2</span>);</div><div class="line">            $pid = $process-&gt;start();</div><div class="line">            <span class="keyword">$this</span>-&gt;process_list[$pid] = $process;</div><div class="line">            <span class="keyword">$this</span>-&gt;process_use[$pid] = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">foreach</span>(<span class="keyword">$this</span>-&gt;process_list <span class="keyword">as</span> $v)&#123;</div><div class="line">            swoole_event_add($v-&gt;pipe,<span class="function"><span class="keyword">function</span><span class="params">($pipe)</span> <span class="title">use</span> <span class="params">($v)</span></span>&#123;</div><div class="line">                $data = $v -&gt; read();</div><div class="line">                var_dump($data);</div><div class="line">                <span class="keyword">$this</span>-&gt;process_use[$data] = <span class="number">0</span>;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 每一秒钟去发一次任务</div><div class="line">         */</div><div class="line">        swoole_timer_tick(<span class="number">1000</span>,<span class="function"><span class="keyword">function</span><span class="params">($timer_id)</span></span>&#123;</div><div class="line">            <span class="keyword">static</span> $num = <span class="number">0</span>;</div><div class="line">            $num += <span class="number">1</span>;</div><div class="line">            $flag = <span class="keyword">true</span>;</div><div class="line">            <span class="comment">//它去看看哪一个进程是没有被使用的</span></div><div class="line">            <span class="keyword">foreach</span>(<span class="keyword">$this</span>-&gt;process_use <span class="keyword">as</span> $k =&gt; $v )&#123;</div><div class="line">                <span class="keyword">if</span>($v == <span class="number">0</span>)&#123;</div><div class="line">                    $flag =<span class="keyword">false</span>;</div><div class="line">                    <span class="keyword">$this</span>-&gt;process_use[$k] = <span class="number">1</span>; <span class="comment">//并且把它标记成1 在给它发个任务</span></div><div class="line">                    <span class="keyword">$this</span>-&gt;process_list[$k] -&gt;write($num .<span class="string">"hello"</span>);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//如果所有的worker子进程都再忙着了，再当前进程池还没满的情况下启动一个新的进程池</span></div><div class="line">            <span class="keyword">if</span>($flag &amp;&amp; <span class="keyword">$this</span>-&gt;current_num &lt; <span class="keyword">$this</span>-&gt;max_worker_num)&#123;</div><div class="line">                $process = <span class="keyword">new</span> swoole_process([<span class="keyword">$this</span>,<span class="string">'task_num'</span>],<span class="keyword">false</span>,<span class="number">2</span>);</div><div class="line">                $pid = $process -&gt;start();</div><div class="line">                <span class="keyword">$this</span>-&gt;process_list[$pid] = $process ;</div><div class="line">                <span class="keyword">$this</span>-&gt;process_use[$pid] = <span class="number">1</span>;</div><div class="line">                <span class="keyword">$this</span>-&gt;process_list[$pid] -&gt;write($num.<span class="string">"Hello"</span>);</div><div class="line">            &#125;</div><div class="line">            var_dump($num);<span class="comment">//如果执行完十次任务后 关闭当前定时器关闭当前子进程</span></div><div class="line">            <span class="keyword">if</span>($num == <span class="number">10</span>)&#123;</div><div class="line">                <span class="keyword">foreach</span>(<span class="keyword">$this</span>-&gt;process_list <span class="keyword">as</span> $v)&#123;</div><div class="line">                    $v -&gt; write(<span class="string">'exit'</span>);</div><div class="line">                &#125;</div><div class="line">                swoole_timer_clear($timer_id);</div><div class="line">                <span class="keyword">$this</span>-&gt;process-&gt;exit();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">task_num</span><span class="params">($worker)</span></span>&#123;</div><div class="line">        <span class="comment">//当读到父进程发送来的任务时</span></div><div class="line">        swoole_event_add($worker-&gt;pipe,<span class="function"><span class="keyword">function</span><span class="params">($pipe)</span> <span class="title">use</span> <span class="params">($worker)</span></span>&#123;</div><div class="line">            $data = $worker-&gt;read();</div><div class="line">            <span class="comment">//当某个子进程收到任务的时候，它会打印自己的进程号，和它所接到的任务的消息</span></div><div class="line">            var_dump($worker-&gt;pid.<span class="string">":"</span>.$data);</div><div class="line">            <span class="keyword">if</span>($data ==<span class="string">'exit'</span>)&#123;</div><div class="line">                $worker-&gt;exit();<span class="keyword">exit</span>;</div><div class="line">                sleep(<span class="number">5</span>);</div><div class="line">                $worker -&gt; write(<span class="string">""</span>,$worker-&gt;pid);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">new</span> BaseProcess();</div><div class="line"><span class="comment">//监听到进程退出了</span></div><div class="line">swoole_process::signal(SIGCHLD,<span class="function"><span class="keyword">function</span><span class="params">($sig)</span></span>&#123;</div><div class="line">    <span class="comment">//必须为false</span></div><div class="line">    <span class="keyword">while</span>($ret = swoole_process::wait(<span class="keyword">false</span>))&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"PID = &#123;$ret['pid']&#125;\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>process</code> 连接池与 <code>task</code>连接池有什么优缺点</p>
+<p><code>task worker</code> 它的数目相对来说是固定的，</p>
+<p><code>process</code> 是不太稳定的，因为它是动态加子进程的，通过定时器发任务的，它的任务耗时比较长，动态扩展进程池，处理更多的任务;</p>
+<p>管道是两个描述符。读和写，当父进程创建这个管道后，然后在创建两个子进程，父进程中比如有两个管道，管1，管2，那么子进程也拥有两个管道，一个读一个写，读的那个只能用来读，写的那个只能用来写</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
+        <p><span>发布时间:</span>2016-09-11, 17:02:00</p>
+        <p><span>最后更新:</span>2017-02-22, 11:20:16</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/09/11/swoole_2/" title="swoole 学习第二章 Event Io 与 process">http://blog.mango16.cc/2016/09/11/swoole_2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2016/09/11/swoole_2/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/22/hello-world/">
+                    Hello World
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/09/10/swoole_1/">
+                    swoole 学习第一章 Task进程与Timer进程
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程"><span class="toc-number">1.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程之间的通信方式-–-管道"><span class="toc-number">2.</span> <span class="toc-text">进程之间的通信方式 – 管道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程之间的通信方式-–-消息队列"><span class="toc-number">3.</span> <span class="toc-text">进程之间的通信方式 – 消息队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序章-IO多路复用"><span class="toc-number">4.</span> <span class="toc-text">序章-IO多路复用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-Loop"><span class="toc-number">5.</span> <span class="toc-text">Event Loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Swoole-Process相关"><span class="toc-number">6.</span> <span class="toc-text">Swoole_Process相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动态进程池"><span class="toc-number">6.1.</span> <span class="toc-text">动态进程池</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"swoole 学习第二章 Event Io 与 process　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/09/11/swoole_2/" data-title="swoole 学习第二章 Event Io 与 process" data-url="http://blog.mango16.cc/2016/09/11/swoole_2/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"pushaowei"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/02/22/hello-world/" title="上一篇: Hello World">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/09/10/swoole_1/" title="下一篇: swoole 学习第一章 Task进程与Timer进程">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 Shaowei Pu
+            </div>
+
+            <div class="footer-right">
+              <!--<a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">shaowei pu</a>  Theme <a href="https://github.com/PuShaoWei/PuShaoWei.github.io" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by Mango16  -->
+                 <span>我把这一生最灿烂的微笑都献给了电脑屏幕</span>
+                <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "澳门首家线上赌场美女荷官在线发牌" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

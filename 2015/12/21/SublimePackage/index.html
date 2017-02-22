@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Shaowei Pu" />
+
+
+
+<meta name="description" content="来到GitHub这么长时间，才开始真真的了解GitHub，这个国外的代码托管平台，充满着大牛的身影。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sublime插件">
+<meta property="og:url" content="http://blog.mango16.cc/2015/12/21/SublimePackage/index.html">
+<meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
+<meta property="og:description" content="来到GitHub这么长时间，才开始真真的了解GitHub，这个国外的代码托管平台，充满着大牛的身影。">
+<meta property="og:updated_time" content="2017-02-22T03:20:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sublime插件">
+<meta name="twitter:description" content="来到GitHub这么长时间，才开始真真的了解GitHub，这个国外的代码托管平台，充满着大牛的身影。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Sublime插件 | Because of your example, I wouldn&#39;t let it either.</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Shaowei Pu</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">无敌小笼包</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/542684913@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/PuShaoWei" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="javascript:alert('博主不想告诉你');" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" href="javascript:alert('博主不想告诉你');" title="豆瓣"></a>
+                            
+                                <a class="fa 简书" href="javascript:alert('博主不想告诉你');" title="简书"></a>
+                            
+                                <a class="fa SegmentFault" href="javascript:alert('博主不想告诉你');" title="SegmentFault"></a>
+                            
+                                <a class="fa QQ" href="javascript:alert('博主不想告诉你');" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/">Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yaf/">Yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellectual/">intellectual</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Shaowei Pu</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Shaowei Pu</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">无敌小笼包</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/542684913@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/PuShaoWei" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="javascript:alert('博主不想告诉你');" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" target="_blank" href="javascript:alert('博主不想告诉你');" title="豆瓣"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="javascript:alert('博主不想告诉你');" title="简书"></a>
+                            
+                                <a class="fa SegmentFault" target="_blank" href="javascript:alert('博主不想告诉你');" title="SegmentFault"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="javascript:alert('博主不想告诉你');" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-SublimePackage" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/21/SublimePackage/" class="article-date">
+      <time datetime="2015-12-21T10:29:10.000Z" itemprop="datePublished">2015-12-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Sublime插件
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Tool/">Tool</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime/">Sublime</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <hr>
+<p>　　<strong>自用笔记：</strong>本文属于自用笔记，不做详解，仅供参考。在此记录自己已理解并开始遵循的前端代码规范。What How Why<br><a id="more"></a></p>
+<h2 id="安装有两个办法："><a href="#安装有两个办法：" class="headerlink" title="安装有两个办法："></a>安装有两个办法：</h2><blockquote>
+<p>1、直接把插件放到它的安装路径对应文件包packages里面去，不知道在哪的可以直接打开 preferences-&gt;Browse packages，放进去之后软件会自动检测。</p>
+<p>2、使用命令方式直接让软件自己下载安装。（使用package control组件）（前提：先安装下面那个package control插件)</p>
+<p>按下Ctrl+Shift+P调出命令面板，输入install， 调出 Install Package 选项并回车，然后在列表中选中要安装的插件。</p>
+<p>下载拷贝：然后把它放到package文件包中。没用过Github的朋友不知道在哪里下载。Download ZIP。然后把它解压，把文件夹放进package文件包，然后它就能检测到包啦！</p>
+<p>代码安装：Ctrl+shift+p、输入install、选择package install 过几秒会弹出另一个框。然后在输入框中输入你想要的插件关键字安装吧！大致就是这样，简单明了。下面介绍其他常用插件，安装方式同理！</p>
+<h3 id="常用插件："><a href="#常用插件：" class="headerlink" title="常用插件："></a>常用插件：</h3><ul>
+<li><a href="">package control（包裹组件）</a><ul>
+<li>通过快捷键 ctrl+` 或者 View &gt; Show Console 菜单打开控制台，然后粘贴对应的版本代码进去，然后回车让它安装。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>适用于 Sublime Text 3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib.request,os,hashlib; h = &apos;2915d1851351e5ee549c20394736b442&apos; + &apos;8bc59f460fa1548d1514676163dafc88&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)</div></pre></td></tr></table></figure>
+<p>适用于 Sublime Text 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib2,os,hashlib; h = &apos;2915d1851351e5ee549c20394736b442&apos; + &apos;8bc59f460fa1548d1514676163dafc88&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), &apos;wb&apos; ).write(by) if dh == h else None; print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h) if dh != h else &apos;Please restart Sublime Text to finish installation&apos;)</div></pre></td></tr></table></figure>
+<p>当然了，有些时候这样你安装不进去的，就只能自个去下载安装包放到package文件里边去了（就是上边我说的那个文件夹)如果在Preferences → Package Settings 中看到 Package Control 这一项，说明安装成功。</p>
+<h2 id="插件整理"><a href="#插件整理" class="headerlink" title="插件整理"></a>插件整理</h2><blockquote>
+<h3 id="代码整理："><a href="#代码整理：" class="headerlink" title="代码整理："></a>代码整理：</h3></blockquote>
+<ul>
+<li><a href="">Tag（代码格式化）</a><ul>
+<li>全选Ctrl+A，Ctrl+Alt+F</li>
+</ul>
+</li>
+<li><a href="">HTMLBeautify（）</a><ul>
+<li>格式化HTML。</li>
+</ul>
+</li>
+<li><a href="">HTML/CSS/JS Prettify（代码格式化）</a><ul>
+<li>能够格式化css html和js。</li>
+<li>注意：格式化的文件路径中不能有中文，不然会报找不到node的错误（windows下）。</li>
+</ul>
+</li>
+<li><a href="">YUI Compressor（压缩JS和CSS文件） </a></li>
+<li><a href="">PHPTidy（整理与排版PHP代码）</a></li>
+<li><a href="">JsFormat（javascript格式化） </a><ul>
+<li>格式化js代码，这个插件很有用，我们有时在网上看到某些效果，想查看是怎么实现的，但是代码被压缩过，很难阅读，不用怕，用ST2打开，按下ctrl+alt+5（这是我设置的快捷键），即可让代码还原，莫非是武林中失传已久的“还我靓靓拳”。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 id="注释："><a href="#注释：" class="headerlink" title="注释："></a>注释：</h3></blockquote>
+<ul>
+<li><a href="">DocBlockr（代码自动注释生成） </a></li>
+<li><a href="">HtmlTidy（清理与排版你的HTML代码）</a></li>
+<li><a href="">AutoPEP8（）</a><ul>
+<li>格式化Python代码。</li>
+</ul>
+</li>
+<li><a href="">Alignment安装案例</a></li>
+<li><a href="">Alignment（代码补齐）补齐就是补齐~就像这样</a></li>
+</ul>
+<blockquote>
+<h3 id="代码简写："><a href="#代码简写：" class="headerlink" title="代码简写："></a>代码简写：</h3></blockquote>
+<ul>
+<li><a href="">SublimeCodeIntel（代码提示）</a><ul>
+<li>自动提示我们，可能要输入HTML代码内容</li>
+</ul>
+</li>
+<li><a href="">snippets（自定制代码补齐机制）</a><ul>
+<li>自定制代码补齐机制，</li>
+</ul>
+</li>
+<li><a href="">Emmet（Zen Coding 代码自动补齐） </a><ul>
+<li>通过简单的命令直接生成一大段代码！一个字又快又准，安装好插件后，使用Ctrl＋Alt＋Enter呼出ZenCoding。<br>我们可以用 div#content&gt;ul&gt;li<em>3&gt;a</em> [href=”javascript:void(0);”]{Links$} 这样短短的一句话，生成下面一段代码：<br>技巧：<br>前端必备，快速开发HTML/CSS</li>
+</ul>
+</li>
+</ul>
+<p>输入 div.wrapper&gt;div.header+div.main+div.footer 按下Tab，立刻变成</p>
+<p>或者按下ctrl+alt+enter，激发zencoding控制台，可看到整个动态的过程。</p>
+<blockquote>
+<h3 id="高亮显示："><a href="#高亮显示：" class="headerlink" title="高亮显示："></a>高亮显示：</h3></blockquote>
+<ul>
+<li><a href="">BracketHighlighter</a><ul>
+<li>BracketHighlighter高亮显示匹配的括号、引号和标签，BracketHighlighter这个插件能在左侧高亮显示匹配的括号、引号和标签，能匹配的<em> [] ,  ()   </em> ,  {} ,  “” ,  ‘’ , <tag></tag>等甚至是自定义的标签，当看到密密麻麻的代码分不清标签之间包容嵌套的关系时，这款插件就能很好地帮你理清楚代码结构，快速定位括号，引号和标签内的范围。</li>
+</ul>
+</li>
+<li><a href="">TrailingSpacer（高亮显示多余的空格和Tab）</a></li>
+</ul>
+<blockquote>
+<h3 id="颜色："><a href="#颜色：" class="headerlink" title="颜色："></a>颜色：</h3></blockquote>
+<ul>
+<li><a href="">ColorPicker （调色盘） </a><ul>
+<li>在编辑CSS样式的时候，ColorPicker可以让sublime text 内置一个调色盘，调好颜色，点击OK就会在光标处生成十六进制颜色代码。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 id="CSS："><a href="#CSS：" class="headerlink" title="CSS："></a>CSS：</h3></blockquote>
+<ul>
+<li><a href="">CSScomb（CSS属性排序） </a></li>
+<li><a href="">CSS3_Syntax（css语法高亮）</a><ul>
+<li>对css语法高亮的支持，view-syntax-css3选中css3就能使用css3高亮了。必须每条属性都加上分号，并且属性必须小写，不然不会高亮，有点鸡肋啊。</li>
+</ul>
+</li>
+<li><a href="">Prefixr（自动加-webkit前缀）</a><ul>
+<li>写 CSS可自动添加 -webkit 等私有词缀，Ctrl+Alt+X触发。</li>
+</ul>
+</li>
+<li><a href="">Autoprefixer（自动加前缀）</a><ul>
+<li>可以给css自动加前缀功能</li>
+</ul>
+</li>
+<li><a href="">Goto-CSS-Declaration（CSS文件跳转）</a><ul>
+<li>跳转到css文件该class的声明处，方便修改查看，如图下所示，注意对应的css文件要同时打开才行。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 id="编码："><a href="#编码：" class="headerlink" title="编码："></a>编码：</h3></blockquote>
+<ul>
+<li><a href="">GBK Encoding Support（GBK中文编码）</a><ul>
+<li>这个插件还是非常有用的，因为sublime 本身 不支持gbk编码，在utf8如此流行的今天，我们整站还是gbk编码，o(︶︿︶)o 唉，所以全靠这个插件了。</li>
+</ul>
+</li>
+<li><a href="">GBK to UTF8（编码转换）</a><ul>
+<li>将文件编码从GBK转换成UTF8，菜单 – File里面找。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 id="文档管理："><a href="#文档管理：" class="headerlink" title="文档管理："></a>文档管理：</h3></blockquote>
+<ul>
+<li><a href="">Nettus+ fetch （管理一些开源框架）</a><ul>
+<li>配置文件修改，Ctrl+Shift+P输入Fetch Manage，配置文档。通过输入fetch file，搜索框架名进行导入。</li>
+</ul>
+</li>
+<li><a href="">SideBarEnhancements（侧边栏增强） </a></li>
+<li><a href="">SyncedSideBar（侧边栏打开文件定位）</a><ul>
+<li>支持当前文件在左侧面板中定位，不错。</li>
+</ul>
+</li>
+<li><a href="">Hex-to-HSL-Color Hex（颜色模式转HSL颜色模式）</a></li>
+<li><a href="">advanceNewfile（面板随意添加文件）</a><ul>
+<li>按Ctrl+Alt+N，下方输入A\B\test.css就好了，test.css这个文件出现在某个文件夹。</li>
+</ul>
+</li>
+<li><a href="">SublimeTmpl （自定义新建文件） </a><ul>
+<li>默认已经添加了html、css、js等常见类型的面板，按ctrl+alt+h/ctrl+alt+c/ctrl+alt+j可新建这 3钟类型的文件，快捷键在这里\Packages\SublimeTmpl\Default (Windows).sublime-keymap, 模板文件在这里\Packages\SublimeTmpl\templates，可修改。 比如下边简单的html文件</li>
+</ul>
+</li>
+<li><a href="">DocBlockr（代码建立文档）</a><ul>
+<li>DocBlockr 可以使你很方便地对代码建立文档。它会解析函数，变量，和参数，根据它们自动生成文档范式，你的工作就是去填充对应的说明。</li>
+</ul>
+</li>
+<li><a href="">GotoRecent（历史文档记录）</a><ul>
+<li>打开最近的文件，系统有这个功能，但只能看最近8个，有点不爽，按ctrl+e，选择即可。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 id="语法识别："><a href="#语法识别：" class="headerlink" title="语法识别："></a>语法识别：</h3></blockquote>
+<ul>
+<li><a href="">jQuery（jQuery语法识别）</a><ul>
+<li>支持jquery的只能语法提示，很赞。</li>
+</ul>
+</li>
+<li><a href="">JavaScriptNext - ES6 Syntax（ES6语法识别）</a><ul>
+<li>提供ES6的语法支持。</li>
+</ul>
+</li>
+<li><a href="">WordPress（WordPress的函数）</a><ul>
+<li>集成一些WordPress的函数，对于像我这种经常要写WP模版和插件的人特别有用</li>
+</ul>
+</li>
+<li><a href="">Vintage（Vim模拟）</a><ul>
+<li>如果你习惯使用vim，那么可以安装这个插件，这个插件可以让sublime像vim一样。</li>
+</ul>
+</li>
+<li><a href="">LESS（LESS语法识别）</a><ul>
+<li>这是一个非常棒的插件，可以让sublime支持less的语法高亮和语法提示，对于搞less的同学灰常重要，不过多解释。</li>
+</ul>
+</li>
+<li><a href="">SCSS（SCSS语法识别）</a><ul>
+<li>支持scss的语法高亮，里面附带了好多CSS Snippet，无论现用或者改造成，都可节省不少时间。</li>
+</ul>
+</li>
+<li><a href="">Liquid（Liquid语法识别）</a><ul>
+<li>提供Liquid语法支持，如果你也写博客的话不妨试试。</li>
+</ul>
+</li>
+<li><a href="">Smarty（Smarty语法识别）</a><ul>
+<li>提供smarty语法的支持。Smarty插件默认的分隔符是{}，如果你使用的分隔符不同可以更改插件目录的Smarty.tmPreferences文件，找到其中的SMARTY_LDELIM和SMARTY_RDELIM，修改为你的分隔符即可。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 id="文件传输："><a href="#文件传输：" class="headerlink" title="文件传输："></a>文件传输：</h3></blockquote>
+<ul>
+<li><a href="">SFTP（编辑 FTP 或 SFTP 服务器上的文件）</a></li>
+<li><a href="">Package Syncing</a><ul>
+<li>最后推荐一个同步插件，这个插件可以在不同的机器同步配置信息和插件，非常方便，但鉴于国内的墙太高，我都是直接把插件给手动备份了，然后直接拖进去，或者直接去github上下载对应的包。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h3 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h3></blockquote>
+<ul>
+<li><a href="">Gits（集成 GitHub） </a></li>
+<li><a href="">Clipboard-history（粘贴板历史记录） </a><ul>
+<li>可以保存粘贴的历史，很赞的功能，再也不用担心历史丢失了。ctrl+alt+v可打开历史面板，上下选择即可，安装后会和默认的ctrl+shift+v（粘贴缩进）冲突，干掉这个快捷键。</li>
+</ul>
+</li>
+<li><a href="">lint（语法校验）：</a></li>
+<li><a href="">SublimeLinter（代码错误提示） 总体架构</a></li>
+<li><a href="">Jslint编程风格</a><ul>
+<li>Sub</li>
+</ul>
+</li>
+<li><a href="">Tradsim（中文繁字体和简体字转换） </a></li>
+<li><a href="">Terminal</a><ul>
+<li>可以sublime中，打开命令行，非常方便哦。</li>
+</ul>
+</li>
+<li><a href="">AllAutocomplete</a><ul>
+<li>自动完成插件，可在全部打开的文件中，自动完成。</li>
+</ul>
+</li>
+<li><a href="">HexViewer</a><ul>
+<li>提供十六进制文件查看功能。</li>
+</ul>
+</li>
+<li><a href="">MultiEditUtils</a><ul>
+<li>扩展多行编辑的功能。</li>
+</ul>
+</li>
+<li><a href="">IMESupport（输入框不更随着光标）</a><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="主题（Themes）"><a href="#主题（Themes）" class="headerlink" title="主题（Themes）"></a>主题（Themes）</h2><p>Sublime Text有大量第三方主题：</p>
+<blockquote>
+<p>1、Facebook Material Theme</p>
+<p>2、Soda</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/21/SublimePackage/">Sublime插件</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
+        <p><span>发布时间:</span>2015-12-21, 18:29:10</p>
+        <p><span>最后更新:</span>2017-02-22, 11:20:16</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/21/SublimePackage/" title="Sublime插件">http://blog.mango16.cc/2015/12/21/SublimePackage/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2015/12/21/SublimePackage/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/12/21/Sublimebest/">
+                    Sublime Text历练
+                </a>
+            </div>
+        
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装有两个办法："><span class="toc-number">1.</span> <span class="toc-text">安装有两个办法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用插件："><span class="toc-number">1.1.</span> <span class="toc-text">常用插件：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件整理"><span class="toc-number">2.</span> <span class="toc-text">插件整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码整理："><span class="toc-number">2.1.</span> <span class="toc-text">代码整理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注释："><span class="toc-number">2.2.</span> <span class="toc-text">注释：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码简写："><span class="toc-number">2.3.</span> <span class="toc-text">代码简写：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高亮显示："><span class="toc-number">2.4.</span> <span class="toc-text">高亮显示：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#颜色："><span class="toc-number">2.5.</span> <span class="toc-text">颜色：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS："><span class="toc-number">2.6.</span> <span class="toc-text">CSS：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编码："><span class="toc-number">2.7.</span> <span class="toc-text">编码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档管理："><span class="toc-number">2.8.</span> <span class="toc-text">文档管理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语法识别："><span class="toc-number">2.9.</span> <span class="toc-text">语法识别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件传输："><span class="toc-number">2.10.</span> <span class="toc-text">文件传输：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他："><span class="toc-number">2.11.</span> <span class="toc-text">其他：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题（Themes）"><span class="toc-number">3.</span> <span class="toc-text">主题（Themes）</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Sublime插件　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2015/12/21/SublimePackage/" data-title="Sublime插件" data-url="http://blog.mango16.cc/2015/12/21/SublimePackage/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"pushaowei"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/21/Sublimebest/" title="上一篇: Sublime Text历练">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 Shaowei Pu
+            </div>
+
+            <div class="footer-right">
+              <!--<a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">shaowei pu</a>  Theme <a href="https://github.com/PuShaoWei/PuShaoWei.github.io" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by Mango16  -->
+                 <span>我把这一生最灿烂的微笑都献给了电脑屏幕</span>
+                <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "澳门首家线上赌场美女荷官在线发牌" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

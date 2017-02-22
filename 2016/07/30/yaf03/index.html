@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Shaowei Pu" />
+
+
+
+<meta name="description" content="Yaf_Session是Yaf对Session的包装, 实现了Iterator, ArrayAccess, Countable接口, 方便使用.关于Yaf_Session的文档介绍：http://www.laruence.com/manual/yaf.class.session.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yaf---Session | 模板 | 模型  | Cli模式">
+<meta property="og:url" content="http://blog.mango16.cc/2016/07/30/yaf03/index.html">
+<meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
+<meta property="og:description" content="Yaf_Session是Yaf对Session的包装, 实现了Iterator, ArrayAccess, Countable接口, 方便使用.关于Yaf_Session的文档介绍：http://www.laruence.com/manual/yaf.class.session.html">
+<meta property="og:image" content="http://blog.mango16.cc/blog-img/yaf_1.bmp">
+<meta property="og:image" content="http://blog.mango16.cc/blog-img/yaff.bmp">
+<meta property="og:image" content="http://blog.mango16.cc/blog-img/yaf_2.bmp">
+<meta property="og:image" content="http://blog.mango16.cc/blog-img/yaf_3.bmp">
+<meta property="og:updated_time" content="2017-02-22T03:20:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yaf---Session | 模板 | 模型  | Cli模式">
+<meta name="twitter:description" content="Yaf_Session是Yaf对Session的包装, 实现了Iterator, ArrayAccess, Countable接口, 方便使用.关于Yaf_Session的文档介绍：http://www.laruence.com/manual/yaf.class.session.html">
+<meta name="twitter:image" content="http://blog.mango16.cc/blog-img/yaf_1.bmp">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Yaf---Session | 模板 | 模型  | Cli模式 | Because of your example, I wouldn&#39;t let it either.</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Shaowei Pu</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">无敌小笼包</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/542684913@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/PuShaoWei" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="javascript:alert('博主不想告诉你');" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" href="javascript:alert('博主不想告诉你');" title="豆瓣"></a>
+                            
+                                <a class="fa 简书" href="javascript:alert('博主不想告诉你');" title="简书"></a>
+                            
+                                <a class="fa SegmentFault" href="javascript:alert('博主不想告诉你');" title="SegmentFault"></a>
+                            
+                                <a class="fa QQ" href="javascript:alert('博主不想告诉你');" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/">Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yaf/">Yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellectual/">intellectual</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Shaowei Pu</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Shaowei Pu</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">无敌小笼包</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/542684913@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/PuShaoWei" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="javascript:alert('博主不想告诉你');" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" target="_blank" href="javascript:alert('博主不想告诉你');" title="豆瓣"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="javascript:alert('博主不想告诉你');" title="简书"></a>
+                            
+                                <a class="fa SegmentFault" target="_blank" href="javascript:alert('博主不想告诉你');" title="SegmentFault"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="javascript:alert('博主不想告诉你');" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-yaf03" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/30/yaf03/" class="article-date">
+      <time datetime="2016-07-30T13:22:43.000Z" itemprop="datePublished">2016-07-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Yaf---Session | 模板 | 模型  | Cli模式
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Frame/">Frame</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yaf/">Yaf</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Yaf_Session是Yaf对Session的包装, 实现了Iterator, ArrayAccess, Countable接口, 方便使用.关于Yaf_Session的文档介绍：<a href="http://www.laruence.com/manual/yaf.class.session.html" target="_blank" rel="external">http://www.laruence.com/manual/yaf.class.session.html</a><br><a id="more"></a></p>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><blockquote>
+<p>使用示例   </p>
+</blockquote>
+<p><img src="/blog-img/yaf_1.bmp" alt="" title="phpinfo显示成功螃蟹图标再现"></p>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>The Yaf_View_Simple class<br>官方文档：<a href="http://www.laruence.com/manual/yaf.class.view.html" target="_blank" rel="external">http://www.laruence.com/manual/yaf.class.view.html</a></p>
+<p>Yaf_View_Simple是Yaf自带的视图引擎, 它追求性能, 所以并没有提供类似Smarty那样的多样功能, 和复杂的语法.<br>对于Yaf_View_Simple的视图模板, 就是普通的PHP脚本, 对于通过<code>Yaf_View_Interface::assgin</code>的模板变量,可在视图模板中直接通过变量名使用.</p>
+<p>使用 <code>$this-&gt;getView()-&gt;assign()</code>在控制器中定义变量</p>
+<pre><code>&lt;?php
+class IndexController extends Yaf_Controller_Abstract {
+  public function indexAction() {
+    $mod = new UserModel();
+    $list = $mod-&gt;where(&apos;id&apos;,1)-&gt;get();
+    $this-&gt;getView()-&gt;assign(&quot;list&quot;, $list);
+    $this-&gt;getView()-&gt;assign(&quot;title&quot;, &quot;Smarty Hello World&quot;);
+    $this-&gt;getView()-&gt;assign(&quot;content&quot;, &quot;Hello World&quot;);
+}
+</code></pre><p>在模板文件中使用php脚本来输出</p>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;&lt;?=$title;?&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+         &lt;?=$content;?&gt;
+    &lt;?php foreach($list as $val):?&gt;
+        &lt;p&gt;&lt;?=$val[&apos;username&apos;]?&gt;&lt;/p&gt;
+    &lt;?php endforeach;?&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="关闭自动加载模板"><a href="#关闭自动加载模板" class="headerlink" title="关闭自动加载模板"></a>关闭自动加载模板</h3><p>Yaf框架默认是开启自动加载模板的，如要关闭自动加载，可在<code>Bootstrap.php</code>里设置全局关闭，如：</p>
+<pre><code>&lt;?php
+class Bootstrap extends Yaf_Bootstrap_Abstract
+  {
+  public function _initConfig(){
+
+    Yaf_Registry::set(&apos;config&apos;, Yaf_Application::app()-&gt;getConfig());
+    Yaf_Dispatcher::getInstance()-&gt;autoRender(FALSE); // 关闭自动加载模板
+
+  }
+}
+</code></pre><p>单独关闭模板加载，可以需要关闭的控制器内利用<code>Yaf_Dispatcher::getInstance()-&gt;disableView()</code>作：</p>
+<pre><code>&lt;?php
+class IndexController extends Yaf_Controller_Abstract {
+    /**
+    * Controller的init方法会被自动首先调用
+    */
+    public function init() {
+    /**
+    * 如果是Ajax请求, 则关闭HTML输出
+    */
+    if ($this-&gt;getRequest()-&gt;isXmlHttpRequest()) {
+         Yaf_Dispatcher::getInstance()-&gt;disableView();
+    }
+  }
+}
+?&gt;
+</code></pre><h3 id="手动调用指定模板"><a href="#手动调用指定模板" class="headerlink" title="手动调用指定模板"></a>手动调用指定模板</h3><p>在控制器里手动调用的方式有2种：</p>
+<blockquote>
+<p>一、调用当前<code>$this-&gt;_module</code>目录下的模版，下面是手动调用<code>view/index/</code>目录下<code>hello.phtml</code>模板</p>
+</blockquote>
+<pre><code>&lt;?php
+    class IndexController extends Yaf_Controller_Abstract
+    {
+      public function indexAction()
+      {
+        $this-&gt;getView()-&gt;assign(&quot;content&quot;, &quot;Hello World&quot;);
+        $this-&gt;display(&apos;hello&apos;);
+      }
+   }
+</code></pre><blockquote>
+<p>二、随意调用<code>view</code>目录下的模板，下面是调用<code>view/test/world.phtml</code>模板</p>
+</blockquote>
+<pre><code>&lt;?php
+    class IndexController extends Yaf_Controller_Abstract
+    {
+        public function indexAction()
+        {
+            $this-&gt;getView()-&gt;assign(&quot;content&quot;, &quot;Hello World&quot;);
+            $this-&gt;getView()-&gt;display(&apos;test/world.phtml&apos;);
+        }
+    }
+</code></pre><h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><blockquote>
+<p>还有不少同学问, 为什么Yaf没有ORM, 这里有俩方面的考虑:首先, <code>Yaf并不是万能的, 它只是解决了应用中, 最基本的一个问题, 就是框架带来的额外的性能开销,</code>然而这本部分的开销和你的应用实际的开销相比, 往往是很小的.但是, Yaf却代表着一种精神, 就是追求简单, 追求高效, 追求:”简单可依赖”, 所以Yaf专注于实现最核心的功能, 提供最稳定的实现.相比ORM, 如果要实现的很方便, 那必然会很复杂, 在当时的情况下, 实现ORM有可能会引入不稳定性第二, 也是最重要的一点是PHP已经提供了对DB的一个轻度封装的PDO, 我认为直接使用PDO, 会更加简单, 更加高效, 我不希望提供一个复杂的ORM包装, 鼓励大家去抛弃简单的PDO而使用ORM. 所以, 最初的时候, Yaf并不包含ORM.诚然, ORM可以提高开发效率, 尤其对于一些简单应用, 所以我想在后续的Yaf的版本中, 会考虑加入ORM, 但是那也绝对会是一个简单的ORM, 类似于Yaf的内建视图引擎: <code>Yaf_View_Simple</code>, 简单可依赖.</p>
+</blockquote>
+<p>显然，目前yaf是没有内置的操作数据库类了，那只能自己diy了，yaf的model规则是，类名以Model为后缀，放在放置在<code>models</code>文件夹下面</p>
+<p>先在<code>application.ini</code>配置文件里添加数据库配置信息:</p>
+<pre><code>db.type=mysql
+db.host=localhost
+db.database=test
+db.username=root
+db.password=123
+db.charset = utf8
+db.log = false
+db.collation=utf8_unicode_ci
+db.prefix =
+</code></pre><p>在models文件夹下面新建一个base.php文件:</p>
+<p><img src="/blog-img/yaff.bmp" alt="" title="phpinfo显示成功螃蟹图标再现"></p>
+<p><img src="/blog-img/yaf_2.bmp" alt="" title="哟，还不错哦"></p>
+<blockquote>
+<p>载入第三方的ORM</p>
+</blockquote>
+<p>上面只是一个简单的model实现方法，大家可以再自行完善。在一些项目中，ORM可以提高开发效率,我这里也尝试着载入lavarel框架中所使用的Eloquent ORM。<br>loquent ORM操作介绍：<a href="http://www.golaravel.com/laravel/docs/4.2/eloquent/" target="_blank" rel="external">http://www.golaravel.com/laravel/docs/4.2/eloquent/</a><br>因为下载有点慢，我就直接从laravel5.1的包里面直接复制出的eloquent。</p>
+<ul>
+<li>将文件夹放置到library下面,如下所示</li>
+</ul>
+<p><img src="/blog-img/yaf_3.bmp" alt="" title="哟，还不错哦"></p>
+<ul>
+<li>在Bootstarpphp初始化eloquent</li>
+</ul>
+<pre><code>    &lt;?php
+    Yaf_loader::import(&quot;/vendor/autoload.php&quot;);
+    use Illuminate\Container\Container;
+    use Illuminate\Database\Capsule\Manager as Capsule;
+    class Bootstrap extends Yaf_Bootstrap_Abstract{
+    private $config;
+    public function _initConfig() {
+    $this-&gt;config = Yaf_Application::app()-&gt;getConfig();
+    Yaf_Registry::set(&quot;config&quot;, $this-&gt;config);
+    }
+   //载入数据库ORM
+   public function _initDatabase()
+   {
+    $database = array(
+      &apos;driver&apos; =&gt; $this-&gt;config-&gt;db-&gt;type,
+      &apos;host&apos; =&gt; $this-&gt;config-&gt;db-&gt;host,
+      &apos;database&apos; =&gt; $this-&gt;config-&gt;db-&gt;database,
+      &apos;username&apos; =&gt; $this-&gt;config-&gt;db-&gt;username,
+      &apos;password&apos; =&gt; $this-&gt;config-&gt;db-&gt;password,
+      &apos;charset&apos; =&gt; $this-&gt;config-&gt;db-&gt;charset,
+      &apos;collation&apos; =&gt; $this-&gt;config-&gt;db-&gt;collation,
+      &apos;prefix&apos; =&gt; $this-&gt;config-&gt;db-&gt;prefix,
+    );
+    $capsule = new Capsule;
+    // 创建链接
+    $capsule-&gt;addConnection($database);
+    // 设置全局静态可访问
+    $capsule-&gt;setAsGlobal();
+    // 启动Eloquent
+    $capsule-&gt;bootEloquent();
+}
+</code></pre><ul>
+<li>在models文件夹下新建UsersModel的Users.php:</li>
+</ul>
+<pre><code>&lt;?php
+      use Illuminate\Database\Eloquent\Model as Mymodel;
+      class UsersModel extends Mymodel{
+            protected $table = &apos;user&apos;;
+      }
+      ?&gt;
+      在控制器中调用：
+      &lt;?php
+      class IndexController extends Yaf_Controller_Abstract {
+            public function indexAction() {
+            Yaf_Dispatcher::getInstance()-&gt;disableView();
+            $mod = new UsersModel();
+            $data = $mod-&gt;find(1)-&gt;toArray();
+            print_r($data);
+      }
+</code></pre><ul>
+<li>更多关于Eloquent ORM的操作介绍可移步：</li>
+</ul>
+<p><a href="http://www.golaravel.com/laravel/docs/4.2/eloquent/" target="_blank" rel="external">http://www.golaravel.com/laravel/docs/4.2/eloquent/</a></p>
+<h3 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h3><p>官方文档地址：<a href="http://yaf.laruence.com/manual/yaf.incli.times.html" target="_blank" rel="external">http://yaf.laruence.com/manual/yaf.incli.times.html</a></p>
+<p>感觉文档写得有点简单，不好理解，这里聊下我是怎么用的yaf命令行。</p>
+<blockquote>
+<p>方法一</p>
+</blockquote>
+<p>在yaf中用到命令行大多是为了跑Crontab，首先，为了更好的与web区分(配置文件,argc、argv判断等等).重新创建个入口文件是比较好的做法</p>
+<pre><code>&lt;?php
+
+  define(&quot;APP_PATH&quot;, realpath(dirname(__FILE__)));
+
+  $app = new Yaf_Application(APP_PATH . &quot;/conf/application.ini&quot;);
+
+  $app-&gt;getDispatcher()-&gt;dispatch(new Yaf_Request_Simple());
+</code></pre><p>然后再新建一个接收命令和操作的控制器Crontab.php:</p>
+<pre><code>&lt;?php
+
+class CrontabController extends Yaf_Controller_Abstract {
+
+      public function init(){
+      Yaf_Dispatcher::getInstance()-&gt;disableView();
+      }
+      public function indexAction($username = &apos;&apos;){
+      //to do a crontab
+      echo &apos;we get the name is : &apos;.$username;
+      }
+
+  }
+?&gt;
+</code></pre><p>接下来，我们在命令行中调用。在命令行中切换到你的项目目录，就是cli.php所在目录，然后输入如下命令：<br><code>php cli.php request_uri=&quot;/crontab/index&quot;</code>是不是在命令行看到了输出的字符串。<br><code>request_uri=&quot;/crontab/index&quot;</code> 中的路径便是Controller的路由路径.在例子里指向<code>/controllers/Crontab.php</code> 中的 <code>indexAction()</code></p>
+<blockquote>
+<p>方法二</p>
+</blockquote>
+<p>还有一种方法，通过<code>Yaf_Application::execute(..)</code>去实现。</p>
+<p>先看一下这个函数的定义：</p>
+<pre><code>public void Yaf_Application::execute ( callable $entry , string $... )
+This method is typically used to run Yaf_Application in a crontab work. Make the crontab work
+can also use the autoloader and Bootstrap mechanism.
+</code></pre><p>第一参数需要定义一个回调函数,也可以是一个类中的某个函数。</p>
+<p>示例：<code>$application-&gt;execute(“main”, $argc, $argv);</code>或</p>
+<pre><code>$application-&gt;execute(array(“Class”,”Method”), $argc, $argv);
+</code></pre><p>后面的参数为一个可变列表，值为你希望传入的参数。如些，我们将刚才新建的cli.php文件改写成：</p>
+<pre><code>&lt;?php
+define(&quot;APP_PATH&quot;, realpath(dirname(__FILE__)));
+$app = new Yaf_Application(APP_PATH . &quot;/conf/application.ini&quot;);
+$app-&gt;bootstrap()-&gt;execute(array(&apos;CrontabController&apos;,&apos;indexAction&apos;),&apos;wulei&apos;);
+</code></pre><p>其中如果你需要用bootstrap的初始化的，可以保留，如果不需要的话，也可以把bootstrap去掉。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
+        <p><span>发布时间:</span>2016-07-30, 21:22:43</p>
+        <p><span>最后更新:</span>2017-02-22, 11:20:16</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/30/yaf03/" title="Yaf---Session | 模板 | 模型  | Cli模式">http://blog.mango16.cc/2016/07/30/yaf03/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2016/07/30/yaf03/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/07/31/yaf04/">
+                    Yaf---异常和错误 | 路由和分发
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/29/yaf02/">
+                    Yaf---加载规则插件使用
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Session"><span class="toc-number">1.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模板"><span class="toc-number">2.</span> <span class="toc-text">模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭自动加载模板"><span class="toc-number">3.</span> <span class="toc-text">关闭自动加载模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动调用指定模板"><span class="toc-number">4.</span> <span class="toc-text">手动调用指定模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型"><span class="toc-number">5.</span> <span class="toc-text">模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令行模式"><span class="toc-number">6.</span> <span class="toc-text">命令行模式</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Yaf---Session | 模板 | 模型  | Cli模式　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/30/yaf03/" data-title="Yaf---Session | 模板 | 模型  | Cli模式" data-url="http://blog.mango16.cc/2016/07/30/yaf03/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"pushaowei"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/07/31/yaf04/" title="上一篇: Yaf---异常和错误 | 路由和分发">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/29/yaf02/" title="下一篇: Yaf---加载规则插件使用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 Shaowei Pu
+            </div>
+
+            <div class="footer-right">
+              <!--<a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">shaowei pu</a>  Theme <a href="https://github.com/PuShaoWei/PuShaoWei.github.io" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by Mango16  -->
+                 <span>我把这一生最灿烂的微笑都献给了电脑屏幕</span>
+                <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "澳门首家线上赌场美女荷官在线发牌" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

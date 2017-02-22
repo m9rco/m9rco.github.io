@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Shaowei Pu" />
+
+
+
+<meta name="description" content="Swoole 据说是可以php革命的一个东西，更有屌丝说看见swoole如见php的未来一般,作者不才看官方教程实在迷糊，特意花大洋买了视频来看，希望与大家共同进步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swoole 学习第一章 Task进程与Timer进程">
+<meta property="og:url" content="http://blog.mango16.cc/2016/09/10/swoole_1/index.html">
+<meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
+<meta property="og:description" content="Swoole 据说是可以php革命的一个东西，更有屌丝说看见swoole如见php的未来一般,作者不才看官方教程实在迷糊，特意花大洋买了视频来看，希望与大家共同进步">
+<meta property="og:image" content="https://psv.oss-cn-shanghai.aliyuncs.com/swoole.png">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/clipboard.png">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160910134602.png">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/9110B9CBB4484E6D86B4E217CD409925.jpg">
+<meta property="og:image" content="https://image20160910.oss-cn-beijing.aliyuncs.com/62394E88F88B4D4D81D7DB0147C04738.jpg">
+<meta property="og:updated_time" content="2017-02-22T03:20:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swoole 学习第一章 Task进程与Timer进程">
+<meta name="twitter:description" content="Swoole 据说是可以php革命的一个东西，更有屌丝说看见swoole如见php的未来一般,作者不才看官方教程实在迷糊，特意花大洋买了视频来看，希望与大家共同进步">
+<meta name="twitter:image" content="https://psv.oss-cn-shanghai.aliyuncs.com/swoole.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>swoole 学习第一章 Task进程与Timer进程 | Because of your example, I wouldn&#39;t let it either.</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Shaowei Pu</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">无敌小笼包</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/542684913@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/PuShaoWei" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="javascript:alert('博主不想告诉你');" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" href="javascript:alert('博主不想告诉你');" title="豆瓣"></a>
+                            
+                                <a class="fa 简书" href="javascript:alert('博主不想告诉你');" title="简书"></a>
+                            
+                                <a class="fa SegmentFault" href="javascript:alert('博主不想告诉你');" title="SegmentFault"></a>
+                            
+                                <a class="fa QQ" href="javascript:alert('博主不想告诉你');" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/">Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yaf/">Yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellectual/">intellectual</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Shaowei Pu</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Shaowei Pu</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">无敌小笼包</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/542684913@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/PuShaoWei" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="javascript:alert('博主不想告诉你');" title="知乎"></a>
+                            
+                                <a class="fa 豆瓣" target="_blank" href="javascript:alert('博主不想告诉你');" title="豆瓣"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="javascript:alert('博主不想告诉你');" title="简书"></a>
+                            
+                                <a class="fa SegmentFault" target="_blank" href="javascript:alert('博主不想告诉你');" title="SegmentFault"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="javascript:alert('博主不想告诉你');" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-swoole_1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/10/swoole_1/" class="article-date">
+      <time datetime="2016-09-10T10:29:00.000Z" itemprop="datePublished">2016-09-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      swoole 学习第一章 Task进程与Timer进程
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/publish/">publish</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swoole/">Swoole</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>Swoole</strong> 据说是可以php革命的一个东西，更有屌丝说看见swoole如见php的未来一般,作者不才看官方教程实在迷糊，特意花大洋买了视频来看，希望与大家共同进步</p>
+<a id="more"></a>
+<p><img src="https://psv.oss-cn-shanghai.aliyuncs.com/swoole.png" alt="swoole"></p>
+<p><strong>Swoole</strong> 据说是可以php革命的一个东西，更有屌丝说看见swoole如见php的未来一般,作者不才看官方教程实在迷糊，特意花大洋买了视频来看，希望与大家共同进步</p>
+<ul>
+<li>补坑环节</li>
+<li>介绍swoole进程的基本知识</li>
+<li>介绍task进程的原理，使用方法和常见问题的解决方法</li>
+<li>介绍如何使用定时器，定时器使用的一些小技巧和调试方法</li>
+<li>装逼环节</li>
+</ul>
+<h3 id="补坑环节"><a href="#补坑环节" class="headerlink" title="补坑环节"></a>补坑环节</h3><hr>
+<blockquote>
+<p>什么是进程，所谓进程其实就是操作系统中一个正在运行的程序，我们在一个终端当中，通过php，运行一个php文件，这个时候就相当于我们创建了一个进程，这个进程会在系统中驻存，申请属于它自己的内存空间系统资源并且运行相应的程序</p>
+</blockquote>
+<p>那么我们将这个模型做一下简化，对于一个进程来说，它的核心内容分为两个部分，一个是它的内存，这个内存是这进程创建之初从系统分配的，它所有创建的变量都会存储在这一片内存环境当中</p>
+<p>一个是它的上下文环境我们知道进程是运行在操作系统的，那么对于程序来说，它的运行依赖操作系统分配给它的资源，操作系统的一些状态，以及它自己的一些状态，这些都构成了这个进程的上下文环境</p>
+<p>在操作系统中可以运行多个进程的，对于一个进程来说，它<code>可以通过一个系统函数创建自己的子进程</code>，那么当我们在一个进程中创建出若干个子进程的时候那么可以看到如图，我们以两个方框代表父进程创建出来的子进程，那么子进程和父进程一样，拥有自己的内存空间和上下文环境</p>
+<p>需要注意的是，在创建出来的新的子进程当中，它会复制自己的父进程的内存空间和上下文环境，也就是说子进程自己的内存空间和父进程的内存空间是独立的，相互没有任何影响的，如果修改子进程当中的某个变量，它不会影响自己的父进程，我们在父进程中创建一个变量<code>$temp</code> ,那么它的两个子进程当中也有<code>$temp</code></p>
+<p><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/clipboard.png" alt="swoole"></p>
+<ul>
+<li>[x] 子进程会复制父进程的内存空间和上下文环境</li>
+<li>[x] 修改某个子进程的内存空间，不会修改父进程或其他子进程中的内存空间</li>
+<li>[x] Swoole本身也是一个多进程的模型，它有多个<code>worker</code>进程和自己<code>master</code>进程,那么多个<code>worker</code>进程中创建的变量之间是不能通用的</li>
+</ul>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>上面我们说了，进程当中的变量是不能通用的，那我怎么实现两个进程之间的通信呢？如图我们看到有一个子进程1和子进程2 他们拥有不同的内存空间和上下文环境，那么我们想实现它们之间的通信的话就可以用我们的<code>共享内存</code>，共享内存在操作系统中比较一个特殊的内存，它并不依赖于进程而存在，并不属于任何进程，我们可以调用系统提供的系统函数，来创建一片<code>共享内存</code>并指定它的<code>索引</code>，通过索引任何一个进程都可以在这片共享内存中申请内存空间，并在其中储存对应的值</p>
+<p><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/QQ%E5%9B%BE%E7%89%8720160910134602.png" alt="swoole"></p>
+<ul>
+<li>[x] 共享内存不属于任何一个进程</li>
+<li>[x] 在共享内存中分配的内存空间可以被任何进程访问，只要这个进程拥有这片共享内存的<code>索引</code></li>
+<li>[x] 即使进程关闭，共享内存任然可以继续保留在操作系统当中</li>
+</ul>
+<p>举例来说，当子进程1 通过索引在共享内存中分配了一片内存并将它命名为 <code>$a</code>并赋值为<code>vg</code>,那么子进程2中同样可以去访问这个<code>$a</code>并且 得到<code>vg</code>这个值，它也可以修改这个值，同样子进程1可以通过变量得到这个修改，这样它们就实现了两个子进程之间的通信啦</p>
+<p>可以通过几个命令来看一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[pushaowei@localhost ~]<span class="comment"># ipcs -m</span></div><div class="line"></div><div class="line">------ Shared Memory Segments --------</div><div class="line">key        shmid      owner      perms      bytes      nattch     status</div><div class="line">0x00000000 0          root       600        524288     21         dest</div></pre></td></tr></table></figure>
+<p>当程序  生成了一片共享内存过后，<code>key</code>值是我们创建共享内存中所申明的。<code>shmid</code>就是这个共享内存的<code>索引</code>，我们可以通过这个id来访问指定的 内存空间,<code>owner</code>是创建内存的用户，<code>perms</code> 是它的访问权限，<code>bytes</code>是它的大小</p>
+<hr>
+<h2 id="Swoole-的结构"><a href="#Swoole-的结构" class="headerlink" title="Swoole 的结构"></a>Swoole 的结构</h2><p>在swoole 没出现之前，php写web开发的时候需要依赖nginx 这样的web应用服务器并且依赖<code>fpm</code>的解析的 ,<code>fpm</code>大家都知道它同样是一个多进程的php解析器，当一个新的请求过来的时候<code>fpm</code>会创建一个新的进程去处理这个请求，这样的话系统的开销是用于创建和销毁进程，导致整个程序的效应效率并不是十分的高，那么在swoole当中，swoole采用和fpm完全不用的架构，如图所示，整个swoole扩展可以分为三层</p>
+<ul>
+<li>[ ] 第一层，Master进程，这个是swoole的主进程,这个进程是用于处理swoole的核心事件驱动的，那么在这个进程当中可以看到它拥有若干个<code>Reactor</code>[线程]，swoole所有对于事件的监听都会在这些线程中实现，比如来自客户端的连接，本地通信用的管道，以及异步操作用到的描述符</li>
+<li>[ ] Manager进程，创建管理更下一层的Worker进程以及Task Worker 进程，它仅仅做分配</li>
+<li>[ ] Worker进程以及Task worker 进程，worker 进程属于swoole的主逻辑进程，用户处理客户端的一系列请求，再往下一层是taskworker进程这一进城是swoole提供的异步工作进程，这些进程主要用于处理一些耗时较长的同步任务，</li>
+</ul>
+<p><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/9110B9CBB4484E6D86B4E217CD409925.jpg" alt="swoole"></p>
+<p>在swoole 当中进程与进程之间的通信是通过管道来实现的， 在master进程当中当<code>Reactor</code>接收到了来自客户端的数据的时候，这些数据会通过管道发送给<code>Worker</code>进程由<code>Worker</code>进程进行处理，那么 <code>Worker</code>进程需要投递任务到<code>Task Worker</code>进程当中的时候也是通过管道来实现数据投递，我们可以通过设置swoole的配置参数来使得<code>task</code>与 <code>worker</code> 进程之间的通信走系统的<code>消息队列</code></p>
+<p>当客户端的一个新的连接过来时，会被 <code>Main Reactor</code> 线程接收到，然后将这个连接读写操作的监听，注册到对应的<code>Reactor</code>线程当中，并通知<code>Worker</code>进程处理对应的<code>OnClient</code>，也就是接收到连接的回调，当<code>Worker</code>进程出现意外，或出现一定的请求次数关闭后，<code>Manager</code>进程会重新发起一个新的<code>Worker</code>进程，保证系统当中的<code>Worker</code>进程的数目是固定的，这样一来就完成了整个swoole扩展的结构</p>
+<hr>
+<h2 id="Task-进程以及Task-Worker进程"><a href="#Task-进程以及Task-Worker进程" class="headerlink" title="Task 进程以及Task Worker进程"></a>Task 进程以及Task Worker进程</h2><p>task 进程是独立于worker进程当中的一个工作进程，用于处理一些耗时较长的逻辑，这些逻辑如果在task 进程当中处理时并不会影响worker 进程处理来自客户端的请求，由此大大提高了swoole处理并发的能力</p>
+<p><img src="https://image20160910.oss-cn-beijing.aliyuncs.com/62394E88F88B4D4D81D7DB0147C04738.jpg" alt="swoole"></p>
+<p>如图可以看到在<code>worker</code>进程到中，我们调用对应的<code>task()</code>方法发送数据通知到<code>task worker</code> 进程，<code>task worker</code>进程会在<code>onTask()</code>回调中 接收到这些数据，并进行处理，处理完成之后通过调用<code>finsh()</code>函数或者直接<code>return</code>返回消息给<code>worker</code>进程，worker进程在<code>onFinsh()</code>进程收到这些消息并进行处理</p>
+<ul>
+<li>[x] 两个进程之间是通过Unix Sock 管道通信(也可配置通过消息队列通信);</li>
+</ul>
+<blockquote>
+<p>Task Worker 的使用</p>
+</blockquote>
+<p>使用linux nc 工具可以模拟客户端连接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[pushaowei@localhost www]<span class="comment"># nc 127.0.0.1 9501</span></div></pre></td></tr></table></figure></p>
+<p>开启 task</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$serv-&gt;set(<span class="keyword">array</span>(</div><div class="line">    <span class="string">'task_worker_num'</span> =&gt; <span class="number">8</span></div><div class="line">));</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> $serv;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;serv = <span class="keyword">new</span> swoole_server(<span class="string">"0.0.0.0"</span>, <span class="number">9501</span>);</div><div class="line">        <span class="keyword">$this</span>-&gt;serv-&gt;set(<span class="keyword">array</span>(</div><div class="line">            <span class="string">'worker_num'</span> =&gt; <span class="number">8</span>,</div><div class="line">            <span class="string">'daemonize'</span> =&gt; <span class="keyword">false</span>,</div><div class="line">            <span class="string">'max_request'</span> =&gt; <span class="number">10000</span>,</div><div class="line">            <span class="string">'dispatch_mode'</span> =&gt; <span class="number">2</span>,</div><div class="line">            <span class="string">'debug_mode'</span>=&gt; <span class="number">1</span>,</div><div class="line">            <span class="string">'task_worker_num'</span> =&gt; <span class="number">8</span></div><div class="line">        ));</div><div class="line">        <span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Start'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onStart'</span>));</div><div class="line">        <span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Connect'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onConnect'</span>));</div><div class="line">        <span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Receive'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onReceive'</span>));</div><div class="line">        <span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Close'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onClose'</span>));</div><div class="line">        <span class="comment">// bind callback</span></div><div class="line">        <span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Task'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onTask'</span>));</div><div class="line">        <span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Finish'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onFinish'</span>));</div><div class="line">        <span class="keyword">$this</span>-&gt;serv-&gt;start();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onStart</span><span class="params">( $serv )</span> </span>&#123; <span class="comment">//创建连接要经历的</span></div><div class="line">        <span class="keyword">echo</span> <span class="string">"Start\n"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onConnect</span><span class="params">( $serv, $fd, $from_id )</span> </span>&#123; <span class="comment">//客户端有连接过来会发起的，有几个连接就有几个fd</span></div><div class="line">        <span class="keyword">echo</span> <span class="string">"Client &#123;$fd&#125; connect\n"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onReceive</span><span class="params">( swoole_server $serv, $fd, $from_id, $data )</span> </span>&#123;</div><div class="line">        <span class="comment">//客户端发送来的数据就跑到这里来了，fd就是第几个连接上的</span></div><div class="line">        <span class="keyword">echo</span> <span class="string">"来自客户端的请求 本次的fd为 &#123;$fd&#125;:&#123;$data&#125;\n"</span>;</div><div class="line">        <span class="comment">// 如果我们收到了来自客户端的数据，需要创建一个任务，我们可以通过这样的方式</span></div><div class="line">        <span class="comment">//首先我们创建一个数组用于存放需要传递给task的数据</span></div><div class="line">        $param =[</div><div class="line">            <span class="string">'task'</span> =&gt;<span class="string">'task_1'</span>, <span class="comment">//task任务</span></div><div class="line">            <span class="string">'param'</span> =&gt; $data, <span class="comment">//收到来自客户端的数据传递给它</span></div><div class="line">            <span class="string">'fd'</span> =&gt; $fd <span class="comment">//客户端的描述符也给它传递过去</span></div><div class="line">        ];</div><div class="line">        $serv-&gt;task( json_encode( $param ) );</div><div class="line">        <span class="comment">//通过serv的task方法将数据传递出去，task传递的时候只能传递一个字符串，需要用json或者序列化将这个数据处理</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onClose</span><span class="params">( $serv, $fd, $from_id )</span> </span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"Client &#123;$fd&#125; close connection\n"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onTask</span><span class="params">($serv,$task_id,$from_id, $data)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">//onTask回调中会收到onReceive发来的这个任务，</span></div><div class="line">        <span class="keyword">echo</span> <span class="string">"这次发送过来的task_id 为 &#123;$task_id&#125; 我们的from_id 为 &#123;$from_id&#125;\n"</span>;</div><div class="line">        $data = json_decode($data,<span class="keyword">true</span>); <span class="comment">//解析发送来的数据</span></div><div class="line">        <span class="keyword">echo</span> <span class="string">"Receive Task :&#123;$data['task']&#125;\n"</span>;</div><div class="line">        var_dump($data[<span class="string">'param'</span>]); <span class="comment">//打印客户端发来的数据</span></div><div class="line"></div><div class="line">        $serv-&gt;send( $data[<span class="string">'fd'</span>], <span class="string">"hello task task_id == &#123;$task_id&#125;"</span>); <span class="comment">//这是发给客户端的</span></div><div class="line"></div><div class="line">        <span class="comment">//处理完成之后调用send函数通过接收到的描述符给客户端发送数据</span></div><div class="line">        <span class="keyword">return</span> <span class="string">"Task &#123;$task_id&#125;'s result"</span>;</div><div class="line">        <span class="comment">//然后return 返回给worker 进程 告诉他们想说的</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onFinish</span><span class="params">($serv,$task_id, $data)</span> </span>&#123;</div><div class="line">        <span class="comment">//onFinish收到上面回来的消息就可以将这个data 打印出来</span></div><div class="line">        <span class="keyword">echo</span> <span class="string">"Task &#123;$task_id&#125; finish\n"</span>;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"Result: &#123;$data&#125;\n"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$server = <span class="keyword">new</span> Server();</div></pre></td></tr></table></figure>
+<h3 id="Task-常见问题"><a href="#Task-常见问题" class="headerlink" title="Task 常见问题"></a>Task 常见问题</h3><ul>
+<li>task 传递数据最好小于8K，如果数据大于8k 超过swoole buff 空间后这些数据会被swoole 写入临时文件<code>/tmp</code>进行传递，那么在onTask接收到实际的任务的时候，他会去读取这个文件将这个数据读出来</li>
+<li>task 传递对象可以通过序列化传递一个对象的拷贝，task中对对象的改变不会反映到worker进程中数据库连接网络连接对象不可传递</li>
+<li>task onFinsh 回调会发回调用task方法的worker 进程</li>
+</ul>
+<h3 id="mysql-连接池"><a href="#mysql-连接池" class="headerlink" title="mysql 连接池"></a>mysql 连接池</h3><p>先来整个数据库<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">test</span> <span class="keyword">charset</span> <span class="string">'utf8'</span>;</div><div class="line"><span class="keyword">use</span> <span class="keyword">test</span>;</div><div class="line"> <span class="keyword">create</span> <span class="keyword">table</span> vg(</div><div class="line">    -&gt; <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">unsigned</span> auto_increment,</div><div class="line">    -&gt; <span class="keyword">value</span> <span class="built_in">char</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span><span class="string">''</span>,</div><div class="line">    -&gt; primary <span class="keyword">key</span>(<span class="keyword">id</span>)</div><div class="line">    -&gt; )<span class="keyword">engine</span>=<span class="keyword">InnoDb</span>;</div></pre></td></tr></table></figure></p>
+<p>上源码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> 1. Class MySqlPlool by:pushaowei</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySqlPlool</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> $serv;</div><div class="line">	<span class="keyword">private</span> $pdo;</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;serv = <span class="keyword">new</span> swoole_server(<span class="string">'127.0.0.1'</span>,<span class="number">9502</span>);</div><div class="line">		<span class="keyword">$this</span>-&gt;serv -&gt;set([</div><div class="line">			<span class="string">'worker_num'</span> =&gt;<span class="number">8</span>,</div><div class="line">			<span class="string">'daemonize'</span> =&gt;<span class="keyword">false</span>,</div><div class="line">			<span class="string">'max_request'</span> =&gt;<span class="number">10000</span>,</div><div class="line">			<span class="string">'dispatch_mode'</span> =&gt;<span class="number">3</span>,</div><div class="line">			<span class="string">'debug_mode'</span> =&gt;<span class="number">1</span> ,</div><div class="line">			<span class="string">'task_worker_num'</span> =&gt;<span class="number">8</span></div><div class="line">			]);</div><div class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'WorkerStart'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onWorkerStart'</span>));</div><div class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Connect'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onConnect'</span>));</div><div class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Receive'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onReceive'</span>));</div><div class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Close'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onClose'</span>));</div><div class="line">		<span class="comment">// bind callback</span></div><div class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Task'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onTask'</span>));</div><div class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;on(<span class="string">'Finish'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onFinish'</span>));</div><div class="line">		<span class="keyword">$this</span>-&gt;serv-&gt;start();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [onConnect 创建连接]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $serv    [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $fd      [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $from_id [description]</div><div class="line">	 * <span class="doctag">@return</span> [type]          [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onConnect</span><span class="params">($serv, $fd ,$from_id )</span></span>&#123;</div><div class="line">		<span class="keyword">echo</span> <span class="string">"Client &#123;$fd&#125; connect \n"</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [onWorkerStart 创建pdo连接,woker进程创建之初被调用]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $serv      [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $worker_id [description]</div><div class="line">	 * <span class="doctag">@return</span> [type]            [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onWorkerStart</span><span class="params">($serv, $worker_id)</span></span>&#123;</div><div class="line">		<span class="keyword">echo</span> <span class="string">"onWorkerStart\n"</span>;</div><div class="line">		<span class="keyword">$this</span>-&gt;pdo = <span class="keyword">new</span> PDO(<span class="string">"mysql:dbname=test;host=127.0.0.1"</span>,<span class="string">'root'</span>,<span class="string">'123456'</span>);</div><div class="line">		<span class="keyword">$this</span>-&gt;pdo -&gt; exec(<span class="string">'SET NAMES utf8'</span>);<span class="comment">//设置通信编码</span></div><div class="line">		<span class="keyword">$this</span>-&gt;pdo -&gt; setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [onReceive 这里收到客户端的请求]</div><div class="line">	 * <span class="doctag">@param</span>  swoole_server $serv    [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type]        $fd      [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type]        $from_id [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type]        $data    [description]</div><div class="line">	 * <span class="doctag">@return</span> [type]                 [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span>  <span class="title">onReceive</span> <span class="params">(swoole_server $serv ,$fd , $from_id ,$data )</span></span>&#123;</div><div class="line">		$task= [</div><div class="line">			<span class="string">'sql'</span> =&gt;<span class="string">'insert into vg  values (?,?)'</span>,</div><div class="line">			<span class="string">'params'</span> =&gt; [<span class="string">''</span>,$fd],</div><div class="line">			<span class="string">'fd'</span> =&gt; $fd <span class="comment">//描述符</span></div><div class="line">		];</div><div class="line">		$serv -&gt;task(json_encode($task));</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [onTask 处理sql,接收客户端的$data]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $serv    [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $task_id [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $from_id [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $data    [description]</div><div class="line">	 * <span class="doctag">@return</span> [type]          [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onTask</span><span class="params">($serv,$task_id,$from_id,$data)</span></span>&#123;</div><div class="line">		<span class="keyword">echo</span> <span class="string">'已经跑onTask这里来啦'</span>;</div><div class="line"></div><div class="line">		<span class="keyword">try</span>&#123;</div><div class="line">			$data = json_decode($data,<span class="keyword">true</span>);</div><div class="line"></div><div class="line">			$stement = <span class="keyword">$this</span>-&gt;pdo-&gt;prepare($data[<span class="string">'sql'</span>]);</div><div class="line">			$stement -&gt;execute($data[<span class="string">'params'</span>]);</div><div class="line">			$serv-&gt;send($data[<span class="string">'fd'</span>],<span class="string">'insert succed'</span>); <span class="comment">//将返回结果给客户端</span></div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125;<span class="keyword">catch</span>(PDOException $e)</div><div class="line">		&#123;</div><div class="line">			var_dump($e-&gt;getMessage());</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [onFinish description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $serv    [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $task_id [description]</div><div class="line">	 * <span class="doctag">@param</span>  [type] $data    [description]</div><div class="line">	 * <span class="doctag">@return</span> [type]          [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onFinish</span><span class="params">($serv,$task_id,$data)</span></span>&#123;</div><div class="line">		var_dump(<span class="string">"resut:"</span> .$data);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> $serv</div><div class="line">	 * <span class="doctag">@param</span> $fd</div><div class="line">	 * <span class="doctag">@param</span> $from_id</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onClose</span><span class="params">( $serv, $fd, $from_id )</span> </span>&#123;</div><div class="line">		<span class="keyword">echo</span> <span class="string">"Client &#123;$fd&#125; close connection \n"</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">new</span> MySqlPlool();</div></pre></td></tr></table></figure></p>
+<p>说说都发生了什么，通过N个task进程来维持数据库操作，每个task进程中都有一个pdo实例然后通过数据库连接来实现一个异步的数据库操作，<code>onWorkerStart</code>这个会在worker进程创建之初被回调，它并不区分自己是<code>worker</code>进程还是<code>task worker</code>进程,我们需要通过代码进行控制，<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onWorkerStart</span><span class="params">($serv, $worker_id)</span></span>&#123;</div><div class="line">	<span class="keyword">echo</span> <span class="string">"onWorkerStart\n"</span>;</div><div class="line">	<span class="comment">//</span></div><div class="line">	<span class="comment">//让它只有是taskworker的时候才创建pdo连接</span></div><div class="line">	<span class="keyword">if</span>($serv -&gt; taskworker)&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;pdo = <span class="keyword">new</span> PDO(<span class="string">"mysql:dbname=test;host=127.0.0.1"</span>,<span class="string">'root'</span>,<span class="string">'123456'</span>);</div><div class="line">		<span class="keyword">$this</span>-&gt;pdo -&gt; exec(<span class="string">'SET NAMES utf8'</span>);<span class="comment">//设置通信编码</span></div><div class="line">		<span class="keyword">$this</span>-&gt;pdo -&gt; setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	 <span class="keyword">echo</span> <span class="string">"我们只让taskworker连"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[pushaowei@localhost www]<span class="comment"># php server.php</span></div><div class="line">我们只让task worker 连接</div><div class="line">我们只让task worker 连接</div><div class="line">我们只让task worker 连接</div><div class="line">我们只让task worker 连接</div><div class="line">我们只让task worker 连接</div><div class="line">我们只让task worker 连接</div><div class="line">taskWorkerStart</div><div class="line">taskWorkerStart</div><div class="line">我们只让task worker 连接</div><div class="line">taskWorkerStart</div><div class="line">我们只让task worker 连接</div><div class="line">taskWorkerStart</div><div class="line">taskWorkerStart</div><div class="line">taskWorkerStart</div><div class="line">taskWorkerStart</div><div class="line">taskWorkerStart</div></pre></td></tr></table></figure></p>
+<p>出现的worker 与前面咱们设定的值对应<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">$this</span>-&gt;serv -&gt;set([</div><div class="line">	<span class="string">'worker_num'</span> =&gt;<span class="number">8</span>,</div><div class="line">	<span class="string">'daemonize'</span> =&gt;<span class="keyword">false</span>,</div><div class="line">	<span class="string">'max_request'</span> =&gt;<span class="number">10000</span>,</div><div class="line">	<span class="string">'dispatch_mode'</span> =&gt;<span class="number">3</span>,</div><div class="line">	<span class="string">'debug_mode'</span> =&gt;<span class="number">1</span> ,</div><div class="line">	<span class="string">'task_worker_num'</span> =&gt;<span class="number">8</span></div><div class="line">	]);</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>Timer定时器</strong><br>Timer定时器 是Swoole提供的一个内置功能，这个功能提供精度更高的毫秒级的定时器</p>
+<ul>
+<li>基于Reactor 线程(在task worker 中使用系统定时器);</li>
+<li>基于epoll的timeout 机制实现</li>
+<li>为了提高timer的检索效率，在swoole中实现了一个堆来存放timer，这个堆是一个最小堆，它的存放的索引是每个timer定时器的 距离下一次相应剩余的时间，这个时间越小这个timer就在堆中所放的位置就会离堆顶越近，每次遍历的时候都会从堆顶往下检索，每一次下沉索引都会检测到剩余时间越长的timer，当最上面的timer可以运行的时候我们只需要遍历少量的timer都可以将所有的timer从这个堆中取出来，提高了 检索的效率</li>
+</ul>
+<h3 id="timer-使用"><a href="#timer-使用" class="headerlink" title="timer-使用"></a>timer-使用</h3><p>一共有两种定时器<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int swoole_timer_tick(int $ms, mixed $callback, mixed $param = <span class="keyword">null</span>);</div><div class="line">int swoole_timer_after(int $after_time_ms, mixed $callback_function);</div></pre></td></tr></table></figure></p>
+<p><code>tick</code> 是创建一个永久的定时器，这个定时器会在swoole 一直运行，并在指定的毫秒间隔每隔一段时间执行一次，并调用指定的<code>$callback</code>函数，<br><code>after</code> 是指定一个临时的一次性的定时器，这个定时器会在<code>$after_time_ms</code>指定毫秒数后调用这个<code>$callback_function</code>方法<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onWorkerStart</span><span class="params">($serv, $worker_id)</span></span>&#123;</div><div class="line">	<span class="comment">//当worker id =0 的时候我们才创建这个tick</span></div><div class="line">	<span class="keyword">if</span>($worker_id == <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		swoole_timer_tick(<span class="number">1000</span>, <span class="function"><span class="keyword">function</span><span class="params">($timer_id,$parmas)</span></span>&#123;</div><div class="line">			<span class="keyword">echo</span> <span class="string">"QQ:542684913\n"</span>;</div><div class="line">			<span class="keyword">echo</span> <span class="string">"&#123;$parmas&#125; \n"</span>;</div><div class="line">		&#125;, <span class="string">"hello"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="timer-常见问题"><a href="#timer-常见问题" class="headerlink" title="timer 常见问题"></a>timer 常见问题</h3><p>可以通过tick方法的第三个参数传递，也可以使用use 闭包来传递一个参数进去，onTimer 是在调用tick方法的进程中回调，因此可以直接使用在Worker进程中申明的对象（局部变量无法访问）；tick方法会返回timer_id 可以使用swoole_timer_clear清除指定的定时器</p>
+<h3 id="timer实例"><a href="#timer实例" class="headerlink" title="timer实例"></a>timer实例</h3><p>Swoole Crontab</p>
+<p><code>Crontab</code>是linux上的一个定时程序，它的实现最小为分钟，我们可以设置<code>swoole crontab</code>实现一个更精确的定时<br>原理：使用<code>tick</code>方法，每1s 检查一次<code>crontab</code> 任务表，如果发现有需要执行的任务，就通知worker进程处理任务,<br>步骤</p>
+<ul>
+<li><p>解析<code>crontab</code>文件，并存入DB</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line">?php</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by PhpStorm.</div><div class="line"> * User: ClownFish 542684913<span class="doctag">@qq</span>.com</div><div class="line"> * Date: 14-12-27</div><div class="line"> * Time: 上午11:59</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParseCrontab</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">public</span> $error;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  解析crontab的定时格式，linux只支持到分钟/，这个类支持到秒</div><div class="line">     * <span class="doctag">@param</span> string $crontab_string :</div><div class="line">     *</div><div class="line">     *      0     1    2    3    4    5</div><div class="line">     *      *     *    *    *    *    *</div><div class="line">     *      -     -    -    -    -    -</div><div class="line">     *      |     |    |    |    |    |</div><div class="line">     *      |     |    |    |    |    +----- day of week (0 - 6) (Sunday=0)</div><div class="line">     *      |     |    |    |    +----- month (1 - 12)</div><div class="line">     *      |     |    |    +------- day of month (1 - 31)</div><div class="line">     *      |     |    +--------- hour (0 - 23)</div><div class="line">     *      |     +----------- min (0 - 59)</div><div class="line">     *      +------------- sec (0-59)</div><div class="line">     * <span class="doctag">@param</span> int $start_time timestamp [default=current timestamp]</div><div class="line">     * <span class="doctag">@return</span> int unix timestamp - 下一分钟内执行是否需要执行任务，如果需要，则把需要在那几秒执行返回</div><div class="line">     * <span class="doctag">@throws</span> InvalidArgumentException 错误信息</div><div class="line">     */</div><div class="line">    <span class="keyword">static</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">parse</span><span class="params">($crontab_string, $start_time = null)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (is_array($crontab_string)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">self</span>::_parse_array($crontab_string, $start_time);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!preg_match(<span class="string">'/^((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)$/i'</span>, trim($crontab_string))) &#123;</div><div class="line">            <span class="keyword">if</span> (!preg_match(<span class="string">'/^((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)\s+((\*(\/[0-9]+)?)|[0-9\-\,\/]+)$/i'</span>, trim($crontab_string))) &#123;</div><div class="line">                <span class="keyword">self</span>::$error = <span class="string">"Invalid cron string: "</span> . $crontab_string;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> ($start_time &amp;&amp; !is_numeric($start_time)) &#123;</div><div class="line">            <span class="keyword">self</span>::$error = <span class="string">"\$start_time must be a valid unix timestamp ($start_time given)"</span>;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">        $cron = preg_split(<span class="string">"/[\s]+/i"</span>, trim($crontab_string));</div><div class="line">        $start = <span class="keyword">empty</span>($start_time) ? time() : $start_time;</div><div class="line">        <span class="keyword">if</span> (count($cron) == <span class="number">6</span>) &#123;</div><div class="line">            $date = <span class="keyword">array</span>(</div><div class="line">                <span class="string">'second'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">0</span>], <span class="number">0</span>, <span class="number">59</span>),</div><div class="line">                <span class="string">'minutes'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">1</span>], <span class="number">0</span>, <span class="number">59</span>),</div><div class="line">                <span class="string">'hours'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">2</span>], <span class="number">0</span>, <span class="number">23</span>),</div><div class="line">                <span class="string">'day'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">3</span>], <span class="number">1</span>, <span class="number">31</span>),</div><div class="line">                <span class="string">'month'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">4</span>], <span class="number">1</span>, <span class="number">12</span>),</div><div class="line">                <span class="string">'week'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">5</span>], <span class="number">0</span>, <span class="number">6</span>),</div><div class="line">            );</div><div class="line">        &#125; <span class="keyword">elseif</span> (count($cron) == <span class="number">5</span>) &#123;</div><div class="line">            $date = <span class="keyword">array</span>(</div><div class="line">                <span class="string">'second'</span> =&gt; <span class="keyword">array</span>(<span class="number">1</span> =&gt; <span class="number">1</span>),</div><div class="line">                <span class="string">'minutes'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">0</span>], <span class="number">0</span>, <span class="number">59</span>),</div><div class="line">                <span class="string">'hours'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">1</span>], <span class="number">0</span>, <span class="number">23</span>),</div><div class="line">                <span class="string">'day'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">2</span>], <span class="number">1</span>, <span class="number">31</span>),</div><div class="line">                <span class="string">'month'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">3</span>], <span class="number">1</span>, <span class="number">12</span>),</div><div class="line">                <span class="string">'week'</span> =&gt; <span class="keyword">self</span>::_parse_cron_number($cron[<span class="number">4</span>], <span class="number">0</span>, <span class="number">6</span>),</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (</div><div class="line">            in_array(intval(date(<span class="string">'i'</span>, $start)), $date[<span class="string">'minutes'</span>]) &amp;&amp;</div><div class="line">            in_array(intval(date(<span class="string">'G'</span>, $start)), $date[<span class="string">'hours'</span>]) &amp;&amp;</div><div class="line">            in_array(intval(date(<span class="string">'j'</span>, $start)), $date[<span class="string">'day'</span>]) &amp;&amp;</div><div class="line">            in_array(intval(date(<span class="string">'w'</span>, $start)), $date[<span class="string">'week'</span>]) &amp;&amp;</div><div class="line">            in_array(intval(date(<span class="string">'n'</span>, $start)), $date[<span class="string">'month'</span>])</div><div class="line">        ) &#123;</div><div class="line">            <span class="keyword">return</span> $date[<span class="string">'second'</span>];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 解析单个配置的含义</div><div class="line">     * <span class="doctag">@param</span> $s</div><div class="line">     * <span class="doctag">@param</span> $min</div><div class="line">     * <span class="doctag">@param</span> $max</div><div class="line">     * <span class="doctag">@return</span> array</div><div class="line">     */</div><div class="line">    <span class="keyword">static</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_parse_cron_number</span><span class="params">($s, $min, $max)</span></span></div><div class="line">    &#123;</div><div class="line">        $result = <span class="keyword">array</span>();</div><div class="line">        $v1 = explode(<span class="string">","</span>, $s);</div><div class="line">        <span class="keyword">foreach</span> ($v1 <span class="keyword">as</span> $v2) &#123;</div><div class="line">            $v3 = explode(<span class="string">"/"</span>, $v2);</div><div class="line">            $step = <span class="keyword">empty</span>($v3[<span class="number">1</span>]) ? <span class="number">1</span> : $v3[<span class="number">1</span>];</div><div class="line">            $v4 = explode(<span class="string">"-"</span>, $v3[<span class="number">0</span>]);</div><div class="line">            $_min = count($v4) == <span class="number">2</span> ? $v4[<span class="number">0</span>] : ($v3[<span class="number">0</span>] == <span class="string">"*"</span> ? $min : $v3[<span class="number">0</span>]);</div><div class="line">            $_max = count($v4) == <span class="number">2</span> ? $v4[<span class="number">1</span>] : ($v3[<span class="number">0</span>] == <span class="string">"*"</span> ? $max : $v3[<span class="number">0</span>]);</div><div class="line">            <span class="keyword">for</span> ($i = $_min; $i &lt;= $_max; $i += $step) &#123;</div><div class="line">                $result[$i] = intval($i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        ksort($result);</div><div class="line">        <span class="keyword">return</span> $result;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_parse_array</span><span class="params">($crontab_array, $start_time)</span></span></div><div class="line">    &#123;</div><div class="line">        $result = <span class="keyword">array</span>();</div><div class="line">        <span class="keyword">foreach</span> ($crontab_array <span class="keyword">as</span> $val) &#123;</div><div class="line">            <span class="keyword">if</span>(count(explode(<span class="string">":"</span>,$val)) == <span class="number">2</span>)&#123;</div><div class="line">                $val = $val.<span class="string">":01"</span>;</div><div class="line">            &#125;</div><div class="line">            $time = strtotime($val);</div><div class="line">            <span class="keyword">if</span> ($time &gt;= $start_time &amp;&amp; $time &lt; $start_time + <span class="number">60</span>) &#123;</div><div class="line">                $result[$time] = $time;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> $result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在tick的回调中，检查所有的crontab任务，找到满足当前时序的任务，并执行</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
+        <p><span>发布时间:</span>2016-09-10, 18:29:00</p>
+        <p><span>最后更新:</span>2017-02-22, 11:20:16</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/09/10/swoole_1/" title="swoole 学习第一章 Task进程与Timer进程">http://blog.mango16.cc/2016/09/10/swoole_1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2016/09/10/swoole_1/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/09/11/swoole_2/">
+                    swoole 学习第二章 Event Io 与 process
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/31/yaf04/">
+                    Yaf---异常和错误 | 路由和分发
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#补坑环节"><span class="toc-number">1.</span> <span class="toc-text">补坑环节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享内存"><span class="toc-number">2.</span> <span class="toc-text">共享内存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Swoole-的结构"><span class="toc-number"></span> <span class="toc-text">Swoole 的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Task-进程以及Task-Worker进程"><span class="toc-number"></span> <span class="toc-text">Task 进程以及Task Worker进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-常见问题"><span class="toc-number">1.</span> <span class="toc-text">Task 常见问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql-连接池"><span class="toc-number">2.</span> <span class="toc-text">mysql 连接池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#timer-使用"><span class="toc-number">3.</span> <span class="toc-text">timer-使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#timer-常见问题"><span class="toc-number">4.</span> <span class="toc-text">timer 常见问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#timer实例"><span class="toc-number">5.</span> <span class="toc-text">timer实例</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"swoole 学习第一章 Task进程与Timer进程　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/09/10/swoole_1/" data-title="swoole 学习第一章 Task进程与Timer进程" data-url="http://blog.mango16.cc/2016/09/10/swoole_1/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"pushaowei"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/09/11/swoole_2/" title="上一篇: swoole 学习第二章 Event Io 与 process">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/31/yaf04/" title="下一篇: Yaf---异常和错误 | 路由和分发">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 Shaowei Pu
+            </div>
+
+            <div class="footer-right">
+              <!--<a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">shaowei pu</a>  Theme <a href="https://github.com/PuShaoWei/PuShaoWei.github.io" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by Mango16  -->
+                 <span>我把这一生最灿烂的微笑都献给了电脑屏幕</span>
+                <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "澳门首家线上赌场美女荷官在线发牌" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
