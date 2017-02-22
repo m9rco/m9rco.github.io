@@ -15,22 +15,22 @@
 
 
 
-<meta name="description" content="适配器设计模式知识将某个对象的借口是配为另一个对象所期望的接口
+<meta name="description" content="建造者设计模式的母的是消除其他对象的复杂创建过程
 
-通过适配器模式能够使用新的代码和功能性来帮助更新原有的系统，简单的说需要转化一个对象的接口用于另一个对象中时，在不改变原对象的基础上可以采用适配器模式">
+使用建造者设计模式不仅是最佳的做法，而且在某个对象的构造和配置方法改变时尽可能地减少重复的代码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP 适配器模式(Adapter Design Pattern)">
-<meta property="og:url" content="http://blog.mango16.cc/2017/02/22/phpAdapter/index.html">
+<meta property="og:title" content="PHP Builder 建造者模式">
+<meta property="og:url" content="http://blog.mango16.cc/2017/02/22/Builder/index.html">
 <meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
-<meta property="og:description" content="适配器设计模式知识将某个对象的借口是配为另一个对象所期望的接口
+<meta property="og:description" content="建造者设计模式的母的是消除其他对象的复杂创建过程
 
-通过适配器模式能够使用新的代码和功能性来帮助更新原有的系统，简单的说需要转化一个对象的接口用于另一个对象中时，在不改变原对象的基础上可以采用适配器模式">
-<meta property="og:updated_time" content="2017-02-22T03:20:16.000Z">
+使用建造者设计模式不仅是最佳的做法，而且在某个对象的构造和配置方法改变时尽可能地减少重复的代码">
+<meta property="og:updated_time" content="2017-02-22T08:52:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP 适配器模式(Adapter Design Pattern)">
-<meta name="twitter:description" content="适配器设计模式知识将某个对象的借口是配为另一个对象所期望的接口
+<meta name="twitter:title" content="PHP Builder 建造者模式">
+<meta name="twitter:description" content="建造者设计模式的母的是消除其他对象的复杂创建过程
 
-通过适配器模式能够使用新的代码和功能性来帮助更新原有的系统，简单的说需要转化一个对象的接口用于另一个对象中时，在不改变原对象的基础上可以采用适配器模式">
+使用建造者设计模式不仅是最佳的做法，而且在某个对象的构造和配置方法改变时尽可能地减少重复的代码">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>PHP 适配器模式(Adapter Design Pattern) | Because of your example, I wouldn&#39;t let it either.</title>
+<title>PHP Builder 建造者模式 | Because of your example, I wouldn&#39;t let it either.</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -259,11 +259,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-phpAdapter" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Builder" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/22/phpAdapter/" class="article-date">
-      <time datetime="2017-02-22T03:20:16.000Z" itemprop="datePublished">2017-02-22</time>
+      <a href="/2017/02/22/Builder/" class="article-date">
+      <time datetime="2017-02-22T02:20:12.000Z" itemprop="datePublished">2017-02-22</time>
 </a>
 
 
@@ -278,7 +278,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      PHP 适配器模式(Adapter Design Pattern)
+      PHP Builder 建造者模式
     </h1>
   
 
@@ -304,13 +304,13 @@
       
           
         <ul>
-<li>适配器设计模式知识将某个对象的借口是配为另一个对象所期望的接口</li>
+<li>建造者设计模式的母的是消除其他对象的复杂创建过程</li>
 </ul>
-<p>通过适配器模式能够使用新的代码和功能性来帮助更新原有的系统，简单的说需要转化一个对象的接口用于另一个对象中时，在不改变原对象的基础上可以采用适配器模式</p>
+<p>使用建造者设计模式不仅是最佳的做法，而且在某个对象的构造和配置方法改变时尽可能地减少重复的代码</p>
 <a id="more"></a>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Adapter  适配器模式</div><div class="line"> * -------------------------------------</div><div class="line"> * ** 来自说明 **</div><div class="line"> * </div><div class="line"> * 通过适配器模式能够使用新的代码和功能性来帮助更新原有的系统。</div><div class="line"> * 简单的说需要转化一个对象的接口用于另一个对象中时，</div><div class="line"> * 在不改变原对象的基础上可以采用适配器模式</div><div class="line"> * </div><div class="line"> * ===================================== </div><div class="line"> * ** 应用场景 **</div><div class="line"> *</div><div class="line"> * 对于项目中比较旧的架构底层的基类做接口更改时使用 </div><div class="line"> * </div><div class="line"> * -------------------------------------</div><div class="line"> * </div><div class="line"> * <span class="doctag">@version</span> $&#123;Id&#125;$</div><div class="line"> * <span class="doctag">@author</span> Shaowei Pu &lt;542684913<span class="doctag">@QQ</span>.com&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Builder  建造者模式</div><div class="line"> * -------------------------------------</div><div class="line"> * ** 来自说明 **</div><div class="line"> *</div><div class="line"> * 建造者设计模式的母的是消除其他对象的复杂创建过程，</div><div class="line"> * 使用建造者设计模式不仅是最佳的做法</div><div class="line"> * 而且在某个对象的构造和配置方法改变时尽可能地减少重复的代码</div><div class="line"> * </div><div class="line"> * ===================================== </div><div class="line"> * ** 应用场景 **</div><div class="line"> *</div><div class="line"> * 数据库接口类 | 优化基类</div><div class="line"> * </div><div class="line"> * -------------------------------------</div><div class="line"> * </div><div class="line"> * <span class="doctag">@version</span> $&#123;Id&#125;$</div><div class="line"> * <span class="doctag">@author</span> Shaowei Pu &lt;54268491<span class="doctag">@qq</span>.com&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
 <hr>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="comment">// 你现在是大巍施工队分配到伊朗的挖矿工头。</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 大巍施工队总部</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">headquarters</span>  </span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> $_worker;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($worker)</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;_worker = $worker;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getWorker</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>( !<span class="keyword">empty</span>(<span class="keyword">$this</span>-&gt;_worker) )&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">'力大无穷'</span>.<span class="keyword">$this</span>-&gt;_worker.<span class="string">'个挖矿师傅'</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 分包出去干活的</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">assignWorker</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> $_workerObject;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(headquarters $_workerObject )</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;_workerObject = $_workerObject;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">assign</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;_workerObject-&gt;getWorker(); <span class="comment">// 将错误信息输出至控制台</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 现在你要20个力大无穷的搬砖师傅，然后找下总部，总部就给你了</div><div class="line"> */</div><div class="line">$Iran   = <span class="keyword">new</span> assignWorker(<span class="keyword">new</span> headquarters(<span class="number">20</span>));</div><div class="line">$Iran-&gt;assign();</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;hr/&gt;"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 日复一日，年复一年，你又被调到黎巴嫩挖矿，这边不同于你在伊朗的日子了，这里你要挖取钻石矿</span></div><div class="line"><span class="comment">// 但是这个钻石矿要几个砖家配合挖矿师傅才行，可是公司现在不能提供给你其他部门，因为咱们是百年大企业，主单位不能随便加部门进去</span></div><div class="line"><span class="comment">// 大巍国际的人才培养很利索，要什么有什么，这可难不倒你。所以你想了这样一个办法</span></div><div class="line"><span class="comment">// </span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 黎巴嫩专用适配器</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">headquarters</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($worker)</span></span>&#123;</div><div class="line">        <span class="keyword">parent</span>::__construct($worker);</div><div class="line">        <span class="keyword">$this</span>-&gt;getallheaders();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getallheaders</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;_worker =<span class="string">'勇敢过人的'</span>.(<span class="keyword">$this</span>-&gt;_worker/<span class="number">2</span>).<span class="string">'个砖家在加上'</span>.<span class="keyword">$this</span>-&gt;_worker;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 这下你要的的人就出来了</span></div><div class="line">$Lebanon = <span class="keyword">new</span> assignWorker(<span class="keyword">new</span> Adapter(<span class="number">20</span>));</div><div class="line">$Lebanon-&gt;assign();</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 现在是这样一个情况，您是学生个人档案录入员，你写了这样一个类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Entering</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> $info = [];</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setName</span><span class="params">( $name )</span></span>&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;info[<span class="string">'name'</span>] = $name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setOld</span><span class="params">( $old )</span></span>&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;info[<span class="string">'old'</span>] = $old;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setGender</span><span class="params">( $gender )</span></span>&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;info[<span class="string">'gander'</span>]  = $gender;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 然后你看到了你们Boss 在许多年前，你还是一个乳臭未干的小孩时写的录入类 </span></div><div class="line">$worker = <span class="keyword">new</span> Entering;</div><div class="line">$worker-&gt;setName(<span class="string">'jacky'</span>);</div><div class="line">$worker-&gt;setOld(<span class="string">'22'</span>);</div><div class="line">$worker-&gt;setGender(<span class="string">'男'</span>);</div><div class="line"><span class="comment">// 然后这样就可以了,一个学生的完整信息就这么弄出来了</span></div><div class="line">var_dump($worker-&gt;info);</div><div class="line"><span class="comment">/* </span></div><div class="line">+----------------------------------------------------------------------</div><div class="line">| array (size=3)</div><div class="line">|   'name' 	 =&gt; string 'jacky' (length=5)</div><div class="line">|   'old' 	 =&gt; string '22' (length=2)</div><div class="line">|   'gander' =&gt; string '男' (length=3)</div><div class="line">+----------------------------------------------------------------------</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="comment">// 但是爱折腾的你从来不会放弃任何机会，自从学习了建造者模式的你 总有种蠢蠢欲动，于是乎就有了下面的类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnteringBuilder</span></span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">protected</span> $_baseObject = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">protected</span> $_newInfo    = []  ;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">( array $info )</span></span>&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;_baseObject = <span class="keyword">new</span> Entering;</div><div class="line">		<span class="keyword">$this</span>-&gt;_newInfo  = $info;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">build</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;_baseObject-&gt;setName  (  <span class="keyword">$this</span>-&gt;_newInfo[<span class="string">'name'</span>]);</div><div class="line">		<span class="keyword">$this</span>-&gt;_baseObject-&gt;setOld 	 (  <span class="keyword">$this</span>-&gt;_newInfo[<span class="string">'old'</span>]);</div><div class="line">		<span class="keyword">$this</span>-&gt;_baseObject-&gt;setGender(  <span class="keyword">$this</span>-&gt;_newInfo[<span class="string">'gander'</span>]);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getInfo</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_baseObject-&gt;info;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 然后这样</span></div><div class="line">$new_worker = <span class="keyword">new</span> EnteringBuilder([</div><div class="line">			<span class="string">'name'</span> 	 =&gt; <span class="string">'lucy'</span>,</div><div class="line">			<span class="string">'old'</span> 	 =&gt;  <span class="number">22</span>,</div><div class="line">			<span class="string">'gander'</span> =&gt; <span class="string">'女'</span>,</div><div class="line">	]);</div><div class="line">$new_worker-&gt;build();</div><div class="line"><span class="comment">// 然后这样就可以了,一个学生的完整信息就这么弄出来了</span></div><div class="line">var_dump($new_worker-&gt;getInfo());</div><div class="line"><span class="comment">/* </span></div><div class="line">+----------------------------------------------------------------------</div><div class="line">|array (size=3)</div><div class="line">|  'name' =&gt; string 'lucy' (length=4)</div><div class="line">|  'old' =&gt; int 22</div><div class="line">|  'gander' =&gt; string '女' (length=3)</div><div class="line">+----------------------------------------------------------------------</div><div class="line">*/</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -319,13 +319,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/22/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
-        <p><span>发布时间:</span>2017-02-22, 11:20:16</p>
-        <p><span>最后更新:</span>2017-02-22, 11:20:16</p>
+        <p><span>发布时间:</span>2017-02-22, 10:20:12</p>
+        <p><span>最后更新:</span>2017-02-22, 16:52:08</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/22/phpAdapter/" title="PHP 适配器模式(Adapter Design Pattern)">http://blog.mango16.cc/2017/02/22/phpAdapter/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2017/02/22/phpAdapter/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/22/Builder/" title="PHP Builder 建造者模式">http://blog.mango16.cc/2017/02/22/Builder/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2017/02/22/Builder/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -337,16 +337,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/22/hiderjs/">
-                    javascript 之隐藏你的代码
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/09/11/swoole_2/">
-                    swoole 学习第二章 Event Io 与 process
+                <a href="/2017/02/21/phpAdapter/">
+                    PHP 适配器模式(Adapter Design Pattern)
                 </a>
             </div>
         
@@ -394,7 +388,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"PHP 适配器模式(Adapter Design Pattern)　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"PHP Builder 建造者模式　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -410,7 +404,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/22/phpAdapter/" data-title="PHP 适配器模式(Adapter Design Pattern)" data-url="http://blog.mango16.cc/2017/02/22/phpAdapter/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/22/Builder/" data-title="PHP Builder 建造者模式" data-url="http://blog.mango16.cc/2017/02/22/Builder/"></div>
     <script>
         var duoshuoQuery = {short_name:"pushaowei"};
         var loadComment = function(){
@@ -433,21 +427,19 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/22/hiderjs/" title="上一篇: javascript 之隐藏你的代码">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/09/11/swoole_2/" title="下一篇: swoole 学习第二章 Event Io 与 process">
+            <a href="/2017/02/21/phpAdapter/" title="下一篇: PHP 适配器模式(Adapter Design Pattern)">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
 
 
 
