@@ -15,16 +15,22 @@
 
 
 
-<meta name="description" content="OOCSS:面向对象的CSS样式，通过对CSS样式的合理规范，重复使用，达到代码的精简，便于换肤。">
+<meta name="description" content="如果已有对象的部分内容或功能性发生改变，但是不需要修改原始的结构
+
+迭代新的应用需求">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面向对象的CSS样式">
-<meta property="og:url" content="http://blog.mango16.cc/2016/02/27/OOCSS/index.html">
+<meta property="og:title" content="PHP Decorator 装饰器模式">
+<meta property="og:url" content="http://blog.mango16.cc/2017/02/23/Decorator/index.html">
 <meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
-<meta property="og:description" content="OOCSS:面向对象的CSS样式，通过对CSS样式的合理规范，重复使用，达到代码的精简，便于换肤。">
-<meta property="og:updated_time" content="2017-02-22T08:48:27.000Z">
+<meta property="og:description" content="如果已有对象的部分内容或功能性发生改变，但是不需要修改原始的结构
+
+迭代新的应用需求">
+<meta property="og:updated_time" content="2017-02-23T12:14:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="面向对象的CSS样式">
-<meta name="twitter:description" content="OOCSS:面向对象的CSS样式，通过对CSS样式的合理规范，重复使用，达到代码的精简，便于换肤。">
+<meta name="twitter:title" content="PHP Decorator 装饰器模式">
+<meta name="twitter:description" content="如果已有对象的部分内容或功能性发生改变，但是不需要修改原始的结构
+
+迭代新的应用需求">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>面向对象的CSS样式 | Because of your example, I wouldn&#39;t let it either.</title>
+<title>PHP Decorator 装饰器模式 | Because of your example, I wouldn&#39;t let it either.</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -253,11 +259,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-OOCSS" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Decorator" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/27/OOCSS/" class="article-date">
-      <time datetime="2016-02-27T06:11:20.000Z" itemprop="datePublished">2016-02-27</time>
+      <a href="/2017/02/23/Decorator/" class="article-date">
+      <time datetime="2017-02-23T02:20:12.000Z" itemprop="datePublished">2017-02-23</time>
 </a>
 
 
@@ -272,7 +278,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      面向对象的CSS样式
+      PHP Decorator 装饰器模式
     </h1>
   
 
@@ -281,13 +287,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/HTML/">HTML</a>
+    <a class="article-category-link" href="/categories/Skill/">Skill</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -297,30 +303,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>　　<strong> OOCSS:</strong>面向对象的CSS样式，通过对CSS样式的合理规范，重复使用，达到代码的精简，便于换肤。<br><a id="more"></a></p>
-<h3 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 加强代码复用以便方便维护</div><div class="line">1. 减少CSS体积</div><div class="line">1. 提升渲染效率</div><div class="line">1. 组件库思想、栅格布局可共用、减少选择器、方便扩展</div></pre></td></tr></table></figure>
-<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1. 不要直接定义子节点，应把共性声明放到父类</div><div class="line"></div><div class="line">.mod .inner&#123;&#125; //</div><div class="line"></div><div class="line">1. 结构和皮肤相分离</div><div class="line">1. 容器和内容相分离</div><div class="line">1. 抽象出可重用的元素，建好组件库，在组件库内寻找可用的元素组装页面</div><div class="line">1. 往你想要扩展的对象本身添加Class，而不是他的父节点</div><div class="line">1. 对象应保持独立性</div><div class="line">1. 避免使用ID选择器，权重太高，无法重用</div><div class="line">1. 避免位置相关的样式</div><div class="line">1. 保证选择器相同的权重</div><div class="line">1. 类名：简短、清晰、语义化、OOCSS的名字并不影响HTML语义化</div></pre></td></tr></table></figure>
-<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p><a href="http://oocss.org" title="面向对象的CSS网站" target="_blank" rel="external">OOCSS</a></p>
-<p><a href="htto://meyerweb.com/eric/tools/css/reset/" target="_blank" rel="external">Reset</a></p>
-<blockquote>
-<p>优点：样式初始化设置非常全面<br>缺点：设置了部分多余的设置，border</p>
-</blockquote>
-<p><a href="http://github.com/necolas/normalize.css" target="_blank" rel="external">Normalize</a></p>
-<blockquote>
-<p>优点：<br>缺点：有些默认的没有设置</p>
-</blockquote>
-<p><a href="http://thx.github.io/cube/doc/neat/" target="_blank" rel="external">Neat.css</a></p>
-<blockquote>
-<p>优点：</p>
-<ol>
-<li>解决Bug，低级浏览器常见Bug</li>
-<li>统一效果，但不盲目追求重置为0</li>
-<li>向后兼容</li>
-<li>考虑响应式</li>
-<li>考虑移动设备</li>
-</ol>
-<p>缺点：</p>
-</blockquote>
+        <ul>
+<li>如果已有对象的部分内容或功能性发生改变，但是不需要修改原始的结构</li>
+</ul>
+<p>迭代新的应用需求</p>
+<a id="more"></a>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Decorator 装饰器模式</div><div class="line"> * -------------------------------------</div><div class="line"> * ** 来自说明 **</div><div class="line"> *</div><div class="line"> * 如果已有对象的部分内容或功能性发生改变，但是不需要修改原始的结构</div><div class="line"> *</div><div class="line"> * 刚开始楼主觉得这个他么怎么这么像 【 适配器模式 】</div><div class="line"> * 然后又把适配器模式的理论复制了过来给各位观众老爷看</div><div class="line"> * </div><div class="line"> * |-&gt; 适配器模式： * 通过适配器模式能够使用新的代码和功能性来帮助更新原有的系统。</div><div class="line"> *</div><div class="line"> * 前面演练过了，适配器还是需要继承原对象来实现，但是我们最开始学习面向对象编程时候</div><div class="line"> * 如果对象开始要求启用过多的子类，那么相应的代码就会牺牲编程人员的理解力和可维护性</div><div class="line"> * 通常，我们会竭力保证用于一个对象的父-子类关系不超过3个</div><div class="line"> * </div><div class="line"> * </div><div class="line"> * ===================================== </div><div class="line"> * ** 应用场景 **</div><div class="line"> *</div><div class="line"> * 迭代新的应用需求</div><div class="line"> * </div><div class="line"> * -------------------------------------</div><div class="line"> * </div><div class="line"> * <span class="doctag">@version</span> $&#123;Id&#125;$</div><div class="line"> * <span class="doctag">@author</span> Shaowei Pu &lt;54268491<span class="doctag">@qq</span>.com&gt;</div><div class="line"> */</div></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 现在你是一个农场饲养员，主要负责养猪方面工作</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 饲养类</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">feeding</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [$mess_tin 饭盒]</div><div class="line">	 * <span class="doctag">@var</span> array</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> $mess_tin = [];</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [feed 喂食物]</div><div class="line">	 * <span class="doctag">@author</span> 		Shaowei Pu &lt;pushaowei<span class="doctag">@sporte</span>.cn&gt;</div><div class="line">	 * <span class="doctag">@CreateTime</span>	2017-02-23T19:47:18+0800</div><div class="line">	 * <span class="doctag">@param</span>                               [type] $food [description]</div><div class="line">	 * <span class="doctag">@return</span>                              [type]       [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">feed</span><span class="params">( $food )</span></span>&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;mess_tin[] = $food;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [getHow 吃了哪些东西]</div><div class="line">	 * <span class="doctag">@author</span> 		Shaowei Pu &lt;pushaowei<span class="doctag">@sporte</span>.cn&gt;</div><div class="line">	 * <span class="doctag">@CreateTime</span>	2017-02-23T19:51:41+0800</div><div class="line">	 * <span class="doctag">@return</span>                              [type] [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getHow</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;mess_tin;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 以前你通过这样的方式可以喂猪</span></div><div class="line">$you = <span class="keyword">new</span> feeding;</div><div class="line"></div><div class="line"><span class="comment">// 然后老板给了这些食物</span></div><div class="line">$bread = [		</div><div class="line">		<span class="string">'apple'</span>,</div><div class="line">		<span class="string">'tangerine'</span>,</div><div class="line">		<span class="string">'banana'</span>,</div><div class="line">	];</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($bread <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">	$you-&gt;feed($value);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 看看吃了些啥</span></div><div class="line">var_dump( $you-&gt;getHow() );</div><div class="line"><span class="comment">/* </span></div><div class="line">+----------------------------------------------------------------------</div><div class="line">|array (size=3)</div><div class="line">|  0 =&gt; string 'apple' (length=5)</div><div class="line">|  1 =&gt; string 'tangerine' (length=9)</div><div class="line">|  2 =&gt; string 'banana' (length=6)</div><div class="line">+----------------------------------------------------------------------</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="comment">// 但是有天高级饲养说这喂的这些食物都是小写的 这不行，给猪必须要大写的</span></div><div class="line"><span class="comment">// 然后你看了下饲养类，听隔壁兄弟这个类不仅仅用在猪身上</span></div><div class="line"><span class="comment">// 也有养羊事业部，羊牛事业部，同样用的这个类</span></div><div class="line"><span class="comment">// 你不能瞎几把乱改</span></div><div class="line"><span class="comment">// 学了适配器的你马上想到了 使用【适配器模式】可以解决问题</span></div><div class="line"><span class="comment">// 但是立马老大就说了不准乱继承。一个父类最多继承 3 个子类</span></div><div class="line"><span class="comment">// 于是聪明的你想到了这样一个方法</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 养猪事业部专用</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">feddingDecorator</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [$_feeding 基类容器]</div><div class="line">	 * <span class="doctag">@var</span> array</div><div class="line">	 */</div><div class="line">	<span class="keyword">private</span> $_feeding = [];</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [__construct 基类入变量]</div><div class="line">	 * <span class="doctag">@author</span> 		Shaowei Pu &lt;pushaowei<span class="doctag">@sporte</span>.cn&gt;</div><div class="line">	 * <span class="doctag">@CreateTime</span>	2017-02-23T20:00:58+0800</div><div class="line">	 * <span class="doctag">@param</span>                               feeding $feeding [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">( feeding $feeding )</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">$this</span>-&gt;_feeding = $feeding;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * [expertFeed 高级食物转换器]</div><div class="line">	 * <span class="doctag">@author</span> 		Shaowei Pu &lt;pushaowei<span class="doctag">@sporte</span>.cn&gt;</div><div class="line">	 * <span class="doctag">@CreateTime</span>	2017-02-23T20:04:42+0800</div><div class="line">	 * <span class="doctag">@return</span>                              [type] [description]</div><div class="line">	 */</div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">expertFeed</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		array_walk(<span class="keyword">$this</span>-&gt;_feeding-&gt;mess_tin, <span class="function"><span class="keyword">function</span><span class="params">( &amp;$value )</span></span>&#123;</div><div class="line">			$value = strtoupper( $value );</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 然后这样,前期您还是放心喂</span></div><div class="line"></div><div class="line">$me = <span class="keyword">new</span> feeding;</div><div class="line"><span class="keyword">foreach</span> ($bread <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">	$me-&gt;feed($value);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 然后你喂完了就开始用的养猪专业部使用的高科技了</span></div><div class="line">$stm = <span class="keyword">new</span> feddingDecorator( $me );</div><div class="line">$stm-&gt;expertFeed();</div><div class="line"><span class="comment">// 看看吃了啥</span></div><div class="line">var_dump($me-&gt; getHow());</div><div class="line"></div><div class="line"><span class="comment">/* </span></div><div class="line">+----------------------------------------------------------------------</div><div class="line">|array (size=3)</div><div class="line">| 0 =&gt; string 'APPLE' (length=5)</div><div class="line">| 1 =&gt; string 'TANGERINE' (length=9)</div><div class="line">| 2 =&gt; string 'BANANA' (length=6)</div><div class="line">+----------------------------------------------------------------------</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="comment">// 掌声经久不息</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -329,13 +319,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/23/Decorator/">PHP Decorator 装饰器模式</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
-        <p><span>发布时间:</span>2016-02-27, 14:11:20</p>
-        <p><span>最后更新:</span>2017-02-22, 16:48:27</p>
+        <p><span>发布时间:</span>2017-02-23, 10:20:12</p>
+        <p><span>最后更新:</span>2017-02-23, 20:14:08</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/02/27/OOCSS/" title="面向对象的CSS样式">http://blog.mango16.cc/2016/02/27/OOCSS/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2016/02/27/OOCSS/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/23/Decorator/" title="PHP Decorator 装饰器模式">http://blog.mango16.cc/2017/02/23/Decorator/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2017/02/23/Decorator/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -347,16 +337,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/05/05/php画图形/">
-                    PHP 画图形 N行N列
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/01/27/Ajax/">
-                    Ajax学习计划
+                <a href="/2017/02/22/Builder/">
+                    PHP Builder 建造者模式
                 </a>
             </div>
         
@@ -368,7 +352,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用："><span class="toc-number">1.</span> <span class="toc-text">作用：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意事项："><span class="toc-number">2.</span> <span class="toc-text">注意事项：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展"><span class="toc-number">3.</span> <span class="toc-text">拓展</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -404,7 +388,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"面向对象的CSS样式　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"PHP Decorator 装饰器模式　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -420,7 +404,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/02/27/OOCSS/" data-title="面向对象的CSS样式" data-url="http://blog.mango16.cc/2016/02/27/OOCSS/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/23/Decorator/" data-title="PHP Decorator 装饰器模式" data-url="http://blog.mango16.cc/2017/02/23/Decorator/"></div>
     <script>
         var duoshuoQuery = {short_name:"pushaowei"};
         var loadComment = function(){
@@ -443,15 +427,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/05/05/php画图形/" title="上一篇: PHP 画图形 N行N列">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/01/27/Ajax/" title="下一篇: Ajax学习计划">
+            <a href="/2017/02/22/Builder/" title="下一篇: PHP Builder 建造者模式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
