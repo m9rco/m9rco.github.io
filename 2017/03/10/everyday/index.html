@@ -15,16 +15,16 @@
 
 
 
-<meta name="description" content="HTTP 常用状态码 拿出来 用的时候看一看">
+<meta name="description" content="随时更新一下值得记忆的一些踏过的坑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP常见状态码">
-<meta property="og:url" content="http://blog.mango16.cc/2016/07/07/HTTPcode/index.html">
+<meta property="og:title" content="But you should have one thing mind.">
+<meta property="og:url" content="http://blog.mango16.cc/2017/03/10/everyday/index.html">
 <meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
-<meta property="og:description" content="HTTP 常用状态码 拿出来 用的时候看一看">
-<meta property="og:updated_time" content="2017-02-22T08:48:27.000Z">
+<meta property="og:description" content="随时更新一下值得记忆的一些踏过的坑">
+<meta property="og:updated_time" content="2017-03-10T10:13:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP常见状态码">
-<meta name="twitter:description" content="HTTP 常用状态码 拿出来 用的时候看一看">
+<meta name="twitter:title" content="But you should have one thing mind.">
+<meta name="twitter:description" content="随时更新一下值得记忆的一些踏过的坑">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,7 +52,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>HTTP常见状态码 | Because of your example, I wouldn&#39;t let it either.</title>
+<title>But you should have one thing mind. | Because of your example, I wouldn&#39;t let it either.</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -253,11 +253,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-HTTPcode" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-everyday" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/07/HTTPcode/" class="article-date">
-      <time datetime="2016-07-07T04:47:24.000Z" itemprop="datePublished">2016-07-07</time>
+      <a href="/2017/03/10/everyday/" class="article-date">
+      <time datetime="2017-03-10T10:09:05.000Z" itemprop="datePublished">2017-03-10</time>
 </a>
 
 
@@ -272,7 +272,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      HTTP常见状态码
+      But you should have one thing mind.
     </h1>
   
 
@@ -281,13 +281,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
+    <a class="article-category-link" href="/categories/php/">php</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/intellectual/">intellectual</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/phper/">phper</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -297,44 +297,19 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>HTTP 常用状态码 拿出来 用的时候看一看<br><a id="more"></a></p>
-<p><code>100</code> Continue<br>  初始的请求已经接受，客户应当继续发送请求的其余部分</p>
-<p><code>101</code> Switching Protocols<br>  服务器将遵从客户的请求转换到另外一种协议</p>
-<p><code>200</code> OK<br>  一切正常，对GET和POST请求的应答文档跟在后面</p>
-<p><code>201</code> Created<br>  服务器已经创建了文档，Location头给出了它的URL。</p>
-<p><code>202</code> Accepted<br>  已经接受请求，但处理尚未完成。</p>
-<p><code>203</code> Non-Authoritative Information<br>  文档已经正常地返回，但一些应答头可能不正确，因为使用的是文档的拷贝</p>
-<p><code>204</code> No Content<br>  没有新文档，浏览器应该继续显示原来的文档。如果用户定期地刷新页面，而Servlet可以确定用户文档足够新，这个状态代码是很有用的</p>
-<p><code>205</code> Reset Content<br>  没有新的内容，但浏览器应该重置它所显示的内容。用来强制浏览器清除表单输入内容</p>
-<p><code>206</code> Partial Content<br>  客户发送了一个带有Range头的GET请求，服务器完成了它</p>
-<p><code>300</code> Multiple Choices<br>  客户请求的文档可以在多个位置找到，这些位置已经在返回的文档内列出。如果服务器要提出优先选择，则应该在Location应答头指明。</p>
-<p><code>301</code> Moved Permanently<br>  客户请求的文档在其他地方，新的URL在Location头中给出，浏览器应该自动地访问新的URL。</p>
-<p><code>302</code> Found<br>  类似于301，但新的URL应该被视为临时性的替代，而不是永久性的。</p>
-<p><code>303</code> See Other<br>  类似于301/302，不同之处在于，如果原来的请求是POST，Location头指定的重定向目标文档应该通过GET提取</p>
-<p><code>304</code> Not Modified<br>  客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓冲的文档还可以继续使用。</p>
-<p><code>305</code> Use Proxy<br>  客户请求的文档应该通过Location头所指明的代理服务器提取</p>
-<p><code>307</code> Temporary Redirect<br>  和302（Found）相同。许多浏览器会错误地响应302应答进行重定向，即使原来的请求是 POST，即使它实际上只能在POST请求的应答是303时才能重定向。由于这个原因，HTTP 1.1新增了307，以便更加清除地区分几个状态代码： 当出现303应答时，浏览器可以跟随重定向的GET和POST请求；如果是307应答，则浏览器只能跟随对GET请求的重定向。</p>
-<p><code>400</code> Bad Request<br>  请求出现语法错误。</p>
-<p><code>401</code> Unauthorized<br>  客户试图未经授权访问受密码保护的页面。应答中会包含一个WWW-Authenticate头，浏览器据此显示用户名字/密码对话框，然后在填写合适的Authorization头后再次发出请求。</p>
-<p><code>403</code> Forbidden<br>  资源不可用。</p>
-<p><code>404</code> Not Found<br>  无法找到指定位置的资源</p>
-<p><code>405</code> Method Not Allowed<br>  请求方法（GET、POST、HEAD、Delete、PUT、TRACE等）对指定的资源不适用。</p>
-<p><code>406</code> Not Acceptable<br>  指定的资源已经找到，但它的MIME类型和客户在Accpet头中所指定的不兼容</p>
-<p><code>407</code> Proxy Authentication Required<br>  类似于401，表示客户必须先经过代理服务器的授权。</p>
-<p><code>408</code> Request Timeout<br>  在服务器许可的等待时间内，客户一直没有发出任何请求。客户可以在以后重复同一请求。</p>
-<p><code>409</code> Conflict<br>  通常和PUT请求有关。由于请求和资源的当前状态相冲突，因此请求不能成功。</p>
-<p><code>410</code> Gone<br>  所请求的文档已经不再可用，而且服务器不知道应该重定向到哪一个地址。它和404的不同在于，返回407表示文档永久地离开了指定的位置，而404表示由于未知的原因文档不可用。</p>
-<p><code>411</code> Length Required<br>  服务器不能处理请求，除非客户发送一个Content-Length头。</p>
-<p><code>412</code> Precondition Failed<br>  请求头中指定的一些前提条件失败</p>
-<p><code>413</code> Request Entity Too Large<br>  目标文档的大小超过服务器当前愿意处理的大小。如果服务器认为自己能够稍后再处理该请求，则应该提供一个Retry-After头</p>
-<p><code>414</code> Request URI Too Long<br>  URI太长</p>
-<p><code>416</code> Requested Range Not Satisfiable<br>  服务器不能满足客户在请求中指定的Range头</p>
-<p><code>500</code> Internal Server Error<br>  服务器遇到了意料不到的情况，不能完成客户的请求</p>
-<p><code>501</code> Not Implemented<br>  服务器不支持实现请求所需要的功能。例如，客户发出了一个服务器不支持的PUT请求</p>
-<p><code>502</code> Bad Gateway<br>  服务器作为网关或者代理时，为了完成请求访问下一个服务器，但该服务器返回了非法的应答</p>
-<p><code>503</code> Service Unavailable<br>  服务器由于维护或者负载过重未能应答。例如，Servlet可能在数据库连接池已满的情况下返回503。服务器返回503时可以提供一个Retry-After头</p>
-<p><code>504</code> Gateway Timeout<br>  由作为代理或网关的服务器使用，表示不能及时地从远程服务器获得应答</p>
-<p><code>505</code> HTTP Version Not Supported<br>  服务器不支持请求中所指明的HTTP版本</p>
+        <p>随时更新一下值得记忆的一些踏过的坑</p>
+<a id="more"></a>
+<h3 id="Mac-git-大小写问题"><a href="#Mac-git-大小写问题" class="headerlink" title="Mac git 大小写问题"></a>Mac git 大小写问题</h3><p>由于 Mac 下文件名大小写不敏感，造成 git 下如果改了名字，譬如小写改大些，推送到 linux 服务器的时候会没有效果，Github 上的也是小写。<br>所以，如果在 Mac 上改文件名，需要用下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git mv --force myfile MyFile</div><div class="line"></div><div class="line"><span class="comment">#修改git配置，不忽略大小写</span></div><div class="line">git config core.ignorecase <span class="literal">false</span></div></pre></td></tr></table></figure>
+<h3 id="删除git-远程的分支"><a href="#删除git-远程的分支" class="headerlink" title="删除git 远程的分支"></a>删除git 远程的分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push --delete origin branch_name</div></pre></td></tr></table></figure>
+<h3 id="推送出现一些同步的错误，可以加个-f"><a href="#推送出现一些同步的错误，可以加个-f" class="headerlink" title="推送出现一些同步的错误，可以加个-f"></a>推送出现一些同步的错误，可以加个-f</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin dev <span class="_">-f</span></div></pre></td></tr></table></figure>
+<h3 id="修改crontab-的编辑器"><a href="#修改crontab-的编辑器" class="headerlink" title="修改crontab 的编辑器"></a>修改crontab 的编辑器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> EDITOR=/usr/bin/vim <span class="comment"># crontab -e</span></div></pre></td></tr></table></figure>
+<h3 id="redis-MONITOR-监控redis的所有的被执行的命令"><a href="#redis-MONITOR-监控redis的所有的被执行的命令" class="headerlink" title="redis MONITOR 监控redis的所有的被执行的命令"></a>redis MONITOR 监控redis的所有的被执行的命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//在程序之外用管道监控某一个命令。</div><div class="line">redis-cli -h 172.16.71.70 -p 6379 MONITOR|grep medal:rank:9</div><div class="line">1472647383.968024 [0 172.16.71.67:48460] <span class="string">"ZINCRBY"</span> <span class="string">"medal:rank:9"</span> <span class="string">"1.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647384.560867 [0 172.16.71.69:60301] <span class="string">"ZADD"</span> <span class="string">"medal:rank:9"</span> <span class="string">"108.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647384.561215 [0 172.16.71.69:60301] <span class="string">"ZCARD"</span> <span class="string">"medal:rank:9"</span></div><div class="line">1472647440.527100 [0 172.16.71.67:48566] <span class="string">"ZINCRBY"</span> <span class="string">"medal:rank:9"</span> <span class="string">"1.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647440.811201 [0 172.16.71.69:60301] <span class="string">"ZADD"</span> <span class="string">"medal:rank:9"</span> <span class="string">"109.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647440.811598 [0 172.16.71.69:60301] <span class="string">"ZCARD"</span> <span class="string">"medal:rank:9"</span></div><div class="line">1472647456.269238 [0 172.16.71.67:48586] <span class="string">"ZINCRBY"</span> <span class="string">"medal:rank:9"</span> <span class="string">"1.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647457.091923 [0 172.16.71.69:60301] <span class="string">"ZADD"</span> <span class="string">"medal:rank:9"</span> <span class="string">"110.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647457.092253 [0 172.16.71.69:60301] <span class="string">"ZCARD"</span> <span class="string">"medal:rank:9"</span></div><div class="line">1472647457.523799 [0 172.16.71.67:48593] <span class="string">"ZINCRBY"</span> <span class="string">"medal:rank:9"</span> <span class="string">"1.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647458.364086 [0 172.16.71.69:60301] <span class="string">"ZADD"</span> <span class="string">"medal:rank:9"</span> <span class="string">"111.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647458.364470 [0 172.16.71.69:60301] <span class="string">"ZCARD"</span> <span class="string">"medal:rank:9"</span></div><div class="line">1472647473.428126 [0 172.16.71.67:48605] <span class="string">"ZCARD"</span> <span class="string">"medal:rank:9"</span></div><div class="line">1472647473.451694 [0 172.16.71.67:48605] <span class="string">"ZCARD"</span> <span class="string">"medal:rank:9"</span></div><div class="line">1472647473.451863 [0 172.16.71.67:48605] <span class="string">"ZREVRANK"</span> <span class="string">"medal:rank:9"</span> <span class="string">"12436136"</span></div><div class="line">1472647473.452154 [0 172.16.71.67:48605] <span class="string">"ZREVRANGE"</span> <span class="string">"medal:rank:9"</span> <span class="string">"0"</span> <span class="string">"9"</span></div><div class="line">1472647516.470815 [0 172.16.71.67:48690] <span class="string">"ZINCRBY"</span> <span class="string">"medal:rank:9"</span> <span class="string">"1.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647516.663979 [0 172.16.71.69:60301] <span class="string">"ZADD"</span> <span class="string">"medal:rank:9"</span> <span class="string">"112.0000000000000000"</span> <span class="string">"12436136"</span></div><div class="line">1472647516.664325 [0 172.16.71.69:60301] <span class="string">"ZCARD"</span> <span class="string">"medal:rank:9"</span></div></pre></td></tr></table></figure>
+<h3 id="监控文件的实时数据-tail-f"><a href="#监控文件的实时数据-tail-f" class="headerlink" title="监控文件的实时数据 tail -f"></a>监控文件的实时数据 tail -f</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//当文件有数据写入时，能实时的输出</div><div class="line">tail -f app.log</div><div class="line">logs tail -f app.log</div><div class="line">[2016-08-25 18:57:37] slim-app.INFO: Slim-Skeleton &apos;/&apos; route [] &#123;&quot;uid&quot;:&quot;9aeff67&quot;&#125;</div><div class="line">[2016-08-25 18:57:37] slim-app.INFO: Slim-Skeleton &apos;/&apos; route [] &#123;&quot;uid&quot;:&quot;a117fed&quot;&#125;</div><div class="line">[2016-08-25 18:57:42] slim-app.INFO: Slim-Skeleton &apos;/&apos; route [] &#123;&quot;uid&quot;:&quot;c6edb36&quot;&#125;</div><div class="line">[2016-08-25 18:57:42] slim-app.INFO: Slim-Skeleton &apos;/&apos; route [] &#123;&quot;uid&quot;:&quot;a29a035&quot;&#125;</div><div class="line">[2016-08-25 19:02:00] slim-app.INFO: Slim-Skeleton &apos;/&apos; route [] &#123;&quot;uid&quot;:&quot;a11dfb4&quot;&#125;</div><div class="line">[2016-08-25 19:02:59] slim-app.INFO: Slim-Skeleton &apos;/&apos; route [] &#123;&quot;uid&quot;:&quot;95e2320&quot;&#125;</div><div class="line">[2016-08-25 19:03:07] slim-app.INFO: Slim-Skeleton &apos;/&apos; route [] &#123;&quot;uid&quot;:&quot;3a5aa35&quot;&#125;</div></pre></td></tr></table></figure>
+<h3 id="set-error-handler-PHP中用来捕获自定义的错误信息"><a href="#set-error-handler-PHP中用来捕获自定义的错误信息" class="headerlink" title="set_error_handler PHP中用来捕获自定义的错误信息"></a>set_error_handler PHP中用来捕获自定义的错误信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public <span class="keyword">function</span> <span class="function"><span class="title">aaa</span></span>()</div><div class="line">&#123;</div><div class="line">    <span class="keyword">function</span> customError(<span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="variable">$errfile</span>, <span class="variable">$errline</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">echo</span> <span class="string">"&lt;b&gt;Custom error:&lt;/b&gt; [<span class="variable">$errno</span>] <span class="variable">$errstr</span>&lt;br /&gt;"</span>;</div><div class="line">        <span class="built_in">echo</span> <span class="string">" Error on line <span class="variable">$errline</span> in <span class="variable">$errfile</span>&lt;br /&gt;"</span>;</div><div class="line">        <span class="built_in">echo</span> <span class="string">"Ending Script"</span>;</div><div class="line">        die();</div><div class="line">    &#125;</div><div class="line">    //<span class="built_in">set</span> error handler， 第二个参数是可以设置需要捕获的错误类型</div><div class="line">    set_error_handler(<span class="string">"customError"</span>, E_ALL | E_WARNING);</div><div class="line">    //<span class="variable">$a</span> 没定义，应该会有一个错误：</div><div class="line">    var_dump(<span class="variable">$a</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>看下打印输出，就能按照我们的方式输出打印错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">&lt;b&gt;Custom error:&lt;/b&gt; [8] Undefined variable: a&lt;br /&gt; Error on line 169 <span class="keyword">in</span> /data/app/live/include/controller/TmpCtrl.php&lt;br /&gt;Ending Script%</div><div class="line"></div><div class="line">``` </div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">### php cli 命令</span></div><div class="line"></div><div class="line"></div><div class="line">```bash</div><div class="line">php -i</div><div class="line">查看phpinfo</div><div class="line">php -v</div><div class="line">显示PHP版本</div><div class="line">php -m</div><div class="line">查看PHP安装了哪些扩展模块，可修改php.ini添加删除扩展模块。</div><div class="line">编译PHP时内置的扩展，无法通过修改php.ini删除</div><div class="line">php -S</div><div class="line">启动一个内置的Web服务器，用于开发环境内进行程序的调试。</div><div class="line">php -S 0.0.0.0:9000</div><div class="line">内置的Web服务器是一个全功能的Http服务器，在开发模式下可以取代apache,nginx+php-fpm，但不可用于线上生产环境。</div><div class="line">可以使用-t参数指定document_root，如果不指定表示使用当前目录作为document_root</div><div class="line">php -S 0.0.0.0:9000 -t /data/webroot/</div><div class="line">php -c</div><div class="line">指定加载php.ini的绝对路径</div><div class="line">php -c /home/htf/my_php.ini</div><div class="line">php <span class="_">-l</span></div><div class="line">检测一个php代码文件是否有语法错误，如 php <span class="_">-l</span> test.php</div><div class="line">php -r</div><div class="line">执行一段php代码，如</div><div class="line">php -r <span class="string">"echo 'hello world';"</span></div><div class="line">php --ini</div><div class="line">显示当前加载的php.ini绝对路径</div><div class="line">php --re swoole</div><div class="line">显示某个扩展提供了哪些类和函数。</div><div class="line">php --ri swoole</div><div class="line">显示扩展的phpinfo信息。与phpinfo的作用相同，不同之处是这里仅显示指定扩展的phpinfo</div><div class="line">php --rf file_get_contents</div><div class="line">显示某个PHP函数的信息，一般用于检测函数是否存在</div></pre></td></tr></table></figure>
+<h3 id="Linux下查看一个端口被哪个占用进程"><a href="#Linux下查看一个端口被哪个占用进程" class="headerlink" title="Linux下查看一个端口被哪个占用进程"></a>Linux下查看一个端口被哪个占用进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">netstat -apn|grep 7782</div><div class="line">tcp        0      0 :::80                       :::*                        LISTEN      19408/java </div><div class="line">#那么进程号就是`19408`</div><div class="line">再通过`ps -ef | grep 19408` 就知道这个进程是啥了。</div><div class="line">+</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -343,13 +318,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></p>
+        <p><span>本文标题:</span><a href="/2017/03/10/everyday/">But you should have one thing mind.</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
-        <p><span>发布时间:</span>2016-07-07, 12:47:24</p>
-        <p><span>最后更新:</span>2017-02-22, 16:48:27</p>
+        <p><span>发布时间:</span>2017-03-10, 18:09:05</p>
+        <p><span>最后更新:</span>2017-03-10, 18:13:55</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/07/07/HTTPcode/" title="HTTP常见状态码">http://blog.mango16.cc/2016/07/07/HTTPcode/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2016/07/07/HTTPcode/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/10/everyday/" title="But you should have one thing mind.">http://blog.mango16.cc/2017/03/10/everyday/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2017/03/10/everyday/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -361,16 +336,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/07/28/yaf01/">
-                    Yaf---写在前面
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/06/05/monkeyKing/">
-                    猴子选大王算法
+                <a href="/2017/02/23/Decorator/">
+                    PHP Decorator 装饰器模式
                 </a>
             </div>
         
@@ -382,7 +351,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-git-大小写问题"><span class="toc-number">1.</span> <span class="toc-text">Mac git 大小写问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除git-远程的分支"><span class="toc-number">2.</span> <span class="toc-text">删除git 远程的分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推送出现一些同步的错误，可以加个-f"><span class="toc-number">3.</span> <span class="toc-text">推送出现一些同步的错误，可以加个-f</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改crontab-的编辑器"><span class="toc-number">4.</span> <span class="toc-text">修改crontab 的编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis-MONITOR-监控redis的所有的被执行的命令"><span class="toc-number">5.</span> <span class="toc-text">redis MONITOR 监控redis的所有的被执行的命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控文件的实时数据-tail-f"><span class="toc-number">6.</span> <span class="toc-text">监控文件的实时数据 tail -f</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set-error-handler-PHP中用来捕获自定义的错误信息"><span class="toc-number">7.</span> <span class="toc-text">set_error_handler PHP中用来捕获自定义的错误信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux下查看一个端口被哪个占用进程"><span class="toc-number">8.</span> <span class="toc-text">Linux下查看一个端口被哪个占用进程</span></a></li></ol>
         
     </div>
     <style>
@@ -418,7 +387,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"HTTP常见状态码　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"But you should have one thing mind.　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -434,7 +403,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/07/HTTPcode/" data-title="HTTP常见状态码" data-url="http://blog.mango16.cc/2016/07/07/HTTPcode/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/03/10/everyday/" data-title="But you should have one thing mind." data-url="http://blog.mango16.cc/2017/03/10/everyday/"></div>
     <script>
         var duoshuoQuery = {short_name:"pushaowei"};
         var loadComment = function(){
@@ -457,15 +426,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/07/28/yaf01/" title="上一篇: Yaf---写在前面">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/06/05/monkeyKing/" title="下一篇: 猴子选大王算法">
+            <a href="/2017/02/23/Decorator/" title="下一篇: PHP Decorator 装饰器模式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
