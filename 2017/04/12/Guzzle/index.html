@@ -15,16 +15,34 @@
 
 
 
-<meta name="description" content="HTTP 常用状态码 拿出来 用的时候看一看">
+<meta name="description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。
+
+
+接口简单：构建查询语句、POST请求、分流上传下载大文件、使用HTTP cookies、上传JSON数据等等 。
+发送同步或异步的请求均使用相同的接口。
+使用PSR-7接口来请求、响应、分流，允许你使用其他兼容的PSR-7类库与Guzzle共同开发。
+抽象了底层的HTTP传输，允许你改变环境以及其">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP常见状态码">
-<meta property="og:url" content="http://blog.mango16.cc/2016/07/07/HTTPcode/index.html">
+<meta property="og:title" content="But you should have one thing mind.">
+<meta property="og:url" content="http://blog.mango16.cc/2017/04/12/Guzzle/index.html">
 <meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
-<meta property="og:description" content="HTTP 常用状态码 拿出来 用的时候看一看">
-<meta property="og:updated_time" content="2017-02-22T08:48:27.000Z">
+<meta property="og:description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。
+
+
+接口简单：构建查询语句、POST请求、分流上传下载大文件、使用HTTP cookies、上传JSON数据等等 。
+发送同步或异步的请求均使用相同的接口。
+使用PSR-7接口来请求、响应、分流，允许你使用其他兼容的PSR-7类库与Guzzle共同开发。
+抽象了底层的HTTP传输，允许你改变环境以及其">
+<meta property="og:updated_time" content="2017-04-12T09:14:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP常见状态码">
-<meta name="twitter:description" content="HTTP 常用状态码 拿出来 用的时候看一看">
+<meta name="twitter:title" content="But you should have one thing mind.">
+<meta name="twitter:description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。
+
+
+接口简单：构建查询语句、POST请求、分流上传下载大文件、使用HTTP cookies、上传JSON数据等等 。
+发送同步或异步的请求均使用相同的接口。
+使用PSR-7接口来请求、响应、分流，允许你使用其他兼容的PSR-7类库与Guzzle共同开发。
+抽象了底层的HTTP传输，允许你改变环境以及其">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,7 +70,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>HTTP常见状态码 | Because of your example, I wouldn&#39;t let it either.</title>
+<title>But you should have one thing mind. | Because of your example, I wouldn&#39;t let it either.</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -253,11 +271,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-HTTPcode" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Guzzle" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/07/HTTPcode/" class="article-date">
-      <time datetime="2016-07-07T04:47:24.000Z" itemprop="datePublished">2016-07-07</time>
+      <a href="/2017/04/12/Guzzle/" class="article-date">
+      <time datetime="2017-04-12T09:14:17.000Z" itemprop="datePublished">2017-04-12</time>
 </a>
 
 
@@ -272,7 +290,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      HTTP常见状态码
+      But you should have one thing mind.
     </h1>
   
 
@@ -281,13 +299,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
+    <a class="article-category-link" href="/categories/php/">php</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/intellectual/">intellectual</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/phper/">phper</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -297,44 +315,24 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>HTTP 常用状态码 拿出来 用的时候看一看<br><a id="more"></a></p>
-<p><code>100</code> Continue<br>  初始的请求已经接受，客户应当继续发送请求的其余部分</p>
-<p><code>101</code> Switching Protocols<br>  服务器将遵从客户的请求转换到另外一种协议</p>
-<p><code>200</code> OK<br>  一切正常，对GET和POST请求的应答文档跟在后面</p>
-<p><code>201</code> Created<br>  服务器已经创建了文档，Location头给出了它的URL。</p>
-<p><code>202</code> Accepted<br>  已经接受请求，但处理尚未完成。</p>
-<p><code>203</code> Non-Authoritative Information<br>  文档已经正常地返回，但一些应答头可能不正确，因为使用的是文档的拷贝</p>
-<p><code>204</code> No Content<br>  没有新文档，浏览器应该继续显示原来的文档。如果用户定期地刷新页面，而Servlet可以确定用户文档足够新，这个状态代码是很有用的</p>
-<p><code>205</code> Reset Content<br>  没有新的内容，但浏览器应该重置它所显示的内容。用来强制浏览器清除表单输入内容</p>
-<p><code>206</code> Partial Content<br>  客户发送了一个带有Range头的GET请求，服务器完成了它</p>
-<p><code>300</code> Multiple Choices<br>  客户请求的文档可以在多个位置找到，这些位置已经在返回的文档内列出。如果服务器要提出优先选择，则应该在Location应答头指明。</p>
-<p><code>301</code> Moved Permanently<br>  客户请求的文档在其他地方，新的URL在Location头中给出，浏览器应该自动地访问新的URL。</p>
-<p><code>302</code> Found<br>  类似于301，但新的URL应该被视为临时性的替代，而不是永久性的。</p>
-<p><code>303</code> See Other<br>  类似于301/302，不同之处在于，如果原来的请求是POST，Location头指定的重定向目标文档应该通过GET提取</p>
-<p><code>304</code> Not Modified<br>  客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓冲的文档还可以继续使用。</p>
-<p><code>305</code> Use Proxy<br>  客户请求的文档应该通过Location头所指明的代理服务器提取</p>
-<p><code>307</code> Temporary Redirect<br>  和302（Found）相同。许多浏览器会错误地响应302应答进行重定向，即使原来的请求是 POST，即使它实际上只能在POST请求的应答是303时才能重定向。由于这个原因，HTTP 1.1新增了307，以便更加清除地区分几个状态代码： 当出现303应答时，浏览器可以跟随重定向的GET和POST请求；如果是307应答，则浏览器只能跟随对GET请求的重定向。</p>
-<p><code>400</code> Bad Request<br>  请求出现语法错误。</p>
-<p><code>401</code> Unauthorized<br>  客户试图未经授权访问受密码保护的页面。应答中会包含一个WWW-Authenticate头，浏览器据此显示用户名字/密码对话框，然后在填写合适的Authorization头后再次发出请求。</p>
-<p><code>403</code> Forbidden<br>  资源不可用。</p>
-<p><code>404</code> Not Found<br>  无法找到指定位置的资源</p>
-<p><code>405</code> Method Not Allowed<br>  请求方法（GET、POST、HEAD、Delete、PUT、TRACE等）对指定的资源不适用。</p>
-<p><code>406</code> Not Acceptable<br>  指定的资源已经找到，但它的MIME类型和客户在Accpet头中所指定的不兼容</p>
-<p><code>407</code> Proxy Authentication Required<br>  类似于401，表示客户必须先经过代理服务器的授权。</p>
-<p><code>408</code> Request Timeout<br>  在服务器许可的等待时间内，客户一直没有发出任何请求。客户可以在以后重复同一请求。</p>
-<p><code>409</code> Conflict<br>  通常和PUT请求有关。由于请求和资源的当前状态相冲突，因此请求不能成功。</p>
-<p><code>410</code> Gone<br>  所请求的文档已经不再可用，而且服务器不知道应该重定向到哪一个地址。它和404的不同在于，返回407表示文档永久地离开了指定的位置，而404表示由于未知的原因文档不可用。</p>
-<p><code>411</code> Length Required<br>  服务器不能处理请求，除非客户发送一个Content-Length头。</p>
-<p><code>412</code> Precondition Failed<br>  请求头中指定的一些前提条件失败</p>
-<p><code>413</code> Request Entity Too Large<br>  目标文档的大小超过服务器当前愿意处理的大小。如果服务器认为自己能够稍后再处理该请求，则应该提供一个Retry-After头</p>
-<p><code>414</code> Request URI Too Long<br>  URI太长</p>
-<p><code>416</code> Requested Range Not Satisfiable<br>  服务器不能满足客户在请求中指定的Range头</p>
-<p><code>500</code> Internal Server Error<br>  服务器遇到了意料不到的情况，不能完成客户的请求</p>
-<p><code>501</code> Not Implemented<br>  服务器不支持实现请求所需要的功能。例如，客户发出了一个服务器不支持的PUT请求</p>
-<p><code>502</code> Bad Gateway<br>  服务器作为网关或者代理时，为了完成请求访问下一个服务器，但该服务器返回了非法的应答</p>
-<p><code>503</code> Service Unavailable<br>  服务器由于维护或者负载过重未能应答。例如，Servlet可能在数据库连接池已满的情况下返回503。服务器返回503时可以提供一个Retry-After头</p>
-<p><code>504</code> Gateway Timeout<br>  由作为代理或网关的服务器使用，表示不能及时地从远程服务器获得应答</p>
-<p><code>505</code> HTTP Version Not Supported<br>  服务器不支持请求中所指明的HTTP版本</p>
+        <blockquote>
+<p>Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。</p>
+</blockquote>
+<ul>
+<li>接口简单：构建查询语句、POST请求、分流上传下载大文件、使用HTTP cookies、上传JSON数据等等 。</li>
+<li>发送同步或异步的请求均使用相同的接口。</li>
+<li>使用PSR-7接口来请求、响应、分流，允许你使用其他兼容的PSR-7类库与Guzzle共同开发。</li>
+<li>抽象了底层的HTTP传输，允许你改变环境以及其他的代码，如：对cURL与PHP的流或socket并非重度依赖，非阻塞事件循环。</li>
+<li>中间件系统允许你创建构成客户端行为。</li>
+</ul>
+<a id="more"></a>
+<h2 id="所需包"><a href="#所需包" class="headerlink" title="所需包"></a>所需包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&quot;require&quot;: &#123;</div><div class="line">	&quot;guzzlehttp/guzzle&quot;: &quot;6.2.*&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">include_once dirname(__FILE__).&apos;/vendor/autoload.php&apos;;</div><div class="line"></div><div class="line">use \GuzzleHttp\Client;</div><div class="line">use \GuzzleHttp\Cookie\CookieJar;</div><div class="line">use \GuzzleHttp\Exception\RequestException;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 豆瓣租房刷留言</div><div class="line"> */</div><div class="line"></div><div class="line">class DouBanBrush&#123;</div><div class="line">    public $jar;</div><div class="line">    public $clock = 10;</div><div class="line">    const SLEEP   = 1200;   // 睡20 分钟</div><div class="line"></div><div class="line">    /**</div><div class="line">     * [__autoload 初始化]</div><div class="line">     * @author     Shaowei Pu &lt;542684913@qq.com&gt;</div><div class="line">     * @CreateTime  2017-04-12T10:39:28+0800</div><div class="line">     * @param                               [type] $account  [description]</div><div class="line">     * @param                               [type] $password [description]</div><div class="line">     * @return                              [type]           [description]</div><div class="line">     */</div><div class="line">    public function __construct( $account, $password )&#123;</div><div class="line">        $this-&gt;jar = new CookieJar;</div><div class="line">        try&#123;</div><div class="line">            if( $this-&gt;login( $account, $password ) == &apos;200&apos;)&#123;</div><div class="line">                echo &quot;----------【 START 】----------\n&quot;;</div><div class="line">                    $this-&gt;send();</div><div class="line">                echo &quot;----------【  END  】----------\n&quot;;</div><div class="line">            &#125;else&#123;</div><div class="line">              echo &quot;登录失败～！&quot;;</div><div class="line">            &#125;</div><div class="line">        &#125;catch (RequestException $e) &#123;</div><div class="line">            var_dump( $e-&gt;getRequest());</div><div class="line">            if ($e-&gt;hasResponse()) &#123;</div><div class="line">                var_dump( $e-&gt;getResponse());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * [login 登录]</div><div class="line">     * @author     Shaowei Pu &lt;542684913&gt;</div><div class="line">     * @CreateTime  2017-04-12T10:42:16+0800</div><div class="line">     * @return                              [type] [description]</div><div class="line">     */</div><div class="line">    public function login( $account , $password )&#123;</div><div class="line">      // 清楚空间内cookie</div><div class="line">      // $this-&gt;jar-&gt;clear();</div><div class="line">      return ( new Client([ &apos;cookies&apos;  =&gt;  true ]) )-&gt;request(</div><div class="line">            &apos;POST&apos;, </div><div class="line">            &apos;https://accounts.douban.com/j/popup/login/basic&apos;,</div><div class="line">            [</div><div class="line">              &apos;version&apos; =&gt; 1.1 ,</div><div class="line">              &apos;cookies&apos;         =&gt; $this-&gt;jar,</div><div class="line">              &apos;headers&apos;         =&gt; [</div><div class="line">                                  &apos;Accept&apos;       =&gt; &apos;application/json&apos;,</div><div class="line">                                  &apos;Referer&apos;      =&gt; &apos;登录来源页&apos;</div><div class="line">              ],</div><div class="line">              &apos;form_params&apos;     =&gt; [</div><div class="line">                                &apos;source&apos;           =&gt; &apos;group&apos;,</div><div class="line">                                &apos;referer&apos;          =&gt; &apos;提交接口&apos;,</div><div class="line">                                &apos;name&apos;             =&gt; $account,</div><div class="line">                                &apos;password&apos;         =&gt; $password,</div><div class="line">                                &apos;captcha_id&apos;       =&gt; &apos;&apos;,</div><div class="line">                                &apos;captcha_solution&apos; =&gt; &apos;&apos;</div><div class="line">                ]</div><div class="line">          ])-&gt;getStatusCode();</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * [send 发送内容]</div><div class="line">     * @author     Shaowei Pu &lt;542684913@qq.com&gt;</div><div class="line">     * @CreateTime  2017-04-12T10:43:17+0800</div><div class="line">     * @return                              [type] [description]</div><div class="line">     */</div><div class="line">    public function send() &#123;</div><div class="line">        // 获得 ck</div><div class="line">        $this-&gt;reload();        </div><div class="line">        $ck    = &apos;ntxB&apos;;</div><div class="line">        array_map(function( $val ) use  (&amp; $ck )&#123;  $val[&apos;Name&apos;] == &apos;ck&apos; &amp;&amp; $ck = $val[&apos;Value&apos;]; &#125;, $this-&gt;jar-&gt;toArray());</div><div class="line">        // 计时器</div><div class="line">        while ( $this-&gt;clock &gt; 0 ) &#123;</div><div class="line">          $send_content =  ( new Client([ &apos;cookies&apos;  =&gt;  true ]) )-&gt;request(</div><div class="line">            &apos;POST&apos;, </div><div class="line">            &apos;提交接口&apos;,</div><div class="line">            [</div><div class="line">              &apos;version&apos;         =&gt; 1.1,</div><div class="line">              &apos;cookies&apos;         =&gt; $this-&gt;jar,</div><div class="line">              &apos;headers&apos;         =&gt; [</div><div class="line">                                  &apos;Accept&apos;       =&gt; &apos;application/json&apos;,</div><div class="line">                                  &apos;Referer&apos;      =&gt; &apos;来源页&apos;</div><div class="line">              ],</div><div class="line">              &apos;form_params&apos;     =&gt; [</div><div class="line">                                &apos;ck&apos;                =&gt; $ck,</div><div class="line">                                &apos;rv_comment&apos;        =&gt; &apos;自己顶一下～！&apos;,</div><div class="line">                                &apos;start&apos;             =&gt; 0,</div><div class="line">                                &apos;submit_btn&apos;        =&gt;&apos;加上去&apos;</div><div class="line">                                ]</div><div class="line">              ])-&gt;getBody()-&gt;getContents();</div><div class="line">              echo date(&apos;Y-m-d H:i:s&apos;).&apos; &apos;.$this-&gt;clock.&quot;\n&quot;;</div><div class="line">              sleep( self::SLEEP );</div><div class="line">              --$this-&gt;clock;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * [reload 刷新页面]</div><div class="line">     * @author     Shaowei Pu &lt;542684913@qq.com&gt;</div><div class="line">     * @CreateTime  2017-04-12T13:35:58+0800</div><div class="line">     * @return                              [type] [description]</div><div class="line">     */</div><div class="line">    public function reload()&#123;</div><div class="line">      (new Client([ &apos;cookies&apos;  =&gt;  true ])) -&gt;request(&apos;GET&apos;, &apos;访问页&apos;,[</div><div class="line">          &apos;cookies&apos;         =&gt; $this-&gt;jar,</div><div class="line">          &apos;headers&apos;         =&gt; [</div><div class="line">                &apos;Accept&apos;       =&gt; &apos;application/json&apos;,</div><div class="line">                &apos;Referer&apos;      =&gt; &apos;来源页&apos;</div><div class="line">       ]]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">new DouBanBrush(&apos;账号&apos;,&apos;密码&apos;);</div></pre></td></tr></table></figure>
+<h2 id="还没做的事"><a href="#还没做的事" class="headerlink" title="还没做的事"></a>还没做的事</h2><ul>
+<li>验证码识别</li>
+<li>优化效率</li>
+</ul>
+<h2 id="致敬"><a href="#致敬" class="headerlink" title="致敬"></a>致敬</h2><p>像 @娃娃脾气 大佬致敬</p>
 
       
     </div>
@@ -343,13 +341,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></p>
+        <p><span>本文标题:</span><a href="/2017/04/12/Guzzle/">But you should have one thing mind.</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
-        <p><span>发布时间:</span>2016-07-07, 12:47:24</p>
-        <p><span>最后更新:</span>2017-02-22, 16:48:27</p>
+        <p><span>发布时间:</span>2017-04-12, 17:14:17</p>
+        <p><span>最后更新:</span>2017-04-12, 17:14:49</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/07/07/HTTPcode/" title="HTTP常见状态码">http://blog.mango16.cc/2016/07/07/HTTPcode/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2016/07/07/HTTPcode/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/12/Guzzle/" title="But you should have one thing mind.">http://blog.mango16.cc/2017/04/12/Guzzle/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2017/04/12/Guzzle/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -361,16 +359,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/07/28/yaf01/">
-                    Yaf---写在前面
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/06/05/monkeyKing/">
-                    猴子选大王算法
+                <a href="/2017/03/10/everyday/">
+                    But you should have one thing mind.
                 </a>
             </div>
         
@@ -382,7 +374,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#所需包"><span class="toc-number">1.</span> <span class="toc-text">所需包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">2.</span> <span class="toc-text">源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#还没做的事"><span class="toc-number">3.</span> <span class="toc-text">还没做的事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#致敬"><span class="toc-number">4.</span> <span class="toc-text">致敬</span></a></li></ol>
         
     </div>
     <style>
@@ -418,7 +410,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"HTTP常见状态码　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"But you should have one thing mind.　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -434,7 +426,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/07/HTTPcode/" data-title="HTTP常见状态码" data-url="http://blog.mango16.cc/2016/07/07/HTTPcode/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/12/Guzzle/" data-title="But you should have one thing mind." data-url="http://blog.mango16.cc/2017/04/12/Guzzle/"></div>
     <script>
         var duoshuoQuery = {short_name:"pushaowei"};
         var loadComment = function(){
@@ -457,15 +449,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/07/28/yaf01/" title="上一篇: Yaf---写在前面">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/06/05/monkeyKing/" title="下一篇: 猴子选大王算法">
+            <a href="/2017/03/10/everyday/" title="下一篇: But you should have one thing mind.">
                 <i class="fa fa-angle-right"></i>
             </a>
         
