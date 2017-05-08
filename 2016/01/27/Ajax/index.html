@@ -413,19 +413,24 @@
 
 
     
-        <section class="youyan" id="comments">
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/01/27/Ajax/" data-title="Ajax学习计划" data-url="http://blog.mango16.cc/2016/01/27/Ajax/"></div>
     <script>
+        var duoshuoQuery = {short_name:"pushaowei"};
         var loadComment = function(){
             var d = document, s = d.createElement('script');
-            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2133054';
+            s.src = '/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
             (d.head || d.body).appendChild(s);
         }
+
+        
     </script>
     
     <script> loadComment(); </script>
 
-    <div id="uyan_frame"></div>
-</section>
+</div>
     
 
 

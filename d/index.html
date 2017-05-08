@@ -49,7 +49,7 @@
 
 .index img {
     width">
-<meta property="og:updated_time" content="2017-05-08T09:30:59.000Z">
+<meta property="og:updated_time" content="2017-05-08T15:01:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="个人作品合集">
 <meta name="twitter:description" content=".index {
@@ -473,11 +473,14 @@ footer .code input {
 }
 
 footer h1:hover + .code, footer .code:hover { display: inline-block }
-
+.jigu-time{
+    height: 10px;
+}
 .jigu-time a {
     font-size: 13px;
     color: #777;
     text-decoration: none;
+    float: right;
 }
 .jigu-time a:hover { text-decoration: underline }
 .jigu-time span {
@@ -518,7 +521,7 @@ footer h1:hover + .code, footer .code:hover { display: inline-block }
     content: "\f028";
 }
 
-.jigu-body { margin-top: 20px; }
+.jigu-body { margin-top: 20px; padding-bottom: 7px;border: 0;border-bottom: 1px solid rgba(102,128,153,0.1);}
 .jigu-body:first-child { margin: 0 }
 .jigu-page { margin-top: 20px; }
 .jigu-page:first-child { margin: 0 }
@@ -618,19 +621,24 @@ footer h1:hover + .code, footer .code:hover { display: inline-block }
 
 
     
-        <section class="youyan" id="comments">
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="d/index.html" data-title="个人作品合集" data-url="http://blog.mango16.cc/d/index.html"></div>
     <script>
+        var duoshuoQuery = {short_name:"pushaowei"};
         var loadComment = function(){
             var d = document, s = d.createElement('script');
-            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2133054';
+            s.src = '/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
             (d.head || d.body).appendChild(s);
         }
+
+        
     </script>
     
     <script> loadComment(); </script>
 
-    <div id="uyan_frame"></div>
-</section>
+</div>
     
 
 
