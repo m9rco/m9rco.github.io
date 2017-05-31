@@ -15,28 +15,16 @@
 
 
 
-<meta name="description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。
-接口简单：构建查询语句、POST请求、分流上传下载大文件、使用HTTP cookies、上传JSON数据等等 。
-发送同步或异步的请求均使用相同的接口。
-使用PSR-7接口来请求、响应、分流，允许你使用其他兼容的PSR-7类库与Guzzle共同开发。
-抽象了底层的HTTP传输，允许你改变环境以及其他的代">
+<meta name="description" content="自用笔记：本文属于自用笔记，不做详解，仅供参考。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用Guzzle刷豆瓣热评引发的联想">
-<meta property="og:url" content="http://blog.mango16.cc/2017/04/12/Guzzle/index.html">
+<meta property="og:title" content="Laravel 简短学习 just write the code in the PHP way">
+<meta property="og:url" content="http://blog.mango16.cc/2017/05/31/learnLaravel/index.html">
 <meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
-<meta property="og:description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。
-接口简单：构建查询语句、POST请求、分流上传下载大文件、使用HTTP cookies、上传JSON数据等等 。
-发送同步或异步的请求均使用相同的接口。
-使用PSR-7接口来请求、响应、分流，允许你使用其他兼容的PSR-7类库与Guzzle共同开发。
-抽象了底层的HTTP传输，允许你改变环境以及其他的代">
-<meta property="og:updated_time" content="2017-04-12T09:50:05.000Z">
+<meta property="og:description" content="自用笔记：本文属于自用笔记，不做详解，仅供参考。">
+<meta property="og:updated_time" content="2017-05-31T02:44:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用Guzzle刷豆瓣热评引发的联想">
-<meta name="twitter:description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。
-接口简单：构建查询语句、POST请求、分流上传下载大文件、使用HTTP cookies、上传JSON数据等等 。
-发送同步或异步的请求均使用相同的接口。
-使用PSR-7接口来请求、响应、分流，允许你使用其他兼容的PSR-7类库与Guzzle共同开发。
-抽象了底层的HTTP传输，允许你改变环境以及其他的代">
+<meta name="twitter:title" content="Laravel 简短学习 just write the code in the PHP way">
+<meta name="twitter:description" content="自用笔记：本文属于自用笔记，不做详解，仅供参考。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -64,7 +52,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>利用Guzzle刷豆瓣热评引发的联想 | Because of your example, I wouldn&#39;t let it either.</title>
+<title>Laravel 简短学习 just write the code in the PHP way | Because of your example, I wouldn&#39;t let it either.</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +253,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Guzzle" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-learnLaravel" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/12/Guzzle/" class="article-date">
-      <time datetime="2017-04-12T04:47:24.000Z" itemprop="datePublished">2017-04-12</time>
+      <a href="/2017/05/31/learnLaravel/" class="article-date">
+      <time datetime="2017-05-31T05:58:41.000Z" itemprop="datePublished">2017-05-31</time>
 </a>
 
 
@@ -284,7 +272,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      利用Guzzle刷豆瓣热评引发的联想
+      Laravel 简短学习 just write the code in the PHP way
     </h1>
   
 
@@ -293,7 +281,7 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/php/">php</a>
+    <a class="article-category-link" href="/categories/Laravel/">Laravel</a>
     </div>
 
 
@@ -309,21 +297,98 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。"><a href="#Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。" class="headerlink" title="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。"></a>Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。</h4><ul>
-<li>接口简单：构建查询语句、POST请求、分流上传下载大文件、使用HTTP cookies、上传JSON数据等等 。</li>
-<li>发送同步或异步的请求均使用相同的接口。</li>
-<li>使用PSR-7接口来请求、响应、分流，允许你使用其他兼容的PSR-7类库与Guzzle共同开发。</li>
-<li>抽象了底层的HTTP传输，允许你改变环境以及其他的代码，如：对cURL与PHP的流或socket并非重度依赖，非阻塞事件循环。</li>
-<li>中间件系统允许你创建构成客户端行为。</li>
-</ul>
+        <p>　　<strong> 自用笔记：</strong>本文属于自用笔记，不做详解，仅供参考。</p>
 <a id="more"></a>
-<h2 id="所需包"><a href="#所需包" class="headerlink" title="所需包"></a>所需包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&quot;require&quot;: &#123;</div><div class="line">	&quot;guzzlehttp/guzzle&quot;: &quot;6.2.*&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">include_once dirname(__FILE__).&apos;/vendor/autoload.php&apos;;</div><div class="line"></div><div class="line">use \GuzzleHttp\Client;</div><div class="line">use \GuzzleHttp\Cookie\CookieJar;</div><div class="line">use \GuzzleHttp\Exception\RequestException;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 豆瓣租房刷留言</div><div class="line"> */</div><div class="line"></div><div class="line">class DouBanBrush&#123;</div><div class="line">    public $jar;</div><div class="line">    public $clock = 10;</div><div class="line">    const SLEEP   = 1200;   // 睡20 分钟</div><div class="line"></div><div class="line">    /**</div><div class="line">     * [__autoload 初始化]</div><div class="line">     * @author     Shaowei Pu &lt;542684913@qq.com&gt;</div><div class="line">     * @CreateTime  2017-04-12T10:39:28+0800</div><div class="line">     * @param                               [type] $account  [description]</div><div class="line">     * @param                               [type] $password [description]</div><div class="line">     * @return                              [type]           [description]</div><div class="line">     */</div><div class="line">    public function __construct( $account, $password )&#123;</div><div class="line">        $this-&gt;jar = new CookieJar;</div><div class="line">        try&#123;</div><div class="line">            if( $this-&gt;login( $account, $password ) == &apos;200&apos;)&#123;</div><div class="line">                echo &quot;----------【 START 】----------\n&quot;;</div><div class="line">                    $this-&gt;send();</div><div class="line">                echo &quot;----------【  END  】----------\n&quot;;</div><div class="line">            &#125;else&#123;</div><div class="line">              echo &quot;登录失败～！&quot;;</div><div class="line">            &#125;</div><div class="line">        &#125;catch (RequestException $e) &#123;</div><div class="line">            var_dump( $e-&gt;getRequest());</div><div class="line">            if ($e-&gt;hasResponse()) &#123;</div><div class="line">                var_dump( $e-&gt;getResponse());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * [login 登录]</div><div class="line">     * @author     Shaowei Pu &lt;542684913&gt;</div><div class="line">     * @CreateTime  2017-04-12T10:42:16+0800</div><div class="line">     * @return                              [type] [description]</div><div class="line">     */</div><div class="line">    public function login( $account , $password )&#123;</div><div class="line">      // 清楚空间内cookie</div><div class="line">      // $this-&gt;jar-&gt;clear();</div><div class="line">      return ( new Client([ &apos;cookies&apos;  =&gt;  true ]) )-&gt;request(</div><div class="line">            &apos;POST&apos;, </div><div class="line">            &apos;https://accounts.douban.com/j/popup/login/basic&apos;,</div><div class="line">            [</div><div class="line">              &apos;version&apos; =&gt; 1.1 ,</div><div class="line">              &apos;cookies&apos;         =&gt; $this-&gt;jar,</div><div class="line">              &apos;headers&apos;         =&gt; [</div><div class="line">                                  &apos;Accept&apos;       =&gt; &apos;application/json&apos;,</div><div class="line">                                  &apos;Referer&apos;      =&gt; &apos;登录来源页&apos;</div><div class="line">              ],</div><div class="line">              &apos;form_params&apos;     =&gt; [</div><div class="line">                                &apos;source&apos;           =&gt; &apos;group&apos;,</div><div class="line">                                &apos;referer&apos;          =&gt; &apos;提交接口&apos;,</div><div class="line">                                &apos;name&apos;             =&gt; $account,</div><div class="line">                                &apos;password&apos;         =&gt; $password,</div><div class="line">                                &apos;captcha_id&apos;       =&gt; &apos;&apos;,</div><div class="line">                                &apos;captcha_solution&apos; =&gt; &apos;&apos;</div><div class="line">                ]</div><div class="line">          ])-&gt;getStatusCode();</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * [send 发送内容]</div><div class="line">     * @author     Shaowei Pu &lt;542684913@qq.com&gt;</div><div class="line">     * @CreateTime  2017-04-12T10:43:17+0800</div><div class="line">     * @return                              [type] [description]</div><div class="line">     */</div><div class="line">    public function send() &#123;</div><div class="line">        // 获得 ck</div><div class="line">        $this-&gt;reload();        </div><div class="line">        $ck    = &apos;ntxB&apos;;</div><div class="line">        array_map(function( $val ) use  (&amp; $ck )&#123;  $val[&apos;Name&apos;] == &apos;ck&apos; &amp;&amp; $ck = $val[&apos;Value&apos;]; &#125;, $this-&gt;jar-&gt;toArray());</div><div class="line">        // 计时器</div><div class="line">        while ( $this-&gt;clock &gt; 0 ) &#123;</div><div class="line">          $send_content =  ( new Client([ &apos;cookies&apos;  =&gt;  true ]) )-&gt;request(</div><div class="line">            &apos;POST&apos;, </div><div class="line">            &apos;提交接口&apos;,</div><div class="line">            [</div><div class="line">              &apos;version&apos;         =&gt; 1.1,</div><div class="line">              &apos;cookies&apos;         =&gt; $this-&gt;jar,</div><div class="line">              &apos;headers&apos;         =&gt; [</div><div class="line">                                  &apos;Accept&apos;       =&gt; &apos;application/json&apos;,</div><div class="line">                                  &apos;Referer&apos;      =&gt; &apos;来源页&apos;</div><div class="line">              ],</div><div class="line">              &apos;form_params&apos;     =&gt; [</div><div class="line">                                &apos;ck&apos;                =&gt; $ck,</div><div class="line">                                &apos;rv_comment&apos;        =&gt; &apos;自己顶一下～！&apos;,</div><div class="line">                                &apos;start&apos;             =&gt; 0,</div><div class="line">                                &apos;submit_btn&apos;        =&gt;&apos;加上去&apos;</div><div class="line">                                ]</div><div class="line">              ])-&gt;getBody()-&gt;getContents();</div><div class="line">              echo date(&apos;Y-m-d H:i:s&apos;).&apos; &apos;.$this-&gt;clock.&quot;\n&quot;;</div><div class="line">              sleep( self::SLEEP );</div><div class="line">              --$this-&gt;clock;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * [reload 刷新页面]</div><div class="line">     * @author     Shaowei Pu &lt;542684913@qq.com&gt;</div><div class="line">     * @CreateTime  2017-04-12T13:35:58+0800</div><div class="line">     * @return                              [type] [description]</div><div class="line">     */</div><div class="line">    public function reload()&#123;</div><div class="line">      (new Client([ &apos;cookies&apos;  =&gt;  true ])) -&gt;request(&apos;GET&apos;, &apos;访问页&apos;,[</div><div class="line">          &apos;cookies&apos;         =&gt; $this-&gt;jar,</div><div class="line">          &apos;headers&apos;         =&gt; [</div><div class="line">                &apos;Accept&apos;       =&gt; &apos;application/json&apos;,</div><div class="line">                &apos;Referer&apos;      =&gt; &apos;来源页&apos;</div><div class="line">       ]]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">new DouBanBrush(&apos;账号&apos;,&apos;密码&apos;);</div></pre></td></tr></table></figure>
-<h2 id="还没做的事"><a href="#还没做的事" class="headerlink" title="还没做的事"></a>还没做的事</h2><ul>
-<li>验证码识别</li>
-<li>优化效率</li>
-</ul>
-<h2 id="致敬"><a href="#致敬" class="headerlink" title="致敬"></a>致敬</h2><p>像 @娃娃脾气 大佬致敬</p>
+<h3 id="artisan"><a href="#artisan" class="headerlink" title="artisan"></a><a href="https://docs.golaravel.com/docs/5.1/artisan/" target="_blank" rel="external">artisan</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">英  /,ɑːtɪ&apos;zæn; &apos;ɑːtɪzæn/</div><div class="line">美  /&apos;ɑrtəzn/</div><div class="line">n. 工匠，技工</div></pre></td></tr></table></figure>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
+<p><code>Artisan</code> 是 <code>Laravel</code> 的命令行接口的名称，它提供了许多实用的命令来帮助你开发 <code>Laravel</code> 应用，它由强大的 <code>Symfony Console</code> 组件所驱动。</p>
+<p>可以使用 <code>list</code> 命令来列出所有可用的 <code>Artisan</code> 命令：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan <span class="keyword">list</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Available commands:</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>explain</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clear-compiled</td>
+<td>Remove the compiled class file</td>
+<td>清除编译后的类文件</td>
+</tr>
+<tr>
+<td>down</td>
+<td>Put the application into maintenance mode</td>
+<td>使应用程序进入维修模式</td>
+</tr>
+<tr>
+<td>  env</td>
+<td>Display the current framework environment</td>
+<td>显示当前框架环境</td>
+</tr>
+<tr>
+<td>  help</td>
+<td>Displays help for a command</td>
+<td>显示命令行的帮助</td>
+</tr>
+<tr>
+<td>  list</td>
+<td>Lists commands</td>
+<td>列出命令</td>
+</tr>
+<tr>
+<td>  migrate</td>
+<td>Run the database migrations</td>
+<td>运行数据库迁移</td>
+</tr>
+<tr>
+<td>  optimize</td>
+<td>Optimize the framework for better performance</td>
+<td>为了更好的框架去优化性能</td>
+</tr>
+<tr>
+<td>  serve</td>
+<td>Serve the application on the PHP development server</td>
+<td>在php开发服务器中服务这个应用</td>
+</tr>
+<tr>
+<td>  tinker</td>
+<td>Interact with your application</td>
+<td>在你的应用中交互</td>
+</tr>
+<tr>
+<td>  up</td>
+<td>Bring the application out of maintenance mode</td>
+<td>退出应用程序的维护模式</td>
+</tr>
+</tbody>
+</table>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">app</div><div class="line"> app:name            Set the application namespace 设置应用程序命名空间</div><div class="line">auth</div><div class="line"> auth:clear-resets   Flush expired password reset tokens 清除过期的密码重置密钥</div><div class="line">cache</div><div class="line"> cache:clear         Flush the application cache 清除应用程序缓存</div><div class="line"> cache:table         Create a migration for the cache database table 创建一个缓存数据库表的迁移</div><div class="line">config</div><div class="line"> config:cache        Create a cache file for faster configuration loading 创建一个加载配置的缓存文件</div><div class="line"> config:clear        Remove the configuration cache file 删除配置的缓存文件</div><div class="line">db</div><div class="line"> db:seed             Seed the database with records 发送数据库的详细记录</div><div class="line">event</div><div class="line"> event:generate      Generate the missing events and listeners based on  registration  在记录上生成错过的事件和基础程序</div><div class="line">key</div><div class="line"> key:generate        Set the application key 设置程序密钥</div><div class="line">make</div><div class="line"> make:auth           Scaffold basic login and registration views and routes</div><div class="line"> make:console        Create a new Artisan command 生成一个Artisan命令</div><div class="line"> make:controller     Create a new controller class 生成一个资源控制类</div><div class="line"> make:event          Create a new event class  生成一个事件类</div><div class="line"> make:job            Create a new job class</div><div class="line"> make:listener       Create a new event listener class</div><div class="line"> make:middleware     Create a new middleware class 生成一个中间件</div><div class="line"> make:migration      Create a new migration file 生成一个迁移文件</div><div class="line"> make:model          Create a new Eloquent model class 生成一个Eloquent 模型类</div><div class="line"> make:policy         Create a new policy class</div><div class="line"> make:provider       Create a new service provider class 生成一个服务提供商的类</div><div class="line"> make:request        Create a new form request class 生成一个表单消息类</div><div class="line"> make:seeder         Create a new seeder class</div><div class="line"> make:test           Create a new test class</div><div class="line">migrate</div><div class="line"> migrate:install     Create the migration repository 创建一个迁移库文件</div><div class="line"> migrate:refresh     Reset and re-run all migrations 复位并重新运行所有的迁移</div><div class="line"> migrate:reset       Rollback all database migrations 回滚全部数据库迁移</div><div class="line"> migrate:rollback    Rollback the last database migration 回滚最后一个数据库迁移</div><div class="line"> migrate:status      Show the status of each migration 显示列表的迁移 上/下</div><div class="line">queue</div><div class="line"> queue:failed        List all of the failed queue jobs 列出全部失败的队列工作</div><div class="line"> queue:failed-table  Create a migration for the failed queue jobs database table     创建一个迁移的失败的队列数据库工作表</div><div class="line"> queue:flush         Flush all of the failed queue jobs                 清除全部失败的队列工作</div><div class="line"> queue:forget        Delete a failed queue job 删除一个失败的队列工作</div><div class="line"> queue:listen        Listen to a given queue 监听一个确定的队列工作</div><div class="line"> queue:restart       Restart queue worker daemons after their current job 重启现在正在运行的所有队列工作</div><div class="line"> queue:retry         Retry a failed queue job 重试一个失败的队列工作</div><div class="line"> queue:table         Create a migration for the queue jobs database table 创建一个迁移的队列数据库工作表</div><div class="line"> queue:work          Process the next job on a queue 进行下一个队列任务</div><div class="line">route</div><div class="line"> route:cache         Create a route cache file for faster route registration 为了更快的路由登记，创建一个路由缓存文件</div><div class="line"> route:clear         Remove the route cache file 清除路由缓存文件</div><div class="line"> route:list          List all registered routes  列出全部的注册路由</div><div class="line">schedule</div><div class="line"> schedule:run        Run the scheduled commands 运行预定命令</div><div class="line">session</div><div class="line"> session:table       Create a migration for the session database table                 创建一个迁移的SESSION数据库工作表</div><div class="line">vendor</div><div class="line"> vendor:publish      Publish any publishable assets from vendor packages 发表一些可以发布的有用的资源来自提供商的插件包</div><div class="line">view</div><div class="line"> view:clear          Clear all compiled view files</div></pre></td></tr></table></figure>
+<p>每个命令也包含了「帮助」界面，它会显示并概述命令可使的参数及选项。只要在命令前面加上 help 即可显示帮助界面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan help migrate</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:auth</div></pre></td></tr></table></figure>
+<h3 id="编写命令"><a href="#编写命令" class="headerlink" title="编写命令"></a>编写命令</h3><hr>
+<p>除了使用 <code>Artisan</code> 本身所提供的命令之外，<code>Laravel</code> 也允许你自定义 <code>Artisan</code> 命令。</p>
+<p>自定义命令默认存储在 <code>app/Console/Commands</code> 目录中，当然，只要在 <code>composer.json</code> 文件中的配置了自动加载，你可以自由选择想要放置的地方。</p>
+<p>若要创建新的命令，你可以使用 <code>make:console Artisan</code>命令生成命令文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:console SendEmails</div></pre></td></tr></table></figure>
+<p>上面的这个命令会生成 <code>app/Console/Commands/SendEmails.php</code> 类，–command 参数可以用来指定调用名称：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:console SendEmails --command=emails:send</div></pre></td></tr></table></figure>
+<h3 id="命令结构"><a href="#命令结构" class="headerlink" title="命令结构"></a>命令结构</h3><hr>
+<p>一旦生成这个命令，应先填写类的 <code>signature</code> 和 <code>description</code> 这两个属性，它们会被显示在  <code>list</code> 界面中。<br>命令运行时 <code>handle</code> 方法会被调用，请将程序逻辑放置在此方法中。<br>接下来讲解一个发送邮件的例子。<br>为了更好的代码重用性，还有可读性，建议把处理业务逻辑的代码抽到一个功能类里。<br><code>Command</code> 类构造器允许注入需要的依赖，<code>Laravel</code> 的 服务容器 将会自动把功能类 <code>DripEmailer</code> 解析到构造器中</p>
+<h3 id="Route"><a href="#Route" class="headerlink" title="Route"></a><a href="http://d.laravel-china.org/docs/5.1/routing" target="_blank" rel="external">Route</a></h3><hr>
+<p>你可以在 <code>app/Http/routes.php</code> 文件中定义应用程序的大多数路由，该文件将会被 <code>App\Providers\RouteServiceProvider</code> 类加载。最基本的 <code>Laravel</code> 路由仅接受 <code>URI</code> 和一个闭包</p>
+<h3 id="view-Blade"><a href="#view-Blade" class="headerlink" title="view-Blade"></a><a href="http://d.laravel-china.org/docs/5.1/blade" target="_blank" rel="external">view-Blade</a></h3><hr>
+<p><code>Blade</code> 是 <code>Laravel</code> 所提供的一个简单且强大的模板引擎。相较于其它知名的 <code>PHP</code> 模板引擎，<code>Blade</code> 并不会限制你必须得在视图中使用 <code>PHP</code> 代码。所有 <code>Blade</code> 视图都会被编译缓存成普通的 PHP 代码，一直到它们被更改为止。这代表 <code>Blade</code> 基本不会对你的应用程序生成负担。</p>
+<p><code>Blade</code> 视图文件使用 <code>.blade.php</code> 做为扩展名，通常保存于 <code>resources/views</code> 文件夹内。</p>
+<p><code>@extends(&#39;layouts.app&#39;)</code></p>
+<p>这表示此视图的基视图是 <code>resources/views/layouts/app.blade.php</code> 。这个函数还隐含了一个小知识：在使用名称查找视图的时候，可以使用 <code>.</code> 来代替 <code>/</code> 或 <code>\</code>.</p>
+<p><code>@Section(&#39;content&#39;) ... @endsection</code><br>这两个标识符之前的代码，会被放到基视图的 <code>@yield(&#39;content&#39;)</code> 中进行输出。</p>
 
       
     </div>
@@ -332,13 +397,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/04/12/Guzzle/">利用Guzzle刷豆瓣热评引发的联想</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/31/learnLaravel/">Laravel 简短学习 just write the code in the PHP way</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
-        <p><span>发布时间:</span>2017-04-12, 12:47:24</p>
-        <p><span>最后更新:</span>2017-04-12, 17:50:05</p>
+        <p><span>发布时间:</span>2017-05-31, 13:58:41</p>
+        <p><span>最后更新:</span>2017-05-31, 10:44:19</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/04/12/Guzzle/" title="利用Guzzle刷豆瓣热评引发的联想">http://blog.mango16.cc/2017/04/12/Guzzle/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2017/04/12/Guzzle/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/31/learnLaravel/" title="Laravel 简短学习 just write the code in the PHP way">http://blog.mango16.cc/2017/05/31/learnLaravel/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2017/05/31/learnLaravel/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -350,16 +415,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/31/learnLaravel/">
-                    Laravel 简短学习 just write the code in the PHP way
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/03/10/everyday/">
-                    But you should have one thing mind.
+                <a href="/2017/04/12/Guzzle/">
+                    利用Guzzle刷豆瓣热评引发的联想
                 </a>
             </div>
         
@@ -371,7 +430,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。"><span class="toc-number">1.</span> <span class="toc-text">Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所需包"><span class="toc-number"></span> <span class="toc-text">所需包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number"></span> <span class="toc-text">源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#还没做的事"><span class="toc-number"></span> <span class="toc-text">还没做的事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#致敬"><span class="toc-number"></span> <span class="toc-text">致敬</span></a>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#artisan"><span class="toc-number">1.</span> <span class="toc-text">artisan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-number">2.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写命令"><span class="toc-number">3.</span> <span class="toc-text">编写命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令结构"><span class="toc-number">4.</span> <span class="toc-text">命令结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Route"><span class="toc-number">5.</span> <span class="toc-text">Route</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#view-Blade"><span class="toc-number">6.</span> <span class="toc-text">view-Blade</span></a></li></ol>
         
     </div>
     <style>
@@ -407,7 +466,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"利用Guzzle刷豆瓣热评引发的联想　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Laravel 简短学习 just write the code in the PHP way　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -423,7 +482,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/12/Guzzle/" data-title="利用Guzzle刷豆瓣热评引发的联想" data-url="http://blog.mango16.cc/2017/04/12/Guzzle/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/05/31/learnLaravel/" data-title="Laravel 简短学习 just write the code in the PHP way" data-url="http://blog.mango16.cc/2017/05/31/learnLaravel/"></div>
     <script>
         var duoshuoQuery = {short_name:"pushaowei"};
         var loadComment = function(){
@@ -446,15 +505,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/31/learnLaravel/" title="上一篇: Laravel 简短学习 just write the code in the PHP way">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/03/10/everyday/" title="下一篇: But you should have one thing mind.">
+            <a href="/2017/04/12/Guzzle/" title="下一篇: 利用Guzzle刷豆瓣热评引发的联想">
                 <i class="fa fa-angle-right"></i>
             </a>
         
