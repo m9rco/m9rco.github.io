@@ -254,6 +254,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-fork系统调用分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/24/fork系统调用分析/" class="article-date">
+      <time datetime="2017-09-24T04:47:24.000Z" itemprop="datePublished">2017-09-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/24/fork系统调用分析/">fork系统调用分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>在Linux中，主要是通过fork的方式产生新的进程，我们都知道每个进程都在 内核对应一个PCB块，内核通过对PCB块的操作做到对进程的管理。在Linux内核中，PCB对应着的结构体就是task_struct，也就是所谓的进程描述符（process descriptor）。该数据结构中包含了程相关的所有信息，比如包含众多描述进程属性的字段，以及指向其他与进程相关的结构体的指针。因此，进程描述符内部是比较复杂的。这个结构体的声明位于include/linux/sched.h中。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/php/">php</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/phper/">phper</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2017/09/24/fork系统调用分析/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-OpenSource" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -870,74 +938,6 @@
       
         <p class="article-more-link">
           <a href="/2016/09/11/swoole_2/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-swoole_1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/10/swoole_1/" class="article-date">
-      <time datetime="2016-09-10T10:29:00.000Z" itemprop="datePublished">2016-09-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p><strong>Swoole</strong> 据说是可以php革命的一个东西，更有屌丝说看见swoole如见php的未来一般,作者不才看官方教程实在迷糊，特意花大洋买了视频来看，希望与大家共同进步</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/publish/">publish</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swoole/">Swoole</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/09/10/swoole_1/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
