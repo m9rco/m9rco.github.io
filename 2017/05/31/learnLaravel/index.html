@@ -16,11 +16,13 @@
 
 
 <meta name="description" content="自用笔记：本文属于自用笔记，不做详解，仅供参考。">
+<meta name="keywords" content="phper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Laravel 简短学习 just write the code in the PHP way">
 <meta property="og:url" content="http://blog.mango16.cc/2017/05/31/learnLaravel/index.html">
-<meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
+<meta property="og:site_name" content="Because of your example, I wouldn&#39;t let it either.">
 <meta property="og:description" content="自用笔记：本文属于自用笔记，不做详解，仅供参考。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-05-31T02:44:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Laravel 简短学习 just write the code in the PHP way">
@@ -299,7 +301,7 @@
           
         <p>　　<strong> 自用笔记：</strong>本文属于自用笔记，不做详解，仅供参考。</p>
 <a id="more"></a>
-<h3 id="artisan"><a href="#artisan" class="headerlink" title="artisan"></a><a href="https://docs.golaravel.com/docs/5.1/artisan/" target="_blank" rel="external">artisan</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">英  /,ɑːtɪ&apos;zæn; &apos;ɑːtɪzæn/</div><div class="line">美  /&apos;ɑrtəzn/</div><div class="line">n. 工匠，技工</div></pre></td></tr></table></figure>
+<h3 id="artisan"><a href="#artisan" class="headerlink" title="artisan"></a><a href="https://docs.golaravel.com/docs/5.1/artisan/" target="_blank" rel="noopener">artisan</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">英  /,ɑːtɪ&apos;zæn; &apos;ɑːtɪzæn/</div><div class="line">美  /&apos;ɑrtəzn/</div><div class="line">n. 工匠，技工</div></pre></td></tr></table></figure>
 <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><hr>
 <p><code>Artisan</code> 是 <code>Laravel</code> 的命令行接口的名称，它提供了许多实用的命令来帮助你开发 <code>Laravel</code> 应用，它由强大的 <code>Symfony Console</code> 组件所驱动。</p>
 <p>可以使用 <code>list</code> 命令来列出所有可用的 <code>Artisan</code> 命令：</p>
@@ -381,9 +383,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:console SendEmails --command=emails:send</div></pre></td></tr></table></figure>
 <h3 id="命令结构"><a href="#命令结构" class="headerlink" title="命令结构"></a>命令结构</h3><hr>
 <p>一旦生成这个命令，应先填写类的 <code>signature</code> 和 <code>description</code> 这两个属性，它们会被显示在  <code>list</code> 界面中。<br>命令运行时 <code>handle</code> 方法会被调用，请将程序逻辑放置在此方法中。<br>接下来讲解一个发送邮件的例子。<br>为了更好的代码重用性，还有可读性，建议把处理业务逻辑的代码抽到一个功能类里。<br><code>Command</code> 类构造器允许注入需要的依赖，<code>Laravel</code> 的 服务容器 将会自动把功能类 <code>DripEmailer</code> 解析到构造器中</p>
-<h3 id="Route"><a href="#Route" class="headerlink" title="Route"></a><a href="http://d.laravel-china.org/docs/5.1/routing" target="_blank" rel="external">Route</a></h3><hr>
+<h3 id="Route"><a href="#Route" class="headerlink" title="Route"></a><a href="http://d.laravel-china.org/docs/5.1/routing" target="_blank" rel="noopener">Route</a></h3><hr>
 <p>你可以在 <code>app/Http/routes.php</code> 文件中定义应用程序的大多数路由，该文件将会被 <code>App\Providers\RouteServiceProvider</code> 类加载。最基本的 <code>Laravel</code> 路由仅接受 <code>URI</code> 和一个闭包</p>
-<h3 id="view-Blade"><a href="#view-Blade" class="headerlink" title="view-Blade"></a><a href="http://d.laravel-china.org/docs/5.1/blade" target="_blank" rel="external">view-Blade</a></h3><hr>
+<h3 id="view-Blade"><a href="#view-Blade" class="headerlink" title="view-Blade"></a><a href="http://d.laravel-china.org/docs/5.1/blade" target="_blank" rel="noopener">view-Blade</a></h3><hr>
 <p><code>Blade</code> 是 <code>Laravel</code> 所提供的一个简单且强大的模板引擎。相较于其它知名的 <code>PHP</code> 模板引擎，<code>Blade</code> 并不会限制你必须得在视图中使用 <code>PHP</code> 代码。所有 <code>Blade</code> 视图都会被编译缓存成普通的 PHP 代码，一直到它们被更改为止。这代表 <code>Blade</code> 基本不会对你的应用程序生成负担。</p>
 <p><code>Blade</code> 视图文件使用 <code>.blade.php</code> 做为扩展名，通常保存于 <code>resources/views</code> 文件夹内。</p>
 <p><code>@extends(&#39;layouts.app&#39;)</code></p>
@@ -486,21 +488,23 @@
 
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+        <link   rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="comment-container"></div>
 
-<section class="gitalk" id="comments" style="width: 82%;margin-left:  32px;">
+<div id="comment-container" style="width:82%; margin-left:32px;"></div>
+
+<section class="gitalk" id="comments">
     <script>
         var gitalk = new Gitalk({
             clientID:'4cf071399e464ec2ab63',
             clientSecret: '6e62a86598cb347350da82d3cbfa3d97fd53345b',
-            repo: '}',
-            owner: '',
+            repo: 'PuShaoWei.github.io',
+            owner: 'PuShaoWei',
             admin: 'PuShaoWei',
+            labels: 'test'
         });
         gitalk.render('comment-container');
-</script>
+    </script>
 </section>
        
     
@@ -524,7 +528,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/fork系统调用分析/">fork系统调用分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/OpenSource/">开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/learnLaravel/">Laravel 简短学习 just write the code in the PHP way</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Guzzle/">利用Guzzle刷豆瓣热评引发的联想</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/everyday/">But you should have one thing mind.</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Decorator/">PHP Decorator 装饰器模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/fork系统调用分析/">fork系统调用分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/OpenSource/">开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/learnLaravel/">Laravel 简短学习 just write the code in the PHP way</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Guzzle/">利用Guzzle刷豆瓣热评引发的联想</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/everyday/">But you should have one thing mind.</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Decorator/">PHP Decorator 装饰器模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
 
 
 

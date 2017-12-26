@@ -16,11 +16,13 @@
 
 
 <meta name="description" content="OOCSS:面向对象的CSS样式，通过对CSS样式的合理规范，重复使用，达到代码的精简，便于换肤。">
+<meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面向对象的CSS样式">
 <meta property="og:url" content="http://blog.mango16.cc/2016/02/27/OOCSS/index.html">
-<meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
+<meta property="og:site_name" content="Because of your example, I wouldn&#39;t let it either.">
 <meta property="og:description" content="OOCSS:面向对象的CSS样式，通过对CSS样式的合理规范，重复使用，达到代码的精简，便于换肤。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-02-22T08:48:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面向对象的CSS样式">
@@ -300,16 +302,16 @@
         <p>　　<strong> OOCSS:</strong>面向对象的CSS样式，通过对CSS样式的合理规范，重复使用，达到代码的精简，便于换肤。<br><a id="more"></a></p>
 <h3 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 加强代码复用以便方便维护</div><div class="line">1. 减少CSS体积</div><div class="line">1. 提升渲染效率</div><div class="line">1. 组件库思想、栅格布局可共用、减少选择器、方便扩展</div></pre></td></tr></table></figure>
 <h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1. 不要直接定义子节点，应把共性声明放到父类</div><div class="line"></div><div class="line">.mod .inner&#123;&#125; //</div><div class="line"></div><div class="line">1. 结构和皮肤相分离</div><div class="line">1. 容器和内容相分离</div><div class="line">1. 抽象出可重用的元素，建好组件库，在组件库内寻找可用的元素组装页面</div><div class="line">1. 往你想要扩展的对象本身添加Class，而不是他的父节点</div><div class="line">1. 对象应保持独立性</div><div class="line">1. 避免使用ID选择器，权重太高，无法重用</div><div class="line">1. 避免位置相关的样式</div><div class="line">1. 保证选择器相同的权重</div><div class="line">1. 类名：简短、清晰、语义化、OOCSS的名字并不影响HTML语义化</div></pre></td></tr></table></figure>
-<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p><a href="http://oocss.org" title="面向对象的CSS网站" target="_blank" rel="external">OOCSS</a></p>
-<p><a href="htto://meyerweb.com/eric/tools/css/reset/" target="_blank" rel="external">Reset</a></p>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p><a href="http://oocss.org" title="面向对象的CSS网站" target="_blank" rel="noopener">OOCSS</a></p>
+<p><a href="htto://meyerweb.com/eric/tools/css/reset/" target="_blank" rel="noopener">Reset</a></p>
 <blockquote>
 <p>优点：样式初始化设置非常全面<br>缺点：设置了部分多余的设置，border</p>
 </blockquote>
-<p><a href="http://github.com/necolas/normalize.css" target="_blank" rel="external">Normalize</a></p>
+<p><a href="http://github.com/necolas/normalize.css" target="_blank" rel="noopener">Normalize</a></p>
 <blockquote>
 <p>优点：<br>缺点：有些默认的没有设置</p>
 </blockquote>
-<p><a href="http://thx.github.io/cube/doc/neat/" target="_blank" rel="external">Neat.css</a></p>
+<p><a href="http://thx.github.io/cube/doc/neat/" target="_blank" rel="noopener">Neat.css</a></p>
 <blockquote>
 <p>优点：</p>
 <ol>
@@ -418,21 +420,23 @@
 
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+        <link   rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="comment-container"></div>
 
-<section class="gitalk" id="comments" style="width: 82%;margin-left:  32px;">
+<div id="comment-container" style="width:82%; margin-left:32px;"></div>
+
+<section class="gitalk" id="comments">
     <script>
         var gitalk = new Gitalk({
             clientID:'4cf071399e464ec2ab63',
             clientSecret: '6e62a86598cb347350da82d3cbfa3d97fd53345b',
-            repo: '}',
-            owner: '',
+            repo: 'PuShaoWei.github.io',
+            owner: 'PuShaoWei',
             admin: 'PuShaoWei',
+            labels: 'test'
         });
         gitalk.render('comment-container');
-</script>
+    </script>
 </section>
        
     
@@ -456,7 +460,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/fork系统调用分析/">fork系统调用分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/OpenSource/">开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/learnLaravel/">Laravel 简短学习 just write the code in the PHP way</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Guzzle/">利用Guzzle刷豆瓣热评引发的联想</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/everyday/">But you should have one thing mind.</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Decorator/">PHP Decorator 装饰器模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/fork系统调用分析/">fork系统调用分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/OpenSource/">开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/learnLaravel/">Laravel 简短学习 just write the code in the PHP way</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Guzzle/">利用Guzzle刷豆瓣热评引发的联想</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/everyday/">But you should have one thing mind.</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Decorator/">PHP Decorator 装饰器模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
 
 
 

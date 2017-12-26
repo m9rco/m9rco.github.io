@@ -16,11 +16,13 @@
 
 
 <meta name="description" content="Yaf在自启动的时候, 会通过SPL注册一个自己的Autoloader, 出于性能的考虑, 对于框架相关的MVC类, Yaf Autoloader只以目录映射的方式尝试一次.">
+<meta name="keywords" content="Yaf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Yaf---加载规则插件使用">
 <meta property="og:url" content="http://blog.mango16.cc/2016/07/29/yaf02/index.html">
-<meta property="og:site_name" content="Because of your example, I wouldn't let it either.">
+<meta property="og:site_name" content="Because of your example, I wouldn&#39;t let it either.">
 <meta property="og:description" content="Yaf在自启动的时候, 会通过SPL注册一个自己的Autoloader, 出于性能的考虑, 对于框架相关的MVC类, Yaf Autoloader只以目录映射的方式尝试一次.">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://blog.mango16.cc/blog-img/yafa.bmp">
 <meta property="og:image" content="http://blog.mango16.cc/blog-img/yafb.bmp">
 <meta property="og:image" content="http://blog.mango16.cc/blog-img/yafc.bmp">
@@ -461,7 +463,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
 <p>  一般的, 插件应该放置在APPLICATION_PATH下的plugins目录, 这样在自动加载的时候, 加载器通过类名,发现这是个插件类, 就会在这个目录下查找.当然, 插件也可以放在任何你想防止的地方, 只要你能把这个类加载进来就可以</p>
 <h3 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h3><p><code>Yaf_Request_Http</code></p>
 <p>代表了一个实际的Http请求, 一般的不用自己实例化它, Yaf_Application在run以后会自动根据当前请求实例它，在控制器内可以使用$this-&gt;getRequest()来获取请求信息。更多Yaf_Request_Http类的内容可参见文档：</p>
-<p><a href="http://www.laruence.com/manual/yaf.class.request.html#yaf.class.request.http" target="_blank" rel="external">http://www.laruence.com/manual/yaf.class.request.html#yaf.class.request.http</a></p>
+<p><a href="http://www.laruence.com/manual/yaf.class.request.html#yaf.class.request.http" target="_blank" rel="noopener">http://www.laruence.com/manual/yaf.class.request.html#yaf.class.request.http</a></p>
 <blockquote>
 <p>使用示例</p>
 </blockquote>
@@ -487,7 +489,7 @@ class IndexController extends Yaf_Controller_Abstract {
   public function indexAction() {
      print_r($this-&gt;getRequest()-&gt;getQuery());
 }
-</code></pre><p>关于更多的该类的使用方法，可以参考：<br><a href="http://www.laruence.com/manual/yaf.class.request.html" target="_blank" rel="external">http://www.laruence.com/manual/yaf.class.request.html</a></p>
+</code></pre><p>关于更多的该类的使用方法，可以参考：<br><a href="http://www.laruence.com/manual/yaf.class.request.html" target="_blank" rel="noopener">http://www.laruence.com/manual/yaf.class.request.html</a></p>
 
       
     </div>
@@ -585,21 +587,23 @@ class IndexController extends Yaf_Controller_Abstract {
 
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+        <link   rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="comment-container"></div>
 
-<section class="gitalk" id="comments" style="width: 82%;margin-left:  32px;">
+<div id="comment-container" style="width:82%; margin-left:32px;"></div>
+
+<section class="gitalk" id="comments">
     <script>
         var gitalk = new Gitalk({
             clientID:'4cf071399e464ec2ab63',
             clientSecret: '6e62a86598cb347350da82d3cbfa3d97fd53345b',
-            repo: '}',
-            owner: '',
+            repo: 'PuShaoWei.github.io',
+            owner: 'PuShaoWei',
             admin: 'PuShaoWei',
+            labels: 'test'
         });
         gitalk.render('comment-container');
-</script>
+    </script>
 </section>
        
     
@@ -623,7 +627,7 @@ class IndexController extends Yaf_Controller_Abstract {
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/fork系统调用分析/">fork系统调用分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/OpenSource/">开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/learnLaravel/">Laravel 简短学习 just write the code in the PHP way</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Guzzle/">利用Guzzle刷豆瓣热评引发的联想</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/everyday/">But you should have one thing mind.</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Decorator/">PHP Decorator 装饰器模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/fork系统调用分析/">fork系统调用分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/OpenSource/">开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/learnLaravel/">Laravel 简短学习 just write the code in the PHP way</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Guzzle/">利用Guzzle刷豆瓣热评引发的联想</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/everyday/">But you should have one thing mind.</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Decorator/">PHP Decorator 装饰器模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
 
 
 
