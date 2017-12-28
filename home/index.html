@@ -342,13 +342,16 @@
 
 <section class="gitalk" id="comments">
     <script>
+        var page = document.getElementById('page');
+        var tags = [];
+
         var gitalk = new Gitalk({
             clientID:'4cf071399e464ec2ab63',
             clientSecret: '6e62a86598cb347350da82d3cbfa3d97fd53345b',
             repo: 'PuShaoWei.github.io',
             owner: 'PuShaoWei',
             admin: 'PuShaoWei',
-            labels: 'test'
+            labels: tags
         });
         gitalk.render('comment-container');
     </script>
