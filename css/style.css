@@ -1746,6 +1746,19 @@ img {
   border-top: 0.1rem #e6e6e6 solid;
   padding: 3rem 0;
 }
+.footer .outer .pulse::before,
+.footer .outer .pulse i.fe {
+  display: inline-block;
+  line-height: 1;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  color: #f00;
+}
+.footer .outer .pulse::before {
+  font-family: 'feathericon';
+  content: '\f12e';
+}
 .article-entry pre,
 .article-entry .highlight {
   background: #f6f8fa;
