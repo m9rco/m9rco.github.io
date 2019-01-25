@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Because of your example, I wouldn&#39;t let it either.</title>
+  <title>稚九当自强</title>
   
-  <subtitle>刻意练习，持续精进</subtitle>
+  <subtitle>我可以拒绝自由，因为这是我的自由</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.mango16.cc/"/>
@@ -10,7 +10,7 @@
   <id>http://blog.mango16.cc/</id>
   
   <author>
-    <name>Shaowei Pu</name>
+    <name>m9rco</name>
     
   </author>
   
