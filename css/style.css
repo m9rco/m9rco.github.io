@@ -1748,6 +1748,7 @@ img {
 }
 .footer .outer .pulse::before,
 .footer .outer .pulse i.fe {
+  font-style: normal;
   display: inline-block;
   line-height: 1;
   font-size: inherit;
@@ -1992,6 +1993,9 @@ pre .javascript .function {
   content: '\f1a9';
 }
 .navbar .nav.nav-main .nav-item:nth-child(4) .nav-item-link::before {
+  content: '\f14c';
+}
+.navbar .nav.nav-main .nav-item:nth-child(5) .nav-item-link::before {
   content: '\f174';
 }
 .navbar-bottom {
