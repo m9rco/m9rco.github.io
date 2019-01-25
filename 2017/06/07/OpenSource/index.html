@@ -1,276 +1,31 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html>
 <head>
-
-    <!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
-    <![endif]-->
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="Shaowei Pu" />
-
-
-
-<meta name="description" content="开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别首先借用有心人士的一张相当直观清晰的图来划分各种协议：开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别">
-<meta name="keywords" content="phper">
-<meta property="og:type" content="article">
-<meta property="og:title" content="开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别">
-<meta property="og:url" content="http://blog.mango16.cc/2017/06/07/OpenSource/index.html">
-<meta property="og:site_name" content="Because of your example, I wouldn&#39;t let it either.">
-<meta property="og:description" content="开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别首先借用有心人士的一张相当直观清晰的图来划分各种协议：开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://image.geek-workshop.com/forum/201209/10/133958i2oieyhetlkuw8ke.jpeg">
-<meta property="og:updated_time" content="2017-06-07T05:17:31.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别">
-<meta name="twitter:description" content="开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别首先借用有心人士的一张相当直观清晰的图来划分各种协议：开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别">
-<meta name="twitter:image" content="http://image.geek-workshop.com/forum/201209/10/133958i2oieyhetlkuw8ke.jpeg">
-
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
-
-
-
-
-    <link rel="shortcut icon" href="/img/favicon.png">
-
-
-
-
-
-    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-
-
-
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-
-<title>开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别 | Because of your example, I wouldn&#39;t let it either.</title>
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-<script>
-    var yiliaConfig = {
-        fancybox: true,
-        animate: false,
-        isHome: false,
-        isPost: true,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
-    }
-</script>
-
-
-    <script>
-        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
-    </script>
-
-
-
-    <script> yiliaConfig.rootUrl = "\/";</script>
-
-
-
-
-
-
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别 |
+    
+    Because of your example, I wouldn&#39;t let it either.</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
 </head>
+
 <body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="/img/head.jpg" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/">Shaowei Pu</a></h1>
-        </hgroup>
+<main class="content">
+  <section class="outer">
+  <article id="post-OpenSource" class="article article-type-post" itemscope itemprop="blogPost">
 
-        
-        <p class="header-subtitle">刻意练习，持续精进</p>
-        
-
-        
-
-
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="http://static.mango16.cc">博客首页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/d">碎言碎语</a></li>
-                        
-                            <li><a href="/about">留言灌水</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" href="mailto:542684913@qq.com" title="Email"></a>
-                            
-                                <a class="fa 知乎" href="javascript:alert('博主太懒没时间折腾');" title="知乎"></a>
-                            
-                                <a class="fa 豆瓣" href="javascript:alert('博主太懒没时间折腾');" title="豆瓣"></a>
-                            
-                                <a class="fa SegmentFault" href="javascript:alert('博主太懒没时间折腾');" title="SegmentFault"></a>
-                            
-                                <a class="fa QQ" href="javascript:alert('博主太懒没时间折腾');" title="QQ"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sublime/">Sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swoole/">Swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yaf/">Yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellectual/">intellectual</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phper/">phper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-            </div>
-        </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Shaowei Pu</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="/img/head.jpg" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">Shaowei Pu</a></h1>
-            </hgroup>
-            
-            <p class="header-subtitle">刻意练习，持续精进</p>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="http://static.mango16.cc">博客首页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/d">碎言碎语</a></li>
-                
-                    <li><a href="/about">留言灌水</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" target="_blank" href="mailto:542684913@qq.com" title="Email"></a>
-                            
-                                <a class="fa 知乎" target="_blank" href="javascript:alert('博主太懒没时间折腾');" title="知乎"></a>
-                            
-                                <a class="fa 豆瓣" target="_blank" href="javascript:alert('博主太懒没时间折腾');" title="豆瓣"></a>
-                            
-                                <a class="fa SegmentFault" target="_blank" href="javascript:alert('博主太懒没时间折腾');" title="SegmentFault"></a>
-                            
-                                <a class="fa QQ" target="_blank" href="javascript:alert('博主太懒没时间折腾');" title="QQ"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
-    </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
-</nav>
-      <div class="body-wrap"><article id="post-OpenSource" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/06/07/OpenSource/" class="article-date">
-      <time datetime="2017-06-07T06:11:20.000Z" itemprop="datePublished">2017-06-07</time>
-</a>
-
-
-    </div>
-  
   <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
     
       <header class="article-header">
         
@@ -281,27 +36,25 @@
   
 
       </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/php/">php</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/phper/">phper</a></li></ul>
-    </div>
-
-
-        <div class="clearfix"></div>
-      </div>
-      
     
+
+    
+      <div class="article-meta">
+        <a href="/2017/06/07/OpenSource/" class="article-date">
+  <time datetime="2017-06-07T06:11:20.000Z" itemprop="datePublished">2017-06-07</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/php/">php</a>
+  </div>
+
+      </div>
+    
+
     <div class="article-entry" itemprop="articleBody">
       
-          
+      
+      
         <p>开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别<br>首先借用有心人士的一张相当直观清晰的图来划分各种协议：开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</p>
 <a id="more"></a>
 <p><img src="http://image.geek-workshop.com/forum/201209/10/133958i2oieyhetlkuw8ke.jpeg" alt="opensource"></p>
@@ -331,314 +84,147 @@
 
       
     </div>
-    
+    <footer class="article-footer">
+      <a data-url="http://blog.mango16.cc/2017/06/07/OpenSource/" data-id="cjqktoor1002ufg8hvk1xurcg"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/phper/">phper</a></li></ul>
+
+    </footer>
+
   </div>
+
   
     
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/06/07/OpenSource/">开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Shaowei Pu</a></p>
-        <p><span>发布时间:</span>2017-06-07, 14:11:20</p>
-        <p><span>最后更新:</span>2017-06-07, 13:17:31</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/06/07/OpenSource/" title="开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别">http://blog.mango16.cc/2017/06/07/OpenSource/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.mango16.cc/2017/06/07/OpenSource/　　作者: Shaowei Pu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
+  <nav class="article-nav">
+    
+      <a href="/2017/09/24/fork系统调用分析/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            fork系统调用分析
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2017/05/31/learnLaravel/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">Laravel 简短学习 just write the code in the PHP way</div>
+      </a>
+    
+  </nav>
 
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/09/24/fork系统调用分析/">
-                    fork系统调用分析
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/05/31/learnLaravel/">
-                    Laravel 简短学习 just write the code in the PHP way
-                </a>
-            </div>
-        
-    </nav>
 
   
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'caba8826a61790936307',
+        clientSecret: '09a15037dcab30d9adf35a53ec6961939169f797',
+        repo: 'https://m9rco.github.io',
+        owner: 'm9rco',
+        admin: ['m9rco'],
+        // id: location.pathname,      // Ensure uniqueness and length less than 50
+        id: md5(location.pathname),
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
 </article>
 
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
 
 
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别　| Because of your example, I wouldn't let it either.　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
-
-
-
-
-
-
-
-    
-        <link   rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-<div id="comment-container" style="width:82%; margin-left:32px;"></div>
-
-<section class="gitalk" id="comments">
-    <script>
-
-        var tags = ["phper"];
-        var gitalk = new Gitalk({
-            clientID:'4cf071399e464ec2ab63',
-            clientSecret: '6e62a86598cb347350da82d3cbfa3d97fd53345b',
-            repo: 'PuShaoWei.github.io',
-            owner: 'PuShaoWei',
-            admin: 'PuShaoWei',
-            labels:tags
-        });
-        gitalk.render('comment-container');
-    </script>
 </section>
-
-       
-    
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/09/24/fork系统调用分析/" title="上一篇: fork系统调用分析">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2017/05/31/learnLaravel/" title="下一篇: Laravel 简短学习 just write the code in the PHP way">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/24/fork系统调用分析/">fork系统调用分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/OpenSource/">开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/learnLaravel/">Laravel 简短学习 just write the code in the PHP way</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Guzzle/">利用Guzzle刷豆瓣热评引发的联想</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/everyday/">But you should have one thing mind.</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/Decorator/">PHP Decorator 装饰器模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/Builder/">PHP Builder 建造者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/phpAdapter/">PHP 适配器模式(Adapter Design Pattern)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/hiderjs/">javascript 之隐藏你的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/swoole_2/">swoole 学习第二章 Event Io 与 process</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/swoole_1/">swoole 学习第一章 Task进程与Timer进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/yaf04/">Yaf---异常和错误 | 路由和分发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/yaf03/">Yaf---Session | 模板 | 模型  | Cli模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/29/yaf02/">Yaf---加载规则插件使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/yaf01/">Yaf---写在前面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/HTTPcode/">HTTP常见状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/monkeyKing/">猴子选大王算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/phpsingerl/">PHP 单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/php工厂模式/">PHP plant</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/php画图形/">PHP 画图形 N行N列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/OOCSS/">面向对象的CSS样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Ajax/">Ajax学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/AjaxStatus/">Ajax Status请求状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/JSTip/">原生JS TitleTip</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Sublimebest/">Sublime Text历练</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/SublimePackage/">Sublime插件</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
-
-
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2016-2017 Shaowei Pu
-            </div>
-
-            <div class="footer-right">
-              <!--<a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">shaowei pu</a>  Theme <a href="https://github.com/PuShaoWei/PuShaoWei.github.io" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by Mango16  -->
-                 <span>我把这一生最灿烂的笑容都献给了电脑屏幕</span>
-                <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
-        
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>| </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
-    </div>
-</footer>
-
-
-    </div>
-    
-<div id="hexo-helper-live2d">
-  <canvas id="live2dcanvas" width="200" height="300"></canvas>
-</div>
-<style>
-  #live2dcanvas{
-    position: fixed;
-    width: 200px;
-    height: 300px;
-    opacity:1;
-    right: 0px;
-    z-index: 999;
-    pointer-events: none;
-    bottom: -20px;
-  }
-</style>
-<script type="text/javascript" src="/live2d/device.min.js"></script>
-<script type="text/javascript">
-const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
-(function(){
-  if((typeof(device) != 'undefined') && (device.mobile())){
-    document.getElementById("live2dcanvas").style.width = '100px';
-    document.getElementById("live2dcanvas").style.height = '150px';
-  }else
-    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
-  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/haruto.model.json", 0.5);});
-})();
-</script>
-
-    
-    <script src="/js/GithubRepoWidget.js"></script>
-
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var iPad = window.navigator.userAgent.indexOf('iPad');
-            if (iPad > -1 || $(".left-col").css("display") === "none") {
-                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
-                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
-                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
-            }
-            else {
-                var backgroundnum = 5;
-                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
-            }
-        })
-    </script>
-
-
-
-
-
-    <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    // Open in New Window
-    
-        var oOpenInNew = {
-             github: ".github-widget a", 
-            
-            
-            
-            
-            
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-            
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
-    
-</script>
-
-    <script>
-        var originTitle = document.title;
-        var titleTime;
-        document.addEventListener("visibilitychange", function() {
-            if (document.hidden) {
-                document.title = "澳门首家线上赌场美女荷官在线发牌" + originTitle;
-                clearTimeout(titleTime);
-            }
-            else {
-                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
-                titleTime = setTimeout(function() {
-                    document.title = originTitle;
-                }, 2000);
-            }
-        })
-    </script>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2019 Because of your example, I wouldn&#39;t let it either.</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <!--
+      <li><a href="/">Shaowei Pu</a></li>
+      -->
+    </ul>
   </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Because of your example, I wouldn&#39;t let it either."></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Buscar">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/ocean.js"></script>
+
 </body>
 </html>
